@@ -1,0 +1,9 @@
+[package]
+name = "cycleSpitter"
+authors = ["slippy"]
+license = "MIT"
+version = "0.1.5"
+edition = "2024"
+
+[dependencies]
+regex = "1.11.1"
