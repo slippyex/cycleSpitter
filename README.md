@@ -1,5 +1,5 @@
 # cycleSpitter
-rro
+
 A cycle-accurate scanline splitter tool for Atari ST fullscreen (sync) programming.
 
 ## Description
