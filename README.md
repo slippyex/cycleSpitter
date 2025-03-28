@@ -1,7 +1,5 @@
 # cycleSpitter
-
-![Atari ST Logo](https://upload.wikimedia.org/wikipedia/commons/3/3e/Atari_logo_alt.svg)
-
+rro
 A cycle-accurate scanline splitter tool for Atari ST fullscreen (sync) programming.
 
 ## Description
