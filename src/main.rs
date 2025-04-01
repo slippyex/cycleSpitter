@@ -3,48 +3,9 @@
  *
  * A Cycle Splitter tool for Atari ST fullscreen (sync) programming.
  *
- * Expects a 68000 assembly code snippet file where the cycles per instruction
- * are provided in parentheses in the comment.
- *
- * For example, given an input snippet like:
- *
- *                 lea     _3dpnt0,a3                  ;                       (12)
- *                 lea     cubeScreenOffsets,a4        ;                       (12)
- *
- *                 ; preserve the initial screen offset in a5
- *                 movea.l screen_adr_fs,a5            ;                       (20)
- *                 lea 230*140(a5),a5 ; (8)
- *
- *                 REPT 45
- *                     movea.l (a3),a2                 ;                       (12)
- *                     lea     _3dcube,a0              ;                       (12)
- *                     adda.l  (a2)+,a0                ;                       (16) -- is 14 but padded to 16
- *                     move.l  a5,a1       ; screen initial offset preserved   ( 4)
- *                     adda.w  (a4)+,a1                ;                       (12)
- *                     REPT 27
- *                         move.l  (a0)+,(a1)          ;                       (20)
- *                         move.l  (a0)+,8(a1)         ;                       (24)
- *                         lea     SCREEN_WIDTH(a1),a1 ;                       ( 8)
- *                     ENDR
- *                     ; exclude the last rept and save the lea
- *                     move.l  (a0)+,(a1)              ;                       (20)
- *                     move.l  (a0)+,8(a1)             ;                       (24)
- *                     move.l  a2,(a3)+                ;                       (12)
- *                 ENDR
- *
- * The output scanline will include the injection lines (each 12 cycles) for:
- *   - Left border:
- *       move.b	d7,$ffff8260.w	;3 Left border  [0]
- *       move.w	d7,$ffff8260.w	;3             [12]
- *   - Right border:
- *       move.w	d7,$ffff820a.w	;3 Right border [??]
- *       move.b	d7,$ffff820a.w	;3             [??]
- *   - Stabilizer:
- *       move.b	d7,$ffff8260.w	;3 Stabilizer   [??]
- *       move.w	d7,$ffff8260.w	;3             [??]
- *
- * (In each case the first injection line is annotated with the current running
- *  total, and then 12 cycles are added before processing the subsequent code.)
+ * This version now loads the instruction cycles JSON from an external file at compile time
+ * and initializes it to a static HashMap (via once_cell::sync::Lazy) so that lookups
+ * are optimized for speed.
  *
  * Usage: ./cycleSpitter [filename.s] [SCANLINES_CONSUMED_LABEL] > [generated_filename.s]
  * If no filename is provided, it defaults to "sample.s".
@@ -54,6 +15,24 @@ use regex::Regex;
 use std::env;
 use std::fs;
 use std::error::Error;
+use std::collections::HashMap;
+use serde_json;
+use once_cell::sync::Lazy;
+
+// Load the cycles JSON at compile time from a file named "cycles.json".
+static CYCLES_MAP: Lazy<HashMap<String, Vec<usize>>> = Lazy::new(|| {
+    let json_str = include_str!("cycles.json");
+    serde_json::from_str(json_str).expect("Error parsing cycles JSON")
+});
+
+const SCANLINE_CYCLES: usize = 512;
+
+#[derive(Debug)]
+struct TemplateSection {
+    injection_code: Vec<(String, usize)>, // (code, cycles)
+    nop_cycles: usize,
+    label: String,
+}
 
 /// Recursively expands REPT/ENDR blocks.
 /// Returns a tuple: (expanded lines, new index).
@@ -87,6 +66,20 @@ fn process_block(lines: &[String], start_index: usize) -> (Vec<String>, usize) {
     (result, index)
 }
 
+/// Looks up the cycle count for a given code line (after normalization).
+/// Returns the first cycle count found in the JSON map (or 0 if not found).
+fn lookup_cycles(line: &str) -> usize {
+  //  let normalized = normalize_line(line);
+    let normalized = parse_line(line);
+    if let Some(cycles) = CYCLES_MAP.get(normalized.as_str()) {
+        // If there are multiple cycle counts (e.g. taken/not-taken), choose the first.
+        cycles[0]
+    } else {
+        eprintln!("Warning: No cycle count found for instruction: {}", line);
+        0
+    }
+}
+
 /// Accumulates lines from `lines[start_index...]` until the sum of cycle counts (relative to initial_offset)
 /// reaches the target. For each line that contains a cycle count (extracted from a comment),
 /// the current cumulative offset is appended (in square brackets).
@@ -109,13 +102,18 @@ fn accumulate_chunk(
             i += 1;
             continue;
         }
-        let mut cycles = 0;
-        if let Some(cap) = number_re.captures(line) {
-            // Capture group 1 is the digits.
-            if let Some(m) = cap.get(1) {
-                cycles = m.as_str().parse::<usize>().unwrap_or(0);
+        // First try to extract cycle count from comment parentheses.
+        let cycles = if let Some(cap) = number_re.captures(line) {
+            cap.get(1).map(|m| m.as_str().parse::<usize>().unwrap_or(0)).unwrap_or(0)
+        } else {
+            if !line.trim().starts_with(";") && !line.contains(" set ") && !line.contains(" equ ") {
+                // Otherwise, use the JSON lookup
+                lookup_cycles(line)
+            } else {
+                i += 1;
+                continue;
             }
-        }
+        };
         if (local_sum - initial_offset) + cycles > target {
             let diff = target - (local_sum - initial_offset);
             let num_nop = diff / 4; // each NOP is 4 cycles
@@ -128,7 +126,7 @@ fn accumulate_chunk(
         }
         // If the line contains a cycle count, annotate it with the current offset.
         if cycles > 0 {
-            let annotated = format!("{}\t[{}]", line, local_sum);
+            let annotated = format!("{}\t;\t({})\t[{}]", line, cycles, local_sum);
             chunk.push(annotated);
             local_sum += cycles;
         } else {
@@ -154,15 +152,8 @@ fn accumulate_chunk(
     (chunk, i, local_sum)
 }
 
-#[derive(Debug)]
-struct TemplateSection {
-    injection_code: Vec<(String, usize)>, // (code, cycles)
-    nop_cycles: usize,
-    label: String,
-}
-
-const SCANLINE_CYCLES: usize = 512;
-
+/// Parses the template file into sections. For each non-empty line that does not match a NOP pattern,
+/// we try to extract its cycle count (either from a "(...)" comment or via lookup in the JSON).
 fn parse_template(template_content: &str, number_re: &Regex) -> Result<Vec<TemplateSection>, Box<dyn Error>> {
     let mut sections = Vec::new();
     let nop_re = Regex::new(r"dcb\.w\s*(\d+),\s*\$4e71")?;
@@ -193,10 +184,15 @@ fn parse_template(template_content: &str, number_re: &Regex) -> Result<Vec<Templ
             continue;
         }
 
-        let cycles = number_re.captures(trimmed)
-            .and_then(|c| c.get(1))
-            .map(|m| m.as_str().parse::<usize>().unwrap_or(0))
-            .unwrap_or(0);
+        let cycles = if let Some(cap) = number_re.captures(trimmed) {
+            cap.get(1).map(|m| m.as_str().parse::<usize>().unwrap_or(0)).unwrap_or(0)
+        } else {
+            if trimmed.trim().starts_with(";") && trimmed.contains(" set ") && trimmed.contains(" equ ") {
+                lookup_cycles(trimmed)
+            } else {
+                continue;
+            }
+        };
 
         if current_label.is_empty() {
             current_label = comment_re.captures(trimmed)
@@ -219,21 +215,83 @@ fn parse_template(template_content: &str, number_re: &Regex) -> Result<Vec<Templ
     Ok(sections)
 }
 
+static REG_DISPLACEMENT: Lazy<Regex> = Lazy::new(|| Regex::new(r"([^\s,()]+)\((a[0-7]|sp)\)").unwrap());
+static REG_INSTRUCTION: Lazy<Regex> = Lazy::new(|| Regex::new(r"^(lea|moveq)$").unwrap());
+static REG_IMMEDIATE: Lazy<Regex> = Lazy::new(|| Regex::new(r"(#[^,\s]+)").unwrap());
+static REG_DATA: Lazy<Regex> = Lazy::new(|| Regex::new(r"\bd[0-7]\b").unwrap());
+static REG_ADDR: Lazy<Regex> = Lazy::new(|| Regex::new(r"\b(a[0-7]|sp)\b").unwrap());
+static REG_ABS_ADDRESS: Lazy<Regex> = Lazy::new(|| Regex::new(
+    r"(?P<before>^|[ \t,(\[])(?P<token>[a-zA-Z_][a-zA-Z0-9_]*)(?P<suffix>\.(?:l|w))?\b"
+).unwrap());
+static REG_SPACES: Lazy<Regex> = Lazy::new(|| Regex::new(r"[ \t]+").unwrap());
+
+fn parse_line(line: &str) -> String {
+    let trimmed = line.trim();
+    let mut parts = trimmed.splitn(2, char::is_whitespace);
+    let first_token = parts.next().unwrap();
+    let operand_part = parts.next().unwrap_or("");
+
+    let first_token = if REG_INSTRUCTION.is_match(first_token) {
+        format!("{}.l", first_token)
+    } else {
+        first_token.to_string()
+    };
+
+    let mut operands = operand_part.to_string();
+    // a. Replace displacement addressing.
+    operands = REG_DISPLACEMENT.replace_all(&operands, "d($2)").into_owned();
+    // b. Replace immediate values.
+    operands = REG_IMMEDIATE.replace_all(&operands, "#xxx").into_owned();
+    // c. Replace data registers.
+    operands = REG_DATA.replace_all(&operands, "dn").into_owned();
+    // d. Replace address registers.
+    operands = REG_ADDR.replace_all(&operands, "an").into_owned();
+    // e. Replace any remaining absolute addresses.
+    operands = REG_ABS_ADDRESS.replace_all(&operands, |caps: &regex::Captures| {
+        let before = caps.name("before").unwrap().as_str();
+        let token = caps.name("token").unwrap().as_str();
+        let suffix = caps.name("suffix").map(|m| m.as_str());
+        if token == "an" || token == "dn" || token == "d" {
+            caps.get(0).unwrap().as_str().to_string()
+        } else {
+            if let Some(suf) = suffix {
+                if suf == ".w" {
+                    format!("{}xxx.w", before)
+                } else {
+                    format!("{}xxx.l", before)
+                }
+            } else {
+                format!("{}xxx.l", before)
+            }
+        }
+    }).into_owned();
+    // f. Collapse multiple spaces.
+    operands = REG_SPACES.replace_all(&operands, " ").into_owned();
+    let operands = operands.trim();
+
+    if operands.is_empty() {
+        first_token
+    } else {
+        format!("{} {}", first_token, operands)
+    }
+}
+
+
 fn main() -> Result<(), Box<dyn Error>> {
-    // Get command-line arguments
+    // Get command-line arguments.
     let args: Vec<String> = env::args().collect();
     let filename = if args.len() > 1 { &args[1] } else { "sample.s" };
     let scanlines_label = if args.len() > 2 { &args[2] } else { "SCANLINES_CONSUMED" };
     let template_file = if args.len() > 3 { &args[3] } else { "template.s" };
 
-    // Compile regexes
+    // Compile regexes.
     let number_re = Regex::new(r"\(\s*(\d+)\s*\)")?;
 
-    // Parse template file
+    // Parse the template file.
     let template_content = fs::read_to_string(template_file)?;
     let template_sections = parse_template(&template_content, &number_re)?;
 
-    // Read and process input file
+    // Read and process the input file.
     let content = fs::read_to_string(filename)?;
     let raw_lines: Vec<String> = content.lines().map(|s| s.trim().to_string()).collect();
     let (flat_lines, _) = process_block(&raw_lines, 0);
@@ -246,9 +304,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         let mut scanline_offset = 0;
         let mut scanline_cycles = 0;
 
-        // Process each template section
+        // Process each template section.
         for section in &template_sections {
-            // Add injection code with proper cycle counting
+            // Add injection code with proper cycle counting.
             for (i, (code, cycles)) in section.injection_code.iter().enumerate() {
                 let annotated = if i == 0 {
                     format!("{}\t[{}]", code, scanline_offset)
@@ -260,10 +318,10 @@ fn main() -> Result<(), Box<dyn Error>> {
                 scanline_cycles += cycles;
             }
 
-            // Add section header
+            // Add section header.
             final_output.push(format!("; --- {} section ---", section.label));
 
-            // Process code for this section
+            // Process code for this section.
             if section.nop_cycles > 0 && current_index < flat_lines.len() {
                 let (chunk, new_idx, new_offset) = accumulate_chunk(
                     &flat_lines,
@@ -280,7 +338,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             final_output.push(format!("; Calculated cycles: {}", scanline_offset));
         }
 
-        // Pad to exactly 512 cycles
+        // Pad to exactly 512 cycles.
         if scanline_cycles < SCANLINE_CYCLES {
             let remaining = SCANLINE_CYCLES - scanline_cycles;
             let nop_count = remaining / 4;
@@ -296,7 +354,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         line_count += 1;
     }
 
-    // Output the results
+    // Output the results.
     println!("; ------------------------------------------");
     println!("; This file is generated using");
     println!("; cycleSpitter (c) 2025 - slippy / vectronix");

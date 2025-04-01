@@ -1,0 +1,7839 @@
+{
+  "move.b dn,dn": [
+    4
+  ],
+  "move.w dn,dn": [
+    4
+  ],
+  "move.b dn,an": [
+    4
+  ],
+  "move.w dn,an": [
+    4
+  ],
+  "movea.b dn,an": [
+    4
+  ],
+  "movea.w dn,an": [
+    4
+  ],
+  "move.b dn,(an)": [
+    8
+  ],
+  "move.w dn,(an)": [
+    8
+  ],
+  "move.b dn,(an)+": [
+    8
+  ],
+  "move.w dn,(an)+": [
+    8
+  ],
+  "move.b dn,-(an)": [
+    8
+  ],
+  "move.w dn,-(an)": [
+    8
+  ],
+  "move.b dn,d(an)": [
+    12
+  ],
+  "move.w dn,d(an)": [
+    12
+  ],
+  "move.b dn,d(an,ix)": [
+    14
+  ],
+  "move.w dn,d(an,ix)": [
+    14
+  ],
+  "move.b dn,xxx.w": [
+    12
+  ],
+  "move.w dn,xxx.w": [
+    12
+  ],
+  "move.b dn,xxx.l": [
+    16
+  ],
+  "move.w dn,xxx.l": [
+    16
+  ],
+  "move.b an,dn": [
+    4
+  ],
+  "move.w an,dn": [
+    4
+  ],
+  "move.b an,an": [
+    4
+  ],
+  "move.w an,an": [
+    4
+  ],
+  "movea.b an,an": [
+    4
+  ],
+  "movea.w an,an": [
+    4
+  ],
+  "move.b an,(an)": [
+    8
+  ],
+  "move.w an,(an)": [
+    8
+  ],
+  "move.b an,(an)+": [
+    8
+  ],
+  "move.w an,(an)+": [
+    8
+  ],
+  "move.b an,-(an)": [
+    8
+  ],
+  "move.w an,-(an)": [
+    8
+  ],
+  "move.b an,d(an)": [
+    12
+  ],
+  "move.w an,d(an)": [
+    12
+  ],
+  "move.b an,d(an,ix)": [
+    14
+  ],
+  "move.w an,d(an,ix)": [
+    14
+  ],
+  "move.b an,xxx.w": [
+    12
+  ],
+  "move.w an,xxx.w": [
+    12
+  ],
+  "move.b an,xxx.l": [
+    16
+  ],
+  "move.w an,xxx.l": [
+    16
+  ],
+  "move.b (an),dn": [
+    8
+  ],
+  "move.w (an),dn": [
+    8
+  ],
+  "move.b (an),an": [
+    8
+  ],
+  "move.w (an),an": [
+    8
+  ],
+  "movea.b (an),an": [
+    8
+  ],
+  "movea.w (an),an": [
+    8
+  ],
+  "move.b (an),(an)": [
+    12
+  ],
+  "move.w (an),(an)": [
+    12
+  ],
+  "move.b (an),(an)+": [
+    12
+  ],
+  "move.w (an),(an)+": [
+    12
+  ],
+  "move.b (an),-(an)": [
+    12
+  ],
+  "move.w (an),-(an)": [
+    12
+  ],
+  "move.b (an),d(an)": [
+    16
+  ],
+  "move.w (an),d(an)": [
+    16
+  ],
+  "move.b (an),d(an,ix)": [
+    18
+  ],
+  "move.w (an),d(an,ix)": [
+    18
+  ],
+  "move.b (an),xxx.w": [
+    16
+  ],
+  "move.w (an),xxx.w": [
+    16
+  ],
+  "move.b (an),xxx.l": [
+    20
+  ],
+  "move.w (an),xxx.l": [
+    20
+  ],
+  "move.b (an)+,dn": [
+    8
+  ],
+  "move.w (an)+,dn": [
+    8
+  ],
+  "move.b (an)+,an": [
+    8
+  ],
+  "move.w (an)+,an": [
+    8
+  ],
+  "movea.b (an)+,an": [
+    8
+  ],
+  "movea.w (an)+,an": [
+    8
+  ],
+  "move.b (an)+,(an)": [
+    12
+  ],
+  "move.w (an)+,(an)": [
+    12
+  ],
+  "move.b (an)+,(an)+": [
+    12
+  ],
+  "move.w (an)+,(an)+": [
+    12
+  ],
+  "move.b (an)+,-(an)": [
+    12
+  ],
+  "move.w (an)+,-(an)": [
+    12
+  ],
+  "move.b (an)+,d(an)": [
+    16
+  ],
+  "move.w (an)+,d(an)": [
+    16
+  ],
+  "move.b (an)+,d(an,ix)": [
+    18
+  ],
+  "move.w (an)+,d(an,ix)": [
+    18
+  ],
+  "move.b (an)+,xxx.w": [
+    16
+  ],
+  "move.w (an)+,xxx.w": [
+    16
+  ],
+  "move.b (an)+,xxx.l": [
+    20
+  ],
+  "move.w (an)+,xxx.l": [
+    20
+  ],
+  "move.b -(an),dn": [
+    10
+  ],
+  "move.w -(an),dn": [
+    10
+  ],
+  "move.b -(an),an": [
+    10
+  ],
+  "move.w -(an),an": [
+    10
+  ],
+  "movea.b -(an),an": [
+    10
+  ],
+  "movea.w -(an),an": [
+    10
+  ],
+  "move.b -(an),(an)": [
+    14
+  ],
+  "move.w -(an),(an)": [
+    14
+  ],
+  "move.b -(an),(an)+": [
+    14
+  ],
+  "move.w -(an),(an)+": [
+    14
+  ],
+  "move.b -(an),-(an)": [
+    14
+  ],
+  "move.w -(an),-(an)": [
+    14
+  ],
+  "move.b -(an),d(an)": [
+    18
+  ],
+  "move.w -(an),d(an)": [
+    18
+  ],
+  "move.b -(an),d(an,ix)": [
+    20
+  ],
+  "move.w -(an),d(an,ix)": [
+    20
+  ],
+  "move.b -(an),xxx.w": [
+    18
+  ],
+  "move.w -(an),xxx.w": [
+    18
+  ],
+  "move.b -(an),xxx.l": [
+    22
+  ],
+  "move.w -(an),xxx.l": [
+    22
+  ],
+  "move.b d(an),dn": [
+    12
+  ],
+  "move.w d(an),dn": [
+    12
+  ],
+  "move.b d(an),an": [
+    12
+  ],
+  "move.w d(an),an": [
+    12
+  ],
+  "movea.b d(an),an": [
+    12
+  ],
+  "movea.w d(an),an": [
+    12
+  ],
+  "move.b d(an),(an)": [
+    16
+  ],
+  "move.w d(an),(an)": [
+    16
+  ],
+  "move.b d(an),(an)+": [
+    16
+  ],
+  "move.w d(an),(an)+": [
+    16
+  ],
+  "move.b d(an),-(an)": [
+    16
+  ],
+  "move.w d(an),-(an)": [
+    16
+  ],
+  "move.b d(an),d(an)": [
+    20
+  ],
+  "move.w d(an),d(an)": [
+    20
+  ],
+  "move.b d(an),d(an,ix)": [
+    22
+  ],
+  "move.w d(an),d(an,ix)": [
+    22
+  ],
+  "move.b d(an),xxx.w": [
+    20
+  ],
+  "move.w d(an),xxx.w": [
+    20
+  ],
+  "move.b d(an),xxx.l": [
+    24
+  ],
+  "move.w d(an),xxx.l": [
+    24
+  ],
+  "move.b d(an,ix),dn": [
+    14
+  ],
+  "move.w d(an,ix),dn": [
+    14
+  ],
+  "move.b d(an,ix),an": [
+    14
+  ],
+  "move.w d(an,ix),an": [
+    14
+  ],
+  "movea.b d(an,ix),an": [
+    14
+  ],
+  "movea.w d(an,ix),an": [
+    14
+  ],
+  "move.b d(an,ix),(an)": [
+    18
+  ],
+  "move.w d(an,ix),(an)": [
+    18
+  ],
+  "move.b d(an,ix),(an)+": [
+    18
+  ],
+  "move.w d(an,ix),(an)+": [
+    18
+  ],
+  "move.b d(an,ix),-(an)": [
+    18
+  ],
+  "move.w d(an,ix),-(an)": [
+    18
+  ],
+  "move.b d(an,ix),d(an)": [
+    22
+  ],
+  "move.w d(an,ix),d(an)": [
+    22
+  ],
+  "move.b d(an,ix),d(an,ix)": [
+    24
+  ],
+  "move.w d(an,ix),d(an,ix)": [
+    24
+  ],
+  "move.b d(an,ix),xxx.w": [
+    22
+  ],
+  "move.w d(an,ix),xxx.w": [
+    22
+  ],
+  "move.b d(an,ix),xxx.l": [
+    26
+  ],
+  "move.w d(an,ix),xxx.l": [
+    26
+  ],
+  "move.b xxx.w,dn": [
+    12
+  ],
+  "move.w xxx.w,dn": [
+    12
+  ],
+  "move.b xxx.w,an": [
+    12
+  ],
+  "move.w xxx.w,an": [
+    12
+  ],
+  "movea.b xxx.w,an": [
+    12
+  ],
+  "movea.w xxx.w,an": [
+    12
+  ],
+  "move.b xxx.w,(an)": [
+    16
+  ],
+  "move.w xxx.w,(an)": [
+    16
+  ],
+  "move.b xxx.w,(an)+": [
+    16
+  ],
+  "move.w xxx.w,(an)+": [
+    16
+  ],
+  "move.b xxx.w,-(an)": [
+    16
+  ],
+  "move.w xxx.w,-(an)": [
+    16
+  ],
+  "move.b xxx.w,d(an)": [
+    20
+  ],
+  "move.w xxx.w,d(an)": [
+    20
+  ],
+  "move.b xxx.w,d(an,ix)": [
+    22
+  ],
+  "move.w xxx.w,d(an,ix)": [
+    22
+  ],
+  "move.b xxx.w,xxx.w": [
+    20
+  ],
+  "move.w xxx.w,xxx.w": [
+    20
+  ],
+  "move.b xxx.w,xxx.l": [
+    24
+  ],
+  "move.w xxx.w,xxx.l": [
+    24
+  ],
+  "move.b xxx.l,dn": [
+    16
+  ],
+  "move.w xxx.l,dn": [
+    16
+  ],
+  "move.b xxx.l,an": [
+    16
+  ],
+  "move.w xxx.l,an": [
+    16
+  ],
+  "movea.b xxx.l,an": [
+    16
+  ],
+  "movea.w xxx.l,an": [
+    16
+  ],
+  "move.b xxx.l,(an)": [
+    20
+  ],
+  "move.w xxx.l,(an)": [
+    20
+  ],
+  "move.b xxx.l,(an)+": [
+    20
+  ],
+  "move.w xxx.l,(an)+": [
+    20
+  ],
+  "move.b xxx.l,-(an)": [
+    20
+  ],
+  "move.w xxx.l,-(an)": [
+    20
+  ],
+  "move.b xxx.l,d(an)": [
+    24
+  ],
+  "move.w xxx.l,d(an)": [
+    24
+  ],
+  "move.b xxx.l,d(an,ix)": [
+    26
+  ],
+  "move.w xxx.l,d(an,ix)": [
+    26
+  ],
+  "move.b xxx.l,xxx.w": [
+    24
+  ],
+  "move.w xxx.l,xxx.w": [
+    24
+  ],
+  "move.b xxx.l,xxx.l": [
+    28
+  ],
+  "move.w xxx.l,xxx.l": [
+    28
+  ],
+  "move.b d(pc),dn": [
+    12
+  ],
+  "move.w d(pc),dn": [
+    12
+  ],
+  "move.b d(pc),an": [
+    12
+  ],
+  "move.w d(pc),an": [
+    12
+  ],
+  "movea.b d(pc),an": [
+    12
+  ],
+  "movea.w d(pc),an": [
+    12
+  ],
+  "move.b d(pc),(an)": [
+    16
+  ],
+  "move.w d(pc),(an)": [
+    16
+  ],
+  "move.b d(pc),(an)+": [
+    16
+  ],
+  "move.w d(pc),(an)+": [
+    16
+  ],
+  "move.b d(pc),-(an)": [
+    16
+  ],
+  "move.w d(pc),-(an)": [
+    16
+  ],
+  "move.b d(pc),d(an)": [
+    20
+  ],
+  "move.w d(pc),d(an)": [
+    20
+  ],
+  "move.b d(pc),d(an,ix)": [
+    22
+  ],
+  "move.w d(pc),d(an,ix)": [
+    22
+  ],
+  "move.b d(pc),xxx.w": [
+    20
+  ],
+  "move.w d(pc),xxx.w": [
+    20
+  ],
+  "move.b d(pc),xxx.l": [
+    24
+  ],
+  "move.w d(pc),xxx.l": [
+    24
+  ],
+  "move.b d(pc,ix),dn": [
+    14
+  ],
+  "move.w d(pc,ix),dn": [
+    14
+  ],
+  "move.b d(pc,ix),an": [
+    14
+  ],
+  "move.w d(pc,ix),an": [
+    14
+  ],
+  "movea.b d(pc,ix),an": [
+    14
+  ],
+  "movea.w d(pc,ix),an": [
+    14
+  ],
+  "move.b d(pc,ix),(an)": [
+    18
+  ],
+  "move.w d(pc,ix),(an)": [
+    18
+  ],
+  "move.b d(pc,ix),(an)+": [
+    18
+  ],
+  "move.w d(pc,ix),(an)+": [
+    18
+  ],
+  "move.b d(pc,ix),-(an)": [
+    18
+  ],
+  "move.w d(pc,ix),-(an)": [
+    18
+  ],
+  "move.b d(pc,ix),d(an)": [
+    22
+  ],
+  "move.w d(pc,ix),d(an)": [
+    22
+  ],
+  "move.b d(pc,ix),d(an,ix)": [
+    24
+  ],
+  "move.w d(pc,ix),d(an,ix)": [
+    24
+  ],
+  "move.b d(pc,ix),xxx.w": [
+    22
+  ],
+  "move.w d(pc,ix),xxx.w": [
+    22
+  ],
+  "move.b d(pc,ix),xxx.l": [
+    26
+  ],
+  "move.w d(pc,ix),xxx.l": [
+    26
+  ],
+  "move.b #xxx,dn": [
+    8
+  ],
+  "move.w #xxx,dn": [
+    8
+  ],
+  "move.b #xxx,an": [
+    8
+  ],
+  "move.w #xxx,an": [
+    8
+  ],
+  "movea.b #xxx,an": [
+    8
+  ],
+  "movea.w #xxx,an": [
+    8
+  ],
+  "move.b #xxx,(an)": [
+    12
+  ],
+  "move.w #xxx,(an)": [
+    12
+  ],
+  "move.b #xxx,(an)+": [
+    12
+  ],
+  "move.w #xxx,(an)+": [
+    12
+  ],
+  "move.b #xxx,-(an)": [
+    12
+  ],
+  "move.w #xxx,-(an)": [
+    12
+  ],
+  "move.b #xxx,d(an)": [
+    16
+  ],
+  "move.w #xxx,d(an)": [
+    16
+  ],
+  "move.b #xxx,d(an,ix)": [
+    18
+  ],
+  "move.w #xxx,d(an,ix)": [
+    18
+  ],
+  "move.b #xxx,xxx.w": [
+    16
+  ],
+  "move.w #xxx,xxx.w": [
+    16
+  ],
+  "move.b #xxx,xxx.l": [
+    20
+  ],
+  "move.w #xxx,xxx.l": [
+    20
+  ],
+  "move.l dn,dn": [
+    4
+  ],
+  "move.l dn,an": [
+    4
+  ],
+  "movea.l dn,an": [
+    4
+  ],
+  "move.l dn,(an)": [
+    12
+  ],
+  "move.l dn,(an)+": [
+    12
+  ],
+  "move.l dn,-(an)": [
+    12
+  ],
+  "move.l dn,d(an)": [
+    16
+  ],
+  "move.l dn,d(an,ix)": [
+    18
+  ],
+  "move.l dn,xxx.w": [
+    16
+  ],
+  "move.l dn,xxx.l": [
+    20
+  ],
+  "move.l an,dn": [
+    4
+  ],
+  "move.l an,an": [
+    4
+  ],
+  "movea.l an,an": [
+    4
+  ],
+  "move.l an,(an)": [
+    12
+  ],
+  "move.l an,(an)+": [
+    12
+  ],
+  "move.l an,-(an)": [
+    12
+  ],
+  "move.l an,d(an)": [
+    16
+  ],
+  "move.l an,d(an,ix)": [
+    18
+  ],
+  "move.l an,xxx.w": [
+    16
+  ],
+  "move.l an,xxx.l": [
+    20
+  ],
+  "move.l (an),dn": [
+    12
+  ],
+  "move.l (an),an": [
+    12
+  ],
+  "movea.l (an),an": [
+    12
+  ],
+  "move.l (an),(an)": [
+    20
+  ],
+  "move.l (an),(an)+": [
+    20
+  ],
+  "move.l (an),-(an)": [
+    20
+  ],
+  "move.l (an),d(an)": [
+    24
+  ],
+  "move.l (an),d(an,ix)": [
+    26
+  ],
+  "move.l (an),xxx.w": [
+    24
+  ],
+  "move.l (an),xxx.l": [
+    28
+  ],
+  "move.l (an)+,dn": [
+    12
+  ],
+  "move.l (an)+,an": [
+    12
+  ],
+  "movea.l (an)+,an": [
+    12
+  ],
+  "move.l (an)+,(an)": [
+    20
+  ],
+  "move.l (an)+,(an)+": [
+    20
+  ],
+  "move.l (an)+,-(an)": [
+    20
+  ],
+  "move.l (an)+,d(an)": [
+    24
+  ],
+  "move.l (an)+,d(an,ix)": [
+    26
+  ],
+  "move.l (an)+,xxx.w": [
+    24
+  ],
+  "move.l (an)+,xxx.l": [
+    28
+  ],
+  "move.l -(an),dn": [
+    14
+  ],
+  "move.l -(an),an": [
+    14
+  ],
+  "movea.l -(an),an": [
+    14
+  ],
+  "move.l -(an),(an)": [
+    22
+  ],
+  "move.l -(an),(an)+": [
+    22
+  ],
+  "move.l -(an),-(an)": [
+    22
+  ],
+  "move.l -(an),d(an)": [
+    26
+  ],
+  "move.l -(an),d(an,ix)": [
+    28
+  ],
+  "move.l -(an),xxx.w": [
+    26
+  ],
+  "move.l -(an),xxx.l": [
+    30
+  ],
+  "move.l d(an),dn": [
+    16
+  ],
+  "move.l d(an),an": [
+    16
+  ],
+  "movea.l d(an),an": [
+    16
+  ],
+  "move.l d(an),(an)": [
+    24
+  ],
+  "move.l d(an),(an)+": [
+    24
+  ],
+  "move.l d(an),-(an)": [
+    24
+  ],
+  "move.l d(an),d(an)": [
+    28
+  ],
+  "move.l d(an),d(an,ix)": [
+    30
+  ],
+  "move.l d(an),xxx.w": [
+    28
+  ],
+  "move.l d(an),xxx.l": [
+    32
+  ],
+  "move.l d(an,ix),dn": [
+    18
+  ],
+  "move.l d(an,ix),an": [
+    18
+  ],
+  "movea.l d(an,ix),an": [
+    18
+  ],
+  "move.l d(an,ix),(an)": [
+    26
+  ],
+  "move.l d(an,ix),(an)+": [
+    26
+  ],
+  "move.l d(an,ix),-(an)": [
+    26
+  ],
+  "move.l d(an,ix),d(an)": [
+    30
+  ],
+  "move.l d(an,ix),d(an,ix)": [
+    32
+  ],
+  "move.l d(an,ix),xxx.w": [
+    30
+  ],
+  "move.l d(an,ix),xxx.l": [
+    34
+  ],
+  "move.l xxx.w,dn": [
+    16
+  ],
+  "move.l xxx.w,an": [
+    16
+  ],
+  "movea.l xxx.w,an": [
+    16
+  ],
+  "move.l xxx.w,(an)": [
+    24
+  ],
+  "move.l xxx.w,(an)+": [
+    24
+  ],
+  "move.l xxx.w,-(an)": [
+    24
+  ],
+  "move.l xxx.w,d(an)": [
+    28
+  ],
+  "move.l xxx.w,d(an,ix)": [
+    30
+  ],
+  "move.l xxx.w,xxx.w": [
+    28
+  ],
+  "move.l xxx.w,xxx.l": [
+    32
+  ],
+  "move.l xxx.l,dn": [
+    20
+  ],
+  "move.l xxx.l,an": [
+    20
+  ],
+  "movea.l xxx.l,an": [
+    20
+  ],
+  "move.l xxx.l,(an)": [
+    28
+  ],
+  "move.l xxx.l,(an)+": [
+    28
+  ],
+  "move.l xxx.l,-(an)": [
+    28
+  ],
+  "move.l xxx.l,d(an)": [
+    32
+  ],
+  "move.l xxx.l,d(an,ix)": [
+    34
+  ],
+  "move.l xxx.l,xxx.w": [
+    32
+  ],
+  "move.l xxx.l,xxx.l": [
+    36
+  ],
+  "move.l d(pc),dn": [
+    16
+  ],
+  "move.l d(pc),an": [
+    16
+  ],
+  "movea.l d(pc),an": [
+    16
+  ],
+  "move.l d(pc),(an)": [
+    24
+  ],
+  "move.l d(pc),(an)+": [
+    24
+  ],
+  "move.l d(pc),-(an)": [
+    24
+  ],
+  "move.l d(pc),d(an)": [
+    28
+  ],
+  "move.l d(pc),d(an,ix)": [
+    30
+  ],
+  "move.l d(pc),xxx.w": [
+    28
+  ],
+  "move.l d(pc),xxx.l": [
+    32
+  ],
+  "move.l d(pc,ix),dn": [
+    18
+  ],
+  "move.l d(pc,ix),an": [
+    18
+  ],
+  "movea.l d(pc,ix),an": [
+    18
+  ],
+  "move.l d(pc,ix),(an)": [
+    26
+  ],
+  "move.l d(pc,ix),(an)+": [
+    26
+  ],
+  "move.l d(pc,ix),-(an)": [
+    26
+  ],
+  "move.l d(pc,ix),d(an)": [
+    30
+  ],
+  "move.l d(pc,ix),d(an,ix)": [
+    32
+  ],
+  "move.l d(pc,ix),xxx.w": [
+    30
+  ],
+  "move.l d(pc,ix),xxx.l": [
+    34
+  ],
+  "move.l #xxx,dn": [
+    12
+  ],
+  "move.l #xxx,an": [
+    12
+  ],
+  "movea.l #xxx,an": [
+    12
+  ],
+  "move.l #xxx,(an)": [
+    20
+  ],
+  "move.l #xxx,(an)+": [
+    20
+  ],
+  "move.l #xxx,-(an)": [
+    20
+  ],
+  "move.l #xxx,d(an)": [
+    24
+  ],
+  "move.l #xxx,d(an,ix)": [
+    26
+  ],
+  "move.l #xxx,xxx.w": [
+    24
+  ],
+  "move.l #xxx,xxx.l": [
+    28
+  ],
+  "add.b dn,an": [
+    8
+  ],
+  "add.b an,an": [
+    8
+  ],
+  "add.b (an),an": [
+    8
+  ],
+  "add.b (an)+,an": [
+    8
+  ],
+  "add.b -(an),an": [
+    8
+  ],
+  "add.b d(an),an": [
+    8
+  ],
+  "add.b d(an,ix),an": [
+    8
+  ],
+  "add.b d(pc),an": [
+    8
+  ],
+  "add.b d(pc,ix),an": [
+    8
+  ],
+  "add.b xxx.w,an": [
+    8
+  ],
+  "add.b xxx.l,an": [
+    8
+  ],
+  "add.b #xxx,an": [
+    8
+  ],
+  "add.w dn,an": [
+    8
+  ],
+  "add.w an,an": [
+    8
+  ],
+  "add.w (an),an": [
+    8
+  ],
+  "add.w (an)+,an": [
+    8
+  ],
+  "add.w -(an),an": [
+    8
+  ],
+  "add.w d(an),an": [
+    8
+  ],
+  "add.w d(an,ix),an": [
+    8
+  ],
+  "add.w d(pc),an": [
+    8
+  ],
+  "add.w d(pc,ix),an": [
+    8
+  ],
+  "add.w xxx.w,an": [
+    8
+  ],
+  "add.w xxx.l,an": [
+    8
+  ],
+  "add.w #xxx,an": [
+    8
+  ],
+  "sub.b dn,an": [
+    8
+  ],
+  "sub.b an,an": [
+    8
+  ],
+  "sub.b (an),an": [
+    8
+  ],
+  "sub.b (an)+,an": [
+    8
+  ],
+  "sub.b -(an),an": [
+    8
+  ],
+  "sub.b d(an),an": [
+    8
+  ],
+  "sub.b d(an,ix),an": [
+    8
+  ],
+  "sub.b d(pc),an": [
+    8
+  ],
+  "sub.b d(pc,ix),an": [
+    8
+  ],
+  "sub.b xxx.w,an": [
+    8
+  ],
+  "sub.b xxx.l,an": [
+    8
+  ],
+  "sub.b #xxx,an": [
+    8
+  ],
+  "sub.w dn,an": [
+    8
+  ],
+  "sub.w an,an": [
+    8
+  ],
+  "sub.w (an),an": [
+    8
+  ],
+  "sub.w (an)+,an": [
+    8
+  ],
+  "sub.w -(an),an": [
+    8
+  ],
+  "sub.w d(an),an": [
+    8
+  ],
+  "sub.w d(an,ix),an": [
+    8
+  ],
+  "sub.w d(pc),an": [
+    8
+  ],
+  "sub.w d(pc,ix),an": [
+    8
+  ],
+  "sub.w xxx.w,an": [
+    8
+  ],
+  "sub.w xxx.l,an": [
+    8
+  ],
+  "sub.w #xxx,an": [
+    8
+  ],
+  "adda.w dn,an": [
+    8
+  ],
+  "adda.w an,an": [
+    8
+  ],
+  "adda.w (an),an": [
+    8
+  ],
+  "adda.w (an)+,an": [
+    8
+  ],
+  "adda.w -(an),an": [
+    8
+  ],
+  "adda.w d(an),an": [
+    8
+  ],
+  "adda.w d(an,ix),an": [
+    8
+  ],
+  "adda.w d(pc),an": [
+    8
+  ],
+  "adda.w d(pc,ix),an": [
+    8
+  ],
+  "adda.w xxx.w,an": [
+    8
+  ],
+  "adda.w xxx.l,an": [
+    8
+  ],
+  "adda.w #xxx,an": [
+    8
+  ],
+  "suba.w dn,an": [
+    8
+  ],
+  "suba.w an,an": [
+    8
+  ],
+  "suba.w (an),an": [
+    8
+  ],
+  "suba.w (an)+,an": [
+    8
+  ],
+  "suba.w -(an),an": [
+    8
+  ],
+  "suba.w d(an),an": [
+    8
+  ],
+  "suba.w d(an,ix),an": [
+    8
+  ],
+  "suba.w d(pc),an": [
+    8
+  ],
+  "suba.w d(pc,ix),an": [
+    8
+  ],
+  "suba.w xxx.w,an": [
+    8
+  ],
+  "suba.w xxx.l,an": [
+    8
+  ],
+  "suba.w #xxx,an": [
+    8
+  ],
+  "add.b dn,dn": [
+    4
+  ],
+  "add.b an,dn": [
+    4
+  ],
+  "add.b (an),dn": [
+    4
+  ],
+  "add.b (an)+,dn": [
+    4
+  ],
+  "add.b -(an),dn": [
+    4
+  ],
+  "add.b d(an),dn": [
+    4
+  ],
+  "add.b d(an,ix),dn": [
+    4
+  ],
+  "add.b d(pc),dn": [
+    4
+  ],
+  "add.b d(pc,ix),dn": [
+    4
+  ],
+  "add.b xxx.w,dn": [
+    4
+  ],
+  "add.b xxx.l,dn": [
+    4
+  ],
+  "add.b #xxx,dn": [
+    8
+  ],
+  "add.w dn,dn": [
+    4
+  ],
+  "add.w an,dn": [
+    4
+  ],
+  "add.w (an),dn": [
+    4
+  ],
+  "add.w (an)+,dn": [
+    4
+  ],
+  "add.w -(an),dn": [
+    4
+  ],
+  "add.w d(an),dn": [
+    4
+  ],
+  "add.w d(an,ix),dn": [
+    4
+  ],
+  "add.w d(pc),dn": [
+    4
+  ],
+  "add.w d(pc,ix),dn": [
+    4
+  ],
+  "add.w xxx.w,dn": [
+    4
+  ],
+  "add.w xxx.l,dn": [
+    4
+  ],
+  "add.w #xxx,dn": [
+    8
+  ],
+  "sub.b dn,dn": [
+    4
+  ],
+  "sub.b an,dn": [
+    4
+  ],
+  "sub.b (an),dn": [
+    4
+  ],
+  "sub.b (an)+,dn": [
+    4
+  ],
+  "sub.b -(an),dn": [
+    4
+  ],
+  "sub.b d(an),dn": [
+    4
+  ],
+  "sub.b d(an,ix),dn": [
+    4
+  ],
+  "sub.b d(pc),dn": [
+    4
+  ],
+  "sub.b d(pc,ix),dn": [
+    4
+  ],
+  "sub.b xxx.w,dn": [
+    4
+  ],
+  "sub.b xxx.l,dn": [
+    4
+  ],
+  "sub.b #xxx,dn": [
+    8
+  ],
+  "sub.w dn,dn": [
+    4
+  ],
+  "sub.w an,dn": [
+    4
+  ],
+  "sub.w (an),dn": [
+    4
+  ],
+  "sub.w (an)+,dn": [
+    4
+  ],
+  "sub.w -(an),dn": [
+    4
+  ],
+  "sub.w d(an),dn": [
+    4
+  ],
+  "sub.w d(an,ix),dn": [
+    4
+  ],
+  "sub.w d(pc),dn": [
+    4
+  ],
+  "sub.w d(pc,ix),dn": [
+    4
+  ],
+  "sub.w xxx.w,dn": [
+    4
+  ],
+  "sub.w xxx.l,dn": [
+    4
+  ],
+  "sub.w #xxx,dn": [
+    8
+  ],
+  "add.b dn,(an)": [
+    8
+  ],
+  "add.b dn,(an)+": [
+    8
+  ],
+  "add.b dn,-(an)": [
+    8
+  ],
+  "add.b dn,d(an)": [
+    8
+  ],
+  "add.b dn,d(an,ix)": [
+    8
+  ],
+  "add.b dn,d(pc)": [
+    8
+  ],
+  "add.b dn,d(pc,ix)": [
+    8
+  ],
+  "add.b dn,xxx.w": [
+    8
+  ],
+  "add.b dn,xxx.l": [
+    8
+  ],
+  "add.w dn,(an)": [
+    8
+  ],
+  "add.w dn,(an)+": [
+    8
+  ],
+  "add.w dn,-(an)": [
+    8
+  ],
+  "add.w dn,d(an)": [
+    8
+  ],
+  "add.w dn,d(an,ix)": [
+    8
+  ],
+  "add.w dn,d(pc)": [
+    8
+  ],
+  "add.w dn,d(pc,ix)": [
+    8
+  ],
+  "add.w dn,xxx.w": [
+    8
+  ],
+  "add.w dn,xxx.l": [
+    8
+  ],
+  "sub.b dn,(an)": [
+    8
+  ],
+  "sub.b dn,(an)+": [
+    8
+  ],
+  "sub.b dn,-(an)": [
+    8
+  ],
+  "sub.b dn,d(an)": [
+    8
+  ],
+  "sub.b dn,d(an,ix)": [
+    8
+  ],
+  "sub.b dn,d(pc)": [
+    8
+  ],
+  "sub.b dn,d(pc,ix)": [
+    8
+  ],
+  "sub.b dn,xxx.w": [
+    8
+  ],
+  "sub.b dn,xxx.l": [
+    8
+  ],
+  "sub.w dn,(an)": [
+    8
+  ],
+  "sub.w dn,(an)+": [
+    8
+  ],
+  "sub.w dn,-(an)": [
+    8
+  ],
+  "sub.w dn,d(an)": [
+    8
+  ],
+  "sub.w dn,d(an,ix)": [
+    8
+  ],
+  "sub.w dn,d(pc)": [
+    8
+  ],
+  "sub.w dn,d(pc,ix)": [
+    8
+  ],
+  "sub.w dn,xxx.w": [
+    8
+  ],
+  "sub.w dn,xxx.l": [
+    8
+  ],
+  "add.l (an),an": [
+    6
+  ],
+  "add.l (an)+,an": [
+    6
+  ],
+  "add.l -(an),an": [
+    6
+  ],
+  "add.l d(an),an": [
+    6
+  ],
+  "add.l d(an,ix),an": [
+    6
+  ],
+  "add.l d(pc),an": [
+    6
+  ],
+  "add.l d(pc,ix),an": [
+    6
+  ],
+  "add.l xxx.w,an": [
+    6
+  ],
+  "add.l xxx.l,an": [
+    6
+  ],
+  "adda.l (an),an": [
+    6
+  ],
+  "adda.l (an)+,an": [
+    6
+  ],
+  "adda.l -(an),an": [
+    6
+  ],
+  "adda.l d(an),an": [
+    6
+  ],
+  "adda.l d(an,ix),an": [
+    6
+  ],
+  "adda.l d(pc),an": [
+    6
+  ],
+  "adda.l d(pc,ix),an": [
+    6
+  ],
+  "adda.l xxx.w,an": [
+    6
+  ],
+  "adda.l xxx.l,an": [
+    6
+  ],
+  "sub.l (an),an": [
+    6
+  ],
+  "sub.l (an)+,an": [
+    6
+  ],
+  "sub.l -(an),an": [
+    6
+  ],
+  "sub.l d(an),an": [
+    6
+  ],
+  "sub.l d(an,ix),an": [
+    6
+  ],
+  "sub.l d(pc),an": [
+    6
+  ],
+  "sub.l d(pc,ix),an": [
+    6
+  ],
+  "sub.l xxx.w,an": [
+    6
+  ],
+  "sub.l xxx.l,an": [
+    6
+  ],
+  "suba.l (an),an": [
+    6
+  ],
+  "suba.l (an)+,an": [
+    6
+  ],
+  "suba.l -(an),an": [
+    6
+  ],
+  "suba.l d(an),an": [
+    6
+  ],
+  "suba.l d(an,ix),an": [
+    6
+  ],
+  "suba.l d(pc),an": [
+    6
+  ],
+  "suba.l d(pc,ix),an": [
+    6
+  ],
+  "suba.l xxx.w,an": [
+    6
+  ],
+  "suba.l xxx.l,an": [
+    6
+  ],
+  "add.l (an),dn": [
+    6
+  ],
+  "add.l (an)+,dn": [
+    6
+  ],
+  "add.l -(an),dn": [
+    6
+  ],
+  "add.l d(an),dn": [
+    6
+  ],
+  "add.l d(an,ix),dn": [
+    6
+  ],
+  "add.l d(pc),dn": [
+    6
+  ],
+  "add.l d(pc,ix),dn": [
+    6
+  ],
+  "add.l xxx.w,dn": [
+    6
+  ],
+  "add.l xxx.l,dn": [
+    6
+  ],
+  "sub.l (an),dn": [
+    6
+  ],
+  "sub.l (an)+,dn": [
+    6
+  ],
+  "sub.l -(an),dn": [
+    6
+  ],
+  "sub.l d(an),dn": [
+    6
+  ],
+  "sub.l d(an,ix),dn": [
+    6
+  ],
+  "sub.l d(pc),dn": [
+    6
+  ],
+  "sub.l d(pc,ix),dn": [
+    6
+  ],
+  "sub.l xxx.w,dn": [
+    6
+  ],
+  "sub.l xxx.l,dn": [
+    6
+  ],
+  "add.l dn,an": [
+    8
+  ],
+  "add.l an,an": [
+    8
+  ],
+  "add.l #xxx,an": [
+    8
+  ],
+  "adda.l dn,an": [
+    8
+  ],
+  "adda.l an,an": [
+    8
+  ],
+  "adda.l #xxx,an": [
+    8
+  ],
+  "sub.l dn,an": [
+    8
+  ],
+  "sub.l an,an": [
+    8
+  ],
+  "sub.l #xxx,an": [
+    8
+  ],
+  "suba.l dn,an": [
+    8
+  ],
+  "suba.l an,an": [
+    8
+  ],
+  "suba.l #xxx,an": [
+    8
+  ],
+  "add.l dn,dn": [
+    8
+  ],
+  "add.l an,dn": [
+    8
+  ],
+  "add.l #xxx,dn": [
+    16
+  ],
+  "sub.l dn,dn": [
+    8
+  ],
+  "sub.l an,dn": [
+    8
+  ],
+  "sub.l #xxx,dn": [
+    16
+  ],
+  "add.l dn,(an)": [
+    12
+  ],
+  "add.l dn,(an)+": [
+    12
+  ],
+  "add.l dn,-(an)": [
+    12
+  ],
+  "add.l dn,d(an)": [
+    12
+  ],
+  "add.l dn,d(an,ix)": [
+    12
+  ],
+  "add.l dn,d(pc)": [
+    12
+  ],
+  "add.l dn,d(pc,ix)": [
+    12
+  ],
+  "add.l dn,xxx.w": [
+    12
+  ],
+  "add.l dn,xxx.l": [
+    12
+  ],
+  "sub.l dn,(an)": [
+    12
+  ],
+  "sub.l dn,(an)+": [
+    12
+  ],
+  "sub.l dn,-(an)": [
+    12
+  ],
+  "sub.l dn,d(an)": [
+    12
+  ],
+  "sub.l dn,d(an,ix)": [
+    12
+  ],
+  "sub.l dn,d(pc)": [
+    12
+  ],
+  "sub.l dn,d(pc,ix)": [
+    12
+  ],
+  "sub.l dn,xxx.w": [
+    12
+  ],
+  "sub.l dn,xxx.l": [
+    12
+  ],
+  "and.b dn,dn": [
+    4
+  ],
+  "and.b an,dn": [
+    4
+  ],
+  "and.b (an),dn": [
+    4
+  ],
+  "and.b (an)+,dn": [
+    4
+  ],
+  "and.b -(an),dn": [
+    4
+  ],
+  "and.b d(an),dn": [
+    4
+  ],
+  "and.b d(an,ix),dn": [
+    4
+  ],
+  "and.b d(pc),dn": [
+    4
+  ],
+  "and.b d(pc,ix),dn": [
+    4
+  ],
+  "and.b xxx.w,dn": [
+    4
+  ],
+  "and.b xxx.l,dn": [
+    4
+  ],
+  "and.b #xxx,dn": [
+    8
+  ],
+  "and.w dn,dn": [
+    4
+  ],
+  "and.w an,dn": [
+    4
+  ],
+  "and.w (an),dn": [
+    4
+  ],
+  "and.w (an)+,dn": [
+    4
+  ],
+  "and.w -(an),dn": [
+    4
+  ],
+  "and.w d(an),dn": [
+    4
+  ],
+  "and.w d(an,ix),dn": [
+    4
+  ],
+  "and.w d(pc),dn": [
+    4
+  ],
+  "and.w d(pc,ix),dn": [
+    4
+  ],
+  "and.w xxx.w,dn": [
+    4
+  ],
+  "and.w xxx.l,dn": [
+    4
+  ],
+  "and.w #xxx,dn": [
+    8
+  ],
+  "or.b dn,dn": [
+    4
+  ],
+  "or.b an,dn": [
+    4
+  ],
+  "or.b (an),dn": [
+    4
+  ],
+  "or.b (an)+,dn": [
+    4
+  ],
+  "or.b -(an),dn": [
+    4
+  ],
+  "or.b d(an),dn": [
+    4
+  ],
+  "or.b d(an,ix),dn": [
+    4
+  ],
+  "or.b d(pc),dn": [
+    4
+  ],
+  "or.b d(pc,ix),dn": [
+    4
+  ],
+  "or.b xxx.w,dn": [
+    4
+  ],
+  "or.b xxx.l,dn": [
+    4
+  ],
+  "or.b #xxx,dn": [
+    8
+  ],
+  "or.w dn,dn": [
+    4
+  ],
+  "or.w an,dn": [
+    4
+  ],
+  "or.w (an),dn": [
+    4
+  ],
+  "or.w (an)+,dn": [
+    4
+  ],
+  "or.w -(an),dn": [
+    4
+  ],
+  "or.w d(an),dn": [
+    4
+  ],
+  "or.w d(an,ix),dn": [
+    4
+  ],
+  "or.w d(pc),dn": [
+    4
+  ],
+  "or.w d(pc,ix),dn": [
+    4
+  ],
+  "or.w xxx.w,dn": [
+    4
+  ],
+  "or.w xxx.l,dn": [
+    4
+  ],
+  "or.w #xxx,dn": [
+    8
+  ],
+  "and.b dn,(an)": [
+    8
+  ],
+  "and.b dn,(an)+": [
+    8
+  ],
+  "and.b dn,-(an)": [
+    8
+  ],
+  "and.b dn,d(an)": [
+    8
+  ],
+  "and.b dn,d(an,ix)": [
+    8
+  ],
+  "and.b dn,d(pc)": [
+    8
+  ],
+  "and.b dn,d(pc,ix)": [
+    8
+  ],
+  "and.b dn,xxx.w": [
+    8
+  ],
+  "and.b dn,xxx.l": [
+    8
+  ],
+  "and.w dn,(an)": [
+    8
+  ],
+  "and.w dn,(an)+": [
+    8
+  ],
+  "and.w dn,-(an)": [
+    8
+  ],
+  "and.w dn,d(an)": [
+    8
+  ],
+  "and.w dn,d(an,ix)": [
+    8
+  ],
+  "and.w dn,d(pc)": [
+    8
+  ],
+  "and.w dn,d(pc,ix)": [
+    8
+  ],
+  "and.w dn,xxx.w": [
+    8
+  ],
+  "and.w dn,xxx.l": [
+    8
+  ],
+  "or.b dn,(an)": [
+    8
+  ],
+  "or.b dn,(an)+": [
+    8
+  ],
+  "or.b dn,-(an)": [
+    8
+  ],
+  "or.b dn,d(an)": [
+    8
+  ],
+  "or.b dn,d(an,ix)": [
+    8
+  ],
+  "or.b dn,d(pc)": [
+    8
+  ],
+  "or.b dn,d(pc,ix)": [
+    8
+  ],
+  "or.b dn,xxx.w": [
+    8
+  ],
+  "or.b dn,xxx.l": [
+    8
+  ],
+  "or.w dn,(an)": [
+    8
+  ],
+  "or.w dn,(an)+": [
+    8
+  ],
+  "or.w dn,-(an)": [
+    8
+  ],
+  "or.w dn,d(an)": [
+    8
+  ],
+  "or.w dn,d(an,ix)": [
+    8
+  ],
+  "or.w dn,d(pc)": [
+    8
+  ],
+  "or.w dn,d(pc,ix)": [
+    8
+  ],
+  "or.w dn,xxx.w": [
+    8
+  ],
+  "or.w dn,xxx.l": [
+    8
+  ],
+  "and.l (an),dn": [
+    6
+  ],
+  "and.l (an)+,dn": [
+    6
+  ],
+  "and.l -(an),dn": [
+    6
+  ],
+  "and.l d(an),dn": [
+    6
+  ],
+  "and.l d(an,ix),dn": [
+    6
+  ],
+  "and.l d(pc),dn": [
+    6
+  ],
+  "and.l d(pc,ix),dn": [
+    6
+  ],
+  "and.l xxx.w,dn": [
+    6
+  ],
+  "and.l xxx.l,dn": [
+    6
+  ],
+  "or.l (an),dn": [
+    6
+  ],
+  "or.l (an)+,dn": [
+    6
+  ],
+  "or.l -(an),dn": [
+    6
+  ],
+  "or.l d(an),dn": [
+    6
+  ],
+  "or.l d(an,ix),dn": [
+    6
+  ],
+  "or.l d(pc),dn": [
+    6
+  ],
+  "or.l d(pc,ix),dn": [
+    6
+  ],
+  "or.l xxx.w,dn": [
+    6
+  ],
+  "or.l xxx.l,dn": [
+    6
+  ],
+  "and.l dn,dn": [
+    8
+  ],
+  "and.l an,dn": [
+    8
+  ],
+  "and.l #xxx,dn": [
+    16
+  ],
+  "or.l dn,dn": [
+    8
+  ],
+  "or.l an,dn": [
+    8
+  ],
+  "or.l #xxx,dn": [
+    16
+  ],
+  "and.l dn,(an)": [
+    12
+  ],
+  "and.l dn,(an)+": [
+    12
+  ],
+  "and.l dn,-(an)": [
+    12
+  ],
+  "and.l dn,d(an)": [
+    12
+  ],
+  "and.l dn,d(an,ix)": [
+    12
+  ],
+  "and.l dn,d(pc)": [
+    12
+  ],
+  "and.l dn,d(pc,ix)": [
+    12
+  ],
+  "and.l dn,xxx.w": [
+    12
+  ],
+  "and.l dn,xxx.l": [
+    12
+  ],
+  "or.l dn,(an)": [
+    12
+  ],
+  "or.l dn,(an)+": [
+    12
+  ],
+  "or.l dn,-(an)": [
+    12
+  ],
+  "or.l dn,d(an)": [
+    12
+  ],
+  "or.l dn,d(an,ix)": [
+    12
+  ],
+  "or.l dn,d(pc)": [
+    12
+  ],
+  "or.l dn,d(pc,ix)": [
+    12
+  ],
+  "or.l dn,xxx.w": [
+    12
+  ],
+  "or.l dn,xxx.l": [
+    12
+  ],
+  "eor.b dn,dn": [
+    4
+  ],
+  "eor.w dn,dn": [
+    4
+  ],
+  "eor.b dn,(an)": [
+    8
+  ],
+  "eor.b dn,(an)+": [
+    8
+  ],
+  "eor.b dn,-(an)": [
+    8
+  ],
+  "eor.b dn,d(an)": [
+    8
+  ],
+  "eor.b dn,d(an,ix)": [
+    8
+  ],
+  "eor.b dn,d(pc)": [
+    8
+  ],
+  "eor.b dn,d(pc,ix)": [
+    8
+  ],
+  "eor.b dn,xxx.w": [
+    8
+  ],
+  "eor.b dn,xxx.l": [
+    8
+  ],
+  "eor.w dn,(an)": [
+    8
+  ],
+  "eor.w dn,(an)+": [
+    8
+  ],
+  "eor.w dn,-(an)": [
+    8
+  ],
+  "eor.w dn,d(an)": [
+    8
+  ],
+  "eor.w dn,d(an,ix)": [
+    8
+  ],
+  "eor.w dn,d(pc)": [
+    8
+  ],
+  "eor.w dn,d(pc,ix)": [
+    8
+  ],
+  "eor.w dn,xxx.w": [
+    8
+  ],
+  "eor.w dn,xxx.l": [
+    8
+  ],
+  "eor.l dn,dn": [
+    8
+  ],
+  "eor.l dn,(an)": [
+    12
+  ],
+  "eor.l dn,(an)+": [
+    12
+  ],
+  "eor.l dn,-(an)": [
+    12
+  ],
+  "eor.l dn,d(an)": [
+    12
+  ],
+  "eor.l dn,d(an,ix)": [
+    12
+  ],
+  "eor.l dn,d(pc)": [
+    12
+  ],
+  "eor.l dn,d(pc,ix)": [
+    12
+  ],
+  "eor.l dn,xxx.w": [
+    12
+  ],
+  "eor.l dn,xxx.l": [
+    12
+  ],
+  "cmp.b dn,an": [
+    6
+  ],
+  "cmp.b an,an": [
+    6
+  ],
+  "cmp.b (an),an": [
+    6
+  ],
+  "cmp.b (an)+,an": [
+    6
+  ],
+  "cmp.b -(an),an": [
+    6
+  ],
+  "cmp.b d(an),an": [
+    6
+  ],
+  "cmp.b d(an,ix),an": [
+    6
+  ],
+  "cmp.b d(pc),an": [
+    6
+  ],
+  "cmp.b d(pc,ix),an": [
+    6
+  ],
+  "cmp.b xxx.w,an": [
+    6
+  ],
+  "cmp.b xxx.l,an": [
+    6
+  ],
+  "cmp.b #xxx,an": [
+    6
+  ],
+  "cmp.w dn,an": [
+    6
+  ],
+  "cmp.w an,an": [
+    6
+  ],
+  "cmp.w (an),an": [
+    6
+  ],
+  "cmp.w (an)+,an": [
+    6
+  ],
+  "cmp.w -(an),an": [
+    6
+  ],
+  "cmp.w d(an),an": [
+    6
+  ],
+  "cmp.w d(an,ix),an": [
+    6
+  ],
+  "cmp.w d(pc),an": [
+    6
+  ],
+  "cmp.w d(pc,ix),an": [
+    6
+  ],
+  "cmp.w xxx.w,an": [
+    6
+  ],
+  "cmp.w xxx.l,an": [
+    6
+  ],
+  "cmp.w #xxx,an": [
+    6
+  ],
+  "cmpa.w dn,an": [
+    6
+  ],
+  "cmpa.w an,an": [
+    6
+  ],
+  "cmpa.w (an),an": [
+    6
+  ],
+  "cmpa.w (an)+,an": [
+    6
+  ],
+  "cmpa.w -(an),an": [
+    6
+  ],
+  "cmpa.w d(an),an": [
+    6
+  ],
+  "cmpa.w d(an,ix),an": [
+    6
+  ],
+  "cmpa.w d(pc),an": [
+    6
+  ],
+  "cmpa.w d(pc,ix),an": [
+    6
+  ],
+  "cmpa.w xxx.w,an": [
+    6
+  ],
+  "cmpa.w xxx.l,an": [
+    6
+  ],
+  "cmpa.w #xxx,an": [
+    6
+  ],
+  "cmp.l dn,an": [
+    6
+  ],
+  "cmp.l an,an": [
+    6
+  ],
+  "cmp.l (an),an": [
+    6
+  ],
+  "cmp.l (an)+,an": [
+    6
+  ],
+  "cmp.l -(an),an": [
+    6
+  ],
+  "cmp.l d(an),an": [
+    6
+  ],
+  "cmp.l d(an,ix),an": [
+    6
+  ],
+  "cmp.l d(pc),an": [
+    6
+  ],
+  "cmp.l d(pc,ix),an": [
+    6
+  ],
+  "cmp.l xxx.w,an": [
+    6
+  ],
+  "cmp.l xxx.l,an": [
+    6
+  ],
+  "cmp.l #xxx,an": [
+    6
+  ],
+  "cmpa.l dn,an": [
+    6
+  ],
+  "cmpa.l an,an": [
+    6
+  ],
+  "cmpa.l (an),an": [
+    6
+  ],
+  "cmpa.l (an)+,an": [
+    6
+  ],
+  "cmpa.l -(an),an": [
+    6
+  ],
+  "cmpa.l d(an),an": [
+    6
+  ],
+  "cmpa.l d(an,ix),an": [
+    6
+  ],
+  "cmpa.l d(pc),an": [
+    6
+  ],
+  "cmpa.l d(pc,ix),an": [
+    6
+  ],
+  "cmpa.l xxx.w,an": [
+    6
+  ],
+  "cmpa.l xxx.l,an": [
+    6
+  ],
+  "cmpa.l #xxx,an": [
+    6
+  ],
+  "cmp.l dn,dn": [
+    6
+  ],
+  "cmp.l an,dn": [
+    6
+  ],
+  "cmp.l (an),dn": [
+    6
+  ],
+  "cmp.l (an)+,dn": [
+    6
+  ],
+  "cmp.l -(an),dn": [
+    6
+  ],
+  "cmp.l d(an),dn": [
+    6
+  ],
+  "cmp.l d(an,ix),dn": [
+    6
+  ],
+  "cmp.l d(pc),dn": [
+    6
+  ],
+  "cmp.l d(pc,ix),dn": [
+    6
+  ],
+  "cmp.l xxx.w,dn": [
+    6
+  ],
+  "cmp.l xxx.l,dn": [
+    6
+  ],
+  "cmp.l #xxx,dn": [
+    14
+  ],
+  "cmp.b dn,dn": [
+    4
+  ],
+  "cmp.b an,dn": [
+    4
+  ],
+  "cmp.b (an),dn": [
+    4
+  ],
+  "cmp.b (an)+,dn": [
+    4
+  ],
+  "cmp.b -(an),dn": [
+    4
+  ],
+  "cmp.b d(an),dn": [
+    4
+  ],
+  "cmp.b d(an,ix),dn": [
+    4
+  ],
+  "cmp.b d(pc),dn": [
+    4
+  ],
+  "cmp.b d(pc,ix),dn": [
+    4
+  ],
+  "cmp.b xxx.w,dn": [
+    4
+  ],
+  "cmp.b xxx.l,dn": [
+    4
+  ],
+  "cmp.b #xxx,dn": [
+    8
+  ],
+  "cmp.w dn,dn": [
+    4
+  ],
+  "cmp.w an,dn": [
+    4
+  ],
+  "cmp.w (an),dn": [
+    4
+  ],
+  "cmp.w (an)+,dn": [
+    4
+  ],
+  "cmp.w -(an),dn": [
+    4
+  ],
+  "cmp.w d(an),dn": [
+    4
+  ],
+  "cmp.w d(an,ix),dn": [
+    4
+  ],
+  "cmp.w d(pc),dn": [
+    4
+  ],
+  "cmp.w d(pc,ix),dn": [
+    4
+  ],
+  "cmp.w xxx.w,dn": [
+    4
+  ],
+  "cmp.w xxx.l,dn": [
+    4
+  ],
+  "cmp.w #xxx,dn": [
+    8
+  ],
+  "divs.w dn,dn": [
+    158
+  ],
+  "divs.w an,dn": [
+    158
+  ],
+  "divs.w (an),dn": [
+    158
+  ],
+  "divs.w (an)+,dn": [
+    158
+  ],
+  "divs.w -(an),dn": [
+    158
+  ],
+  "divs.w d(an),dn": [
+    158
+  ],
+  "divs.w d(an,ix),dn": [
+    158
+  ],
+  "divs.w d(pc),dn": [
+    158
+  ],
+  "divs.w d(pc,ix),dn": [
+    158
+  ],
+  "divs.w xxx.w,dn": [
+    158
+  ],
+  "divs.w xxx.l,dn": [
+    158
+  ],
+  "divs.w #xxx,dn": [
+    158
+  ],
+  "divu.w dn,dn": [
+    140
+  ],
+  "divu.w an,dn": [
+    140
+  ],
+  "divu.w (an),dn": [
+    140
+  ],
+  "divu.w (an)+,dn": [
+    140
+  ],
+  "divu.w -(an),dn": [
+    140
+  ],
+  "divu.w d(an),dn": [
+    140
+  ],
+  "divu.w d(an,ix),dn": [
+    140
+  ],
+  "divu.w d(pc),dn": [
+    140
+  ],
+  "divu.w d(pc,ix),dn": [
+    140
+  ],
+  "divu.w xxx.w,dn": [
+    140
+  ],
+  "divu.w xxx.l,dn": [
+    140
+  ],
+  "divu.w #xxx,dn": [
+    140
+  ],
+  "muls.w dn,dn": [
+    76
+  ],
+  "muls.w an,dn": [
+    76
+  ],
+  "muls.w (an),dn": [
+    76
+  ],
+  "muls.w (an)+,dn": [
+    76
+  ],
+  "muls.w -(an),dn": [
+    76
+  ],
+  "muls.w d(an),dn": [
+    76
+  ],
+  "muls.w d(an,ix),dn": [
+    76
+  ],
+  "muls.w d(pc),dn": [
+    76
+  ],
+  "muls.w d(pc,ix),dn": [
+    76
+  ],
+  "muls.w xxx.w,dn": [
+    76
+  ],
+  "muls.w xxx.l,dn": [
+    76
+  ],
+  "muls.w #xxx,dn": [
+    76
+  ],
+  "mulu.w dn,dn": [
+    76
+  ],
+  "mulu.w an,dn": [
+    76
+  ],
+  "mulu.w (an),dn": [
+    76
+  ],
+  "mulu.w (an)+,dn": [
+    76
+  ],
+  "mulu.w -(an),dn": [
+    76
+  ],
+  "mulu.w d(an),dn": [
+    76
+  ],
+  "mulu.w d(an,ix),dn": [
+    76
+  ],
+  "mulu.w d(pc),dn": [
+    76
+  ],
+  "mulu.w d(pc,ix),dn": [
+    76
+  ],
+  "mulu.w xxx.w,dn": [
+    76
+  ],
+  "mulu.w xxx.l,dn": [
+    76
+  ],
+  "mulu.w #xxx,dn": [
+    76
+  ],
+  "addi.b #xxx,dn": [
+    8
+  ],
+  "addi.w #xxx,dn": [
+    8
+  ],
+  "subi.b #xxx,dn": [
+    8
+  ],
+  "subi.w #xxx,dn": [
+    8
+  ],
+  "add.b #xxx,(an)": [
+    12
+  ],
+  "add.b #xxx,(an)+": [
+    12
+  ],
+  "add.b #xxx,-(an)": [
+    12
+  ],
+  "add.b #xxx,d(an)": [
+    12
+  ],
+  "add.b #xxx,d(an,ix)": [
+    12
+  ],
+  "add.b #xxx,d(pc)": [
+    12
+  ],
+  "add.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "add.b #xxx,xxx.w": [
+    12
+  ],
+  "add.b #xxx,xxx.l": [
+    12
+  ],
+  "add.w #xxx,(an)": [
+    12
+  ],
+  "add.w #xxx,(an)+": [
+    12
+  ],
+  "add.w #xxx,-(an)": [
+    12
+  ],
+  "add.w #xxx,d(an)": [
+    12
+  ],
+  "add.w #xxx,d(an,ix)": [
+    12
+  ],
+  "add.w #xxx,d(pc)": [
+    12
+  ],
+  "add.w #xxx,d(pc,ix)": [
+    12
+  ],
+  "add.w #xxx,xxx.w": [
+    12
+  ],
+  "add.w #xxx,xxx.l": [
+    12
+  ],
+  "addi.b #xxx,(an)": [
+    12
+  ],
+  "addi.b #xxx,(an)+": [
+    12
+  ],
+  "addi.b #xxx,-(an)": [
+    12
+  ],
+  "addi.b #xxx,d(an)": [
+    12
+  ],
+  "addi.b #xxx,d(an,ix)": [
+    12
+  ],
+  "addi.b #xxx,d(pc)": [
+    12
+  ],
+  "addi.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "addi.b #xxx,xxx.w": [
+    12
+  ],
+  "addi.b #xxx,xxx.l": [
+    12
+  ],
+  "addi.w #xxx,(an)": [
+    12
+  ],
+  "addi.w #xxx,(an)+": [
+    12
+  ],
+  "addi.w #xxx,-(an)": [
+    12
+  ],
+  "addi.w #xxx,d(an)": [
+    12
+  ],
+  "addi.w #xxx,d(an,ix)": [
+    12
+  ],
+  "addi.w #xxx,d(pc)": [
+    12
+  ],
+  "addi.w #xxx,d(pc,ix)": [
+    12
+  ],
+  "addi.w #xxx,xxx.w": [
+    12
+  ],
+  "addi.w #xxx,xxx.l": [
+    12
+  ],
+  "sub.b #xxx,(an)": [
+    12
+  ],
+  "sub.b #xxx,(an)+": [
+    12
+  ],
+  "sub.b #xxx,-(an)": [
+    12
+  ],
+  "sub.b #xxx,d(an)": [
+    12
+  ],
+  "sub.b #xxx,d(an,ix)": [
+    12
+  ],
+  "sub.b #xxx,d(pc)": [
+    12
+  ],
+  "sub.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "sub.b #xxx,xxx.w": [
+    12
+  ],
+  "sub.b #xxx,xxx.l": [
+    12
+  ],
+  "sub.w #xxx,(an)": [
+    12
+  ],
+  "sub.w #xxx,(an)+": [
+    12
+  ],
+  "sub.w #xxx,-(an)": [
+    12
+  ],
+  "sub.w #xxx,d(an)": [
+    12
+  ],
+  "sub.w #xxx,d(an,ix)": [
+    12
+  ],
+  "sub.w #xxx,d(pc)": [
+    12
+  ],
+  "sub.w #xxx,d(pc,ix)": [
+    12
+  ],
+  "sub.w #xxx,xxx.w": [
+    12
+  ],
+  "sub.w #xxx,xxx.l": [
+    12
+  ],
+  "subi.b #xxx,(an)": [
+    12
+  ],
+  "subi.b #xxx,(an)+": [
+    12
+  ],
+  "subi.b #xxx,-(an)": [
+    12
+  ],
+  "subi.b #xxx,d(an)": [
+    12
+  ],
+  "subi.b #xxx,d(an,ix)": [
+    12
+  ],
+  "subi.b #xxx,d(pc)": [
+    12
+  ],
+  "subi.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "subi.b #xxx,xxx.w": [
+    12
+  ],
+  "subi.b #xxx,xxx.l": [
+    12
+  ],
+  "subi.w #xxx,(an)": [
+    12
+  ],
+  "subi.w #xxx,(an)+": [
+    12
+  ],
+  "subi.w #xxx,-(an)": [
+    12
+  ],
+  "subi.w #xxx,d(an)": [
+    12
+  ],
+  "subi.w #xxx,d(an,ix)": [
+    12
+  ],
+  "subi.w #xxx,d(pc)": [
+    12
+  ],
+  "subi.w #xxx,d(pc,ix)": [
+    12
+  ],
+  "subi.w #xxx,xxx.w": [
+    12
+  ],
+  "subi.w #xxx,xxx.l": [
+    12
+  ],
+  "addi.l #xxx,dn": [
+    16
+  ],
+  "subi.l #xxx,dn": [
+    16
+  ],
+  "add.l #xxx,(an)": [
+    20
+  ],
+  "add.l #xxx,(an)+": [
+    20
+  ],
+  "add.l #xxx,-(an)": [
+    20
+  ],
+  "add.l #xxx,d(an)": [
+    20
+  ],
+  "add.l #xxx,d(an,ix)": [
+    20
+  ],
+  "add.l #xxx,d(pc)": [
+    20
+  ],
+  "add.l #xxx,d(pc,ix)": [
+    20
+  ],
+  "add.l #xxx,xxx.w": [
+    20
+  ],
+  "add.l #xxx,xxx.l": [
+    20
+  ],
+  "addi.l #xxx,(an)": [
+    20
+  ],
+  "addi.l #xxx,(an)+": [
+    20
+  ],
+  "addi.l #xxx,-(an)": [
+    20
+  ],
+  "addi.l #xxx,d(an)": [
+    20
+  ],
+  "addi.l #xxx,d(an,ix)": [
+    20
+  ],
+  "addi.l #xxx,d(pc)": [
+    20
+  ],
+  "addi.l #xxx,d(pc,ix)": [
+    20
+  ],
+  "addi.l #xxx,xxx.w": [
+    20
+  ],
+  "addi.l #xxx,xxx.l": [
+    20
+  ],
+  "sub.l #xxx,(an)": [
+    20
+  ],
+  "sub.l #xxx,(an)+": [
+    20
+  ],
+  "sub.l #xxx,-(an)": [
+    20
+  ],
+  "sub.l #xxx,d(an)": [
+    20
+  ],
+  "sub.l #xxx,d(an,ix)": [
+    20
+  ],
+  "sub.l #xxx,d(pc)": [
+    20
+  ],
+  "sub.l #xxx,d(pc,ix)": [
+    20
+  ],
+  "sub.l #xxx,xxx.w": [
+    20
+  ],
+  "sub.l #xxx,xxx.l": [
+    20
+  ],
+  "subi.l #xxx,(an)": [
+    20
+  ],
+  "subi.l #xxx,(an)+": [
+    20
+  ],
+  "subi.l #xxx,-(an)": [
+    20
+  ],
+  "subi.l #xxx,d(an)": [
+    20
+  ],
+  "subi.l #xxx,d(an,ix)": [
+    20
+  ],
+  "subi.l #xxx,d(pc)": [
+    20
+  ],
+  "subi.l #xxx,d(pc,ix)": [
+    20
+  ],
+  "subi.l #xxx,xxx.w": [
+    20
+  ],
+  "subi.l #xxx,xxx.l": [
+    20
+  ],
+  "addq.b #xxx,dn": [
+    4
+  ],
+  "addq.w #xxx,dn": [
+    4
+  ],
+  "subq.b #xxx,dn": [
+    4
+  ],
+  "subq.w #xxx,dn": [
+    4
+  ],
+  "addq.b #xxx,an": [
+    8
+  ],
+  "addq.w #xxx,an": [
+    8
+  ],
+  "subq.b #xxx,an": [
+    8
+  ],
+  "subq.w #xxx,an": [
+    8
+  ],
+  "addq.b #xxx,(an)": [
+    8
+  ],
+  "addq.b #xxx,(an)+": [
+    8
+  ],
+  "addq.b #xxx,-(an)": [
+    8
+  ],
+  "addq.b #xxx,d(an)": [
+    8
+  ],
+  "addq.b #xxx,d(an,ix)": [
+    8
+  ],
+  "addq.b #xxx,d(pc)": [
+    8
+  ],
+  "addq.b #xxx,d(pc,ix)": [
+    8
+  ],
+  "addq.b #xxx,xxx.w": [
+    8
+  ],
+  "addq.b #xxx,xxx.l": [
+    8
+  ],
+  "addq.w #xxx,(an)": [
+    8
+  ],
+  "addq.w #xxx,(an)+": [
+    8
+  ],
+  "addq.w #xxx,-(an)": [
+    8
+  ],
+  "addq.w #xxx,d(an)": [
+    8
+  ],
+  "addq.w #xxx,d(an,ix)": [
+    8
+  ],
+  "addq.w #xxx,d(pc)": [
+    8
+  ],
+  "addq.w #xxx,d(pc,ix)": [
+    8
+  ],
+  "addq.w #xxx,xxx.w": [
+    8
+  ],
+  "addq.w #xxx,xxx.l": [
+    8
+  ],
+  "subq.b #xxx,(an)": [
+    8
+  ],
+  "subq.b #xxx,(an)+": [
+    8
+  ],
+  "subq.b #xxx,-(an)": [
+    8
+  ],
+  "subq.b #xxx,d(an)": [
+    8
+  ],
+  "subq.b #xxx,d(an,ix)": [
+    8
+  ],
+  "subq.b #xxx,d(pc)": [
+    8
+  ],
+  "subq.b #xxx,d(pc,ix)": [
+    8
+  ],
+  "subq.b #xxx,xxx.w": [
+    8
+  ],
+  "subq.b #xxx,xxx.l": [
+    8
+  ],
+  "subq.w #xxx,(an)": [
+    8
+  ],
+  "subq.w #xxx,(an)+": [
+    8
+  ],
+  "subq.w #xxx,-(an)": [
+    8
+  ],
+  "subq.w #xxx,d(an)": [
+    8
+  ],
+  "subq.w #xxx,d(an,ix)": [
+    8
+  ],
+  "subq.w #xxx,d(pc)": [
+    8
+  ],
+  "subq.w #xxx,d(pc,ix)": [
+    8
+  ],
+  "subq.w #xxx,xxx.w": [
+    8
+  ],
+  "subq.w #xxx,xxx.l": [
+    8
+  ],
+  "addq.l #xxx,dn": [
+    8
+  ],
+  "subq.l #xxx,dn": [
+    8
+  ],
+  "addq.l #xxx,an": [
+    8
+  ],
+  "subq.l #xxx,an": [
+    8
+  ],
+  "addq.l #xxx,(an)": [
+    12
+  ],
+  "addq.l #xxx,(an)+": [
+    12
+  ],
+  "addq.l #xxx,-(an)": [
+    12
+  ],
+  "addq.l #xxx,d(an)": [
+    12
+  ],
+  "addq.l #xxx,d(an,ix)": [
+    12
+  ],
+  "addq.l #xxx,d(pc)": [
+    12
+  ],
+  "addq.l #xxx,d(pc,ix)": [
+    12
+  ],
+  "addq.l #xxx,xxx.w": [
+    12
+  ],
+  "addq.l #xxx,xxx.l": [
+    12
+  ],
+  "subq.l #xxx,(an)": [
+    12
+  ],
+  "subq.l #xxx,(an)+": [
+    12
+  ],
+  "subq.l #xxx,-(an)": [
+    12
+  ],
+  "subq.l #xxx,d(an)": [
+    12
+  ],
+  "subq.l #xxx,d(an,ix)": [
+    12
+  ],
+  "subq.l #xxx,d(pc)": [
+    12
+  ],
+  "subq.l #xxx,d(pc,ix)": [
+    12
+  ],
+  "subq.l #xxx,xxx.w": [
+    12
+  ],
+  "subq.l #xxx,xxx.l": [
+    12
+  ],
+  "andi.b #xxx,dn": [
+    8
+  ],
+  "andi.w #xxx,dn": [
+    8
+  ],
+  "ori.b #xxx,dn": [
+    8
+  ],
+  "ori.w #xxx,dn": [
+    8
+  ],
+  "and.b #xxx,(an)": [
+    12
+  ],
+  "and.b #xxx,(an)+": [
+    12
+  ],
+  "and.b #xxx,-(an)": [
+    12
+  ],
+  "and.b #xxx,d(an)": [
+    12
+  ],
+  "and.b #xxx,d(an,ix)": [
+    12
+  ],
+  "and.b #xxx,d(pc)": [
+    12
+  ],
+  "and.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "and.b #xxx,xxx.w": [
+    12
+  ],
+  "and.b #xxx,xxx.l": [
+    12
+  ],
+  "and.w #xxx,(an)": [
+    12
+  ],
+  "and.w #xxx,(an)+": [
+    12
+  ],
+  "and.w #xxx,-(an)": [
+    12
+  ],
+  "and.w #xxx,d(an)": [
+    12
+  ],
+  "and.w #xxx,d(an,ix)": [
+    12
+  ],
+  "and.w #xxx,d(pc)": [
+    12
+  ],
+  "and.w #xxx,d(pc,ix)": [
+    12
+  ],
+  "and.w #xxx,xxx.w": [
+    12
+  ],
+  "and.w #xxx,xxx.l": [
+    12
+  ],
+  "andi.b #xxx,(an)": [
+    12
+  ],
+  "andi.b #xxx,(an)+": [
+    12
+  ],
+  "andi.b #xxx,-(an)": [
+    12
+  ],
+  "andi.b #xxx,d(an)": [
+    12
+  ],
+  "andi.b #xxx,d(an,ix)": [
+    12
+  ],
+  "andi.b #xxx,d(pc)": [
+    12
+  ],
+  "andi.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "andi.b #xxx,xxx.w": [
+    12
+  ],
+  "andi.b #xxx,xxx.l": [
+    12
+  ],
+  "andi.w #xxx,(an)": [
+    12
+  ],
+  "andi.w #xxx,(an)+": [
+    12
+  ],
+  "andi.w #xxx,-(an)": [
+    12
+  ],
+  "andi.w #xxx,d(an)": [
+    12
+  ],
+  "andi.w #xxx,d(an,ix)": [
+    12
+  ],
+  "andi.w #xxx,d(pc)": [
+    12
+  ],
+  "andi.w #xxx,d(pc,ix)": [
+    12
+  ],
+  "andi.w #xxx,xxx.w": [
+    12
+  ],
+  "andi.w #xxx,xxx.l": [
+    12
+  ],
+  "or.b #xxx,(an)": [
+    12
+  ],
+  "or.b #xxx,(an)+": [
+    12
+  ],
+  "or.b #xxx,-(an)": [
+    12
+  ],
+  "or.b #xxx,d(an)": [
+    12
+  ],
+  "or.b #xxx,d(an,ix)": [
+    12
+  ],
+  "or.b #xxx,d(pc)": [
+    12
+  ],
+  "or.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "or.b #xxx,xxx.w": [
+    12
+  ],
+  "or.b #xxx,xxx.l": [
+    12
+  ],
+  "or.w #xxx,(an)": [
+    12
+  ],
+  "or.w #xxx,(an)+": [
+    12
+  ],
+  "or.w #xxx,-(an)": [
+    12
+  ],
+  "or.w #xxx,d(an)": [
+    12
+  ],
+  "or.w #xxx,d(an,ix)": [
+    12
+  ],
+  "or.w #xxx,d(pc)": [
+    12
+  ],
+  "or.w #xxx,d(pc,ix)": [
+    12
+  ],
+  "or.w #xxx,xxx.w": [
+    12
+  ],
+  "or.w #xxx,xxx.l": [
+    12
+  ],
+  "ori.b #xxx,(an)": [
+    12
+  ],
+  "ori.b #xxx,(an)+": [
+    12
+  ],
+  "ori.b #xxx,-(an)": [
+    12
+  ],
+  "ori.b #xxx,d(an)": [
+    12
+  ],
+  "ori.b #xxx,d(an,ix)": [
+    12
+  ],
+  "ori.b #xxx,d(pc)": [
+    12
+  ],
+  "ori.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "ori.b #xxx,xxx.w": [
+    12
+  ],
+  "ori.b #xxx,xxx.l": [
+    12
+  ],
+  "ori.w #xxx,(an)": [
+    12
+  ],
+  "ori.w #xxx,(an)+": [
+    12
+  ],
+  "ori.w #xxx,-(an)": [
+    12
+  ],
+  "ori.w #xxx,d(an)": [
+    12
+  ],
+  "ori.w #xxx,d(an,ix)": [
+    12
+  ],
+  "ori.w #xxx,d(pc)": [
+    12
+  ],
+  "ori.w #xxx,d(pc,ix)": [
+    12
+  ],
+  "ori.w #xxx,xxx.w": [
+    12
+  ],
+  "ori.w #xxx,xxx.l": [
+    12
+  ],
+  "andi.l #xxx,dn": [
+    16
+  ],
+  "ori.l #xxx,dn": [
+    16
+  ],
+  "and.l #xxx,(an)": [
+    20
+  ],
+  "and.l #xxx,(an)+": [
+    20
+  ],
+  "and.l #xxx,-(an)": [
+    20
+  ],
+  "and.l #xxx,d(an)": [
+    20
+  ],
+  "and.l #xxx,d(an,ix)": [
+    20
+  ],
+  "and.l #xxx,d(pc)": [
+    20
+  ],
+  "and.l #xxx,d(pc,ix)": [
+    20
+  ],
+  "and.l #xxx,xxx.w": [
+    20
+  ],
+  "and.l #xxx,xxx.l": [
+    20
+  ],
+  "andi.l #xxx,(an)": [
+    20
+  ],
+  "andi.l #xxx,(an)+": [
+    20
+  ],
+  "andi.l #xxx,-(an)": [
+    20
+  ],
+  "andi.l #xxx,d(an)": [
+    20
+  ],
+  "andi.l #xxx,d(an,ix)": [
+    20
+  ],
+  "andi.l #xxx,d(pc)": [
+    20
+  ],
+  "andi.l #xxx,d(pc,ix)": [
+    20
+  ],
+  "andi.l #xxx,xxx.w": [
+    20
+  ],
+  "andi.l #xxx,xxx.l": [
+    20
+  ],
+  "or.l #xxx,(an)": [
+    20
+  ],
+  "or.l #xxx,(an)+": [
+    20
+  ],
+  "or.l #xxx,-(an)": [
+    20
+  ],
+  "or.l #xxx,d(an)": [
+    20
+  ],
+  "or.l #xxx,d(an,ix)": [
+    20
+  ],
+  "or.l #xxx,d(pc)": [
+    20
+  ],
+  "or.l #xxx,d(pc,ix)": [
+    20
+  ],
+  "or.l #xxx,xxx.w": [
+    20
+  ],
+  "or.l #xxx,xxx.l": [
+    20
+  ],
+  "ori.l #xxx,(an)": [
+    20
+  ],
+  "ori.l #xxx,(an)+": [
+    20
+  ],
+  "ori.l #xxx,-(an)": [
+    20
+  ],
+  "ori.l #xxx,d(an)": [
+    20
+  ],
+  "ori.l #xxx,d(an,ix)": [
+    20
+  ],
+  "ori.l #xxx,d(pc)": [
+    20
+  ],
+  "ori.l #xxx,d(pc,ix)": [
+    20
+  ],
+  "ori.l #xxx,xxx.w": [
+    20
+  ],
+  "ori.l #xxx,xxx.l": [
+    20
+  ],
+  "cmpi.b #xxx,dn": [
+    8
+  ],
+  "cmpi.w #xxx,dn": [
+    8
+  ],
+  "cmp.b #xxx,(an)": [
+    8
+  ],
+  "cmp.b #xxx,(an)+": [
+    8
+  ],
+  "cmp.b #xxx,-(an)": [
+    8
+  ],
+  "cmp.b #xxx,d(an)": [
+    8
+  ],
+  "cmp.b #xxx,d(an,ix)": [
+    8
+  ],
+  "cmp.b #xxx,d(pc)": [
+    8
+  ],
+  "cmp.b #xxx,d(pc,ix)": [
+    8
+  ],
+  "cmp.b #xxx,xxx.w": [
+    8
+  ],
+  "cmp.b #xxx,xxx.l": [
+    8
+  ],
+  "cmp.w #xxx,(an)": [
+    8
+  ],
+  "cmp.w #xxx,(an)+": [
+    8
+  ],
+  "cmp.w #xxx,-(an)": [
+    8
+  ],
+  "cmp.w #xxx,d(an)": [
+    8
+  ],
+  "cmp.w #xxx,d(an,ix)": [
+    8
+  ],
+  "cmp.w #xxx,d(pc)": [
+    8
+  ],
+  "cmp.w #xxx,d(pc,ix)": [
+    8
+  ],
+  "cmp.w #xxx,xxx.w": [
+    8
+  ],
+  "cmp.w #xxx,xxx.l": [
+    8
+  ],
+  "cmpi.b #xxx,(an)": [
+    8
+  ],
+  "cmpi.b #xxx,(an)+": [
+    8
+  ],
+  "cmpi.b #xxx,-(an)": [
+    8
+  ],
+  "cmpi.b #xxx,d(an)": [
+    8
+  ],
+  "cmpi.b #xxx,d(an,ix)": [
+    8
+  ],
+  "cmpi.b #xxx,d(pc)": [
+    8
+  ],
+  "cmpi.b #xxx,d(pc,ix)": [
+    8
+  ],
+  "cmpi.b #xxx,xxx.w": [
+    8
+  ],
+  "cmpi.b #xxx,xxx.l": [
+    8
+  ],
+  "cmpi.w #xxx,(an)": [
+    8
+  ],
+  "cmpi.w #xxx,(an)+": [
+    8
+  ],
+  "cmpi.w #xxx,-(an)": [
+    8
+  ],
+  "cmpi.w #xxx,d(an)": [
+    8
+  ],
+  "cmpi.w #xxx,d(an,ix)": [
+    8
+  ],
+  "cmpi.w #xxx,d(pc)": [
+    8
+  ],
+  "cmpi.w #xxx,d(pc,ix)": [
+    8
+  ],
+  "cmpi.w #xxx,xxx.w": [
+    8
+  ],
+  "cmpi.w #xxx,xxx.l": [
+    8
+  ],
+  "cmpi.l #xxx,dn": [
+    14
+  ],
+  "cmp.l #xxx,(an)": [
+    12
+  ],
+  "cmp.l #xxx,(an)+": [
+    12
+  ],
+  "cmp.l #xxx,-(an)": [
+    12
+  ],
+  "cmp.l #xxx,d(an)": [
+    12
+  ],
+  "cmp.l #xxx,d(an,ix)": [
+    12
+  ],
+  "cmp.l #xxx,d(pc)": [
+    12
+  ],
+  "cmp.l #xxx,d(pc,ix)": [
+    12
+  ],
+  "cmp.l #xxx,xxx.w": [
+    12
+  ],
+  "cmp.l #xxx,xxx.l": [
+    12
+  ],
+  "cmpi.l #xxx,(an)": [
+    12
+  ],
+  "cmpi.l #xxx,(an)+": [
+    12
+  ],
+  "cmpi.l #xxx,-(an)": [
+    12
+  ],
+  "cmpi.l #xxx,d(an)": [
+    12
+  ],
+  "cmpi.l #xxx,d(an,ix)": [
+    12
+  ],
+  "cmpi.l #xxx,d(pc)": [
+    12
+  ],
+  "cmpi.l #xxx,d(pc,ix)": [
+    12
+  ],
+  "cmpi.l #xxx,xxx.w": [
+    12
+  ],
+  "cmpi.l #xxx,xxx.l": [
+    12
+  ],
+  "eor.b #xxx,dn": [
+    8
+  ],
+  "eor.w #xxx,dn": [
+    8
+  ],
+  "eori.b #xxx,dn": [
+    8
+  ],
+  "eori.w #xxx,dn": [
+    8
+  ],
+  "eor.b #xxx,(an)": [
+    12
+  ],
+  "eor.b #xxx,(an)+": [
+    12
+  ],
+  "eor.b #xxx,-(an)": [
+    12
+  ],
+  "eor.b #xxx,d(an)": [
+    12
+  ],
+  "eor.b #xxx,d(an,ix)": [
+    12
+  ],
+  "eor.b #xxx,d(pc)": [
+    12
+  ],
+  "eor.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "eor.b #xxx,xxx.w": [
+    12
+  ],
+  "eor.b #xxx,xxx.l": [
+    12
+  ],
+  "eor.w #xxx,(an)": [
+    12
+  ],
+  "eor.w #xxx,(an)+": [
+    12
+  ],
+  "eor.w #xxx,-(an)": [
+    12
+  ],
+  "eor.w #xxx,d(an)": [
+    12
+  ],
+  "eor.w #xxx,d(an,ix)": [
+    12
+  ],
+  "eor.w #xxx,d(pc)": [
+    12
+  ],
+  "eor.w #xxx,d(pc,ix)": [
+    12
+  ],
+  "eor.w #xxx,xxx.w": [
+    12
+  ],
+  "eor.w #xxx,xxx.l": [
+    12
+  ],
+  "eori.b #xxx,(an)": [
+    12
+  ],
+  "eori.b #xxx,(an)+": [
+    12
+  ],
+  "eori.b #xxx,-(an)": [
+    12
+  ],
+  "eori.b #xxx,d(an)": [
+    12
+  ],
+  "eori.b #xxx,d(an,ix)": [
+    12
+  ],
+  "eori.b #xxx,d(pc)": [
+    12
+  ],
+  "eori.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "eori.b #xxx,xxx.w": [
+    12
+  ],
+  "eori.b #xxx,xxx.l": [
+    12
+  ],
+  "eori.w #xxx,(an)": [
+    12
+  ],
+  "eori.w #xxx,(an)+": [
+    12
+  ],
+  "eori.w #xxx,-(an)": [
+    12
+  ],
+  "eori.w #xxx,d(an)": [
+    12
+  ],
+  "eori.w #xxx,d(an,ix)": [
+    12
+  ],
+  "eori.w #xxx,d(pc)": [
+    12
+  ],
+  "eori.w #xxx,d(pc,ix)": [
+    12
+  ],
+  "eori.w #xxx,xxx.w": [
+    12
+  ],
+  "eori.w #xxx,xxx.l": [
+    12
+  ],
+  "eor.l #xxx,dn": [
+    16
+  ],
+  "eori.l #xxx,dn": [
+    16
+  ],
+  "eor.l #xxx,(an)": [
+    20
+  ],
+  "eor.l #xxx,(an)+": [
+    20
+  ],
+  "eor.l #xxx,-(an)": [
+    20
+  ],
+  "eor.l #xxx,d(an)": [
+    20
+  ],
+  "eor.l #xxx,d(an,ix)": [
+    20
+  ],
+  "eor.l #xxx,d(pc)": [
+    20
+  ],
+  "eor.l #xxx,d(pc,ix)": [
+    20
+  ],
+  "eor.l #xxx,xxx.w": [
+    20
+  ],
+  "eor.l #xxx,xxx.l": [
+    20
+  ],
+  "eori.l #xxx,(an)": [
+    20
+  ],
+  "eori.l #xxx,(an)+": [
+    20
+  ],
+  "eori.l #xxx,-(an)": [
+    20
+  ],
+  "eori.l #xxx,d(an)": [
+    20
+  ],
+  "eori.l #xxx,d(an,ix)": [
+    20
+  ],
+  "eori.l #xxx,d(pc)": [
+    20
+  ],
+  "eori.l #xxx,d(pc,ix)": [
+    20
+  ],
+  "eori.l #xxx,xxx.w": [
+    20
+  ],
+  "eori.l #xxx,xxx.l": [
+    20
+  ],
+  "moveq.l #xxx,dn": [
+    4
+  ],
+  "clr.b dn": [
+    4
+  ],
+  "clr.w dn": [
+    4
+  ],
+  "not.b dn": [
+    4
+  ],
+  "not.w dn": [
+    4
+  ],
+  "neg.b dn": [
+    4
+  ],
+  "neg.w dn": [
+    4
+  ],
+  "clr.b (an)": [
+    8
+  ],
+  "clr.b (an)+": [
+    8
+  ],
+  "clr.b -(an)": [
+    8
+  ],
+  "clr.b d(an)": [
+    8
+  ],
+  "clr.b d(an,ix)": [
+    8
+  ],
+  "clr.b d(pc)": [
+    8
+  ],
+  "clr.b d(pc,ix)": [
+    8
+  ],
+  "clr.b xxx.w": [
+    8
+  ],
+  "clr.b xxx.l": [
+    8
+  ],
+  "clr.w (an)": [
+    8
+  ],
+  "clr.w (an)+": [
+    8
+  ],
+  "clr.w -(an)": [
+    8
+  ],
+  "clr.w d(an)": [
+    8
+  ],
+  "clr.w d(an,ix)": [
+    8
+  ],
+  "clr.w d(pc)": [
+    8
+  ],
+  "clr.w d(pc,ix)": [
+    8
+  ],
+  "clr.w xxx.w": [
+    8
+  ],
+  "clr.w xxx.l": [
+    8
+  ],
+  "not.b (an)": [
+    8
+  ],
+  "not.b (an)+": [
+    8
+  ],
+  "not.b -(an)": [
+    8
+  ],
+  "not.b d(an)": [
+    8
+  ],
+  "not.b d(an,ix)": [
+    8
+  ],
+  "not.b d(pc)": [
+    8
+  ],
+  "not.b d(pc,ix)": [
+    8
+  ],
+  "not.b xxx.w": [
+    8
+  ],
+  "not.b xxx.l": [
+    8
+  ],
+  "not.w (an)": [
+    8
+  ],
+  "not.w (an)+": [
+    8
+  ],
+  "not.w -(an)": [
+    8
+  ],
+  "not.w d(an)": [
+    8
+  ],
+  "not.w d(an,ix)": [
+    8
+  ],
+  "not.w d(pc)": [
+    8
+  ],
+  "not.w d(pc,ix)": [
+    8
+  ],
+  "not.w xxx.w": [
+    8
+  ],
+  "not.w xxx.l": [
+    8
+  ],
+  "neg.b (an)": [
+    8
+  ],
+  "neg.b (an)+": [
+    8
+  ],
+  "neg.b -(an)": [
+    8
+  ],
+  "neg.b d(an)": [
+    8
+  ],
+  "neg.b d(an,ix)": [
+    8
+  ],
+  "neg.b d(pc)": [
+    8
+  ],
+  "neg.b d(pc,ix)": [
+    8
+  ],
+  "neg.b xxx.w": [
+    8
+  ],
+  "neg.b xxx.l": [
+    8
+  ],
+  "neg.w (an)": [
+    8
+  ],
+  "neg.w (an)+": [
+    8
+  ],
+  "neg.w -(an)": [
+    8
+  ],
+  "neg.w d(an)": [
+    8
+  ],
+  "neg.w d(an,ix)": [
+    8
+  ],
+  "neg.w d(pc)": [
+    8
+  ],
+  "neg.w d(pc,ix)": [
+    8
+  ],
+  "neg.w xxx.w": [
+    8
+  ],
+  "neg.w xxx.l": [
+    8
+  ],
+  "clr.l dn": [
+    6
+  ],
+  "not.l dn": [
+    6
+  ],
+  "neg.l dn": [
+    6
+  ],
+  "clr.l (an)": [
+    12
+  ],
+  "clr.l (an)+": [
+    12
+  ],
+  "clr.l -(an)": [
+    12
+  ],
+  "clr.l d(an)": [
+    12
+  ],
+  "clr.l d(an,ix)": [
+    12
+  ],
+  "clr.l d(pc)": [
+    12
+  ],
+  "clr.l d(pc,ix)": [
+    12
+  ],
+  "clr.l xxx.w": [
+    12
+  ],
+  "clr.l xxx.l": [
+    12
+  ],
+  "not.l (an)": [
+    12
+  ],
+  "not.l (an)+": [
+    12
+  ],
+  "not.l -(an)": [
+    12
+  ],
+  "not.l d(an)": [
+    12
+  ],
+  "not.l d(an,ix)": [
+    12
+  ],
+  "not.l d(pc)": [
+    12
+  ],
+  "not.l d(pc,ix)": [
+    12
+  ],
+  "not.l xxx.w": [
+    12
+  ],
+  "not.l xxx.l": [
+    12
+  ],
+  "neg.l (an)": [
+    12
+  ],
+  "neg.l (an)+": [
+    12
+  ],
+  "neg.l -(an)": [
+    12
+  ],
+  "neg.l d(an)": [
+    12
+  ],
+  "neg.l d(an,ix)": [
+    12
+  ],
+  "neg.l d(pc)": [
+    12
+  ],
+  "neg.l d(pc,ix)": [
+    12
+  ],
+  "neg.l xxx.w": [
+    12
+  ],
+  "neg.l xxx.l": [
+    12
+  ],
+  "nbcd.b dn": [
+    6
+  ],
+  "nbcd.b (an)": [
+    8
+  ],
+  "nbcd.b (an)+": [
+    8
+  ],
+  "nbcd.b -(an)": [
+    8
+  ],
+  "nbcd.b d(an)": [
+    8
+  ],
+  "nbcd.b d(an,ix)": [
+    8
+  ],
+  "nbcd.b d(pc)": [
+    8
+  ],
+  "nbcd.b d(pc,ix)": [
+    8
+  ],
+  "nbcd.b xxx.w": [
+    8
+  ],
+  "nbcd.b xxx.l": [
+    8
+  ],
+  "negx.b dn": [
+    4
+  ],
+  "negx.w dn": [
+    4
+  ],
+  "negx.b (an)": [
+    8
+  ],
+  "negx.b (an)+": [
+    8
+  ],
+  "negx.b -(an)": [
+    8
+  ],
+  "negx.b d(an)": [
+    8
+  ],
+  "negx.b d(an,ix)": [
+    8
+  ],
+  "negx.b d(pc)": [
+    8
+  ],
+  "negx.b d(pc,ix)": [
+    8
+  ],
+  "negx.b xxx.w": [
+    8
+  ],
+  "negx.b xxx.l": [
+    8
+  ],
+  "negx.w (an)": [
+    8
+  ],
+  "negx.w (an)+": [
+    8
+  ],
+  "negx.w -(an)": [
+    8
+  ],
+  "negx.w d(an)": [
+    8
+  ],
+  "negx.w d(an,ix)": [
+    8
+  ],
+  "negx.w d(pc)": [
+    8
+  ],
+  "negx.w d(pc,ix)": [
+    8
+  ],
+  "negx.w xxx.w": [
+    8
+  ],
+  "negx.w xxx.l": [
+    8
+  ],
+  "negx.l dn": [
+    6
+  ],
+  "negx.l (an)": [
+    12
+  ],
+  "negx.l (an)+": [
+    12
+  ],
+  "negx.l -(an)": [
+    12
+  ],
+  "negx.l d(an)": [
+    12
+  ],
+  "negx.l d(an,ix)": [
+    12
+  ],
+  "negx.l d(pc)": [
+    12
+  ],
+  "negx.l d(pc,ix)": [
+    12
+  ],
+  "negx.l xxx.w": [
+    12
+  ],
+  "negx.l xxx.l": [
+    12
+  ],
+  "scc.b dn": [
+    4,
+    6
+  ],
+  "scs.b dn": [
+    4,
+    6
+  ],
+  "seq.b dn": [
+    4,
+    6
+  ],
+  "sge.b dn": [
+    4,
+    6
+  ],
+  "sgt.b dn": [
+    4,
+    6
+  ],
+  "shi.b dn": [
+    4,
+    6
+  ],
+  "sle.b dn": [
+    4,
+    6
+  ],
+  "slt.b dn": [
+    4,
+    6
+  ],
+  "smi.b dn": [
+    4,
+    6
+  ],
+  "sne.b dn": [
+    4,
+    6
+  ],
+  "spl.b dn": [
+    4,
+    6
+  ],
+  "svc.b dn": [
+    4,
+    6
+  ],
+  "svs.b dn": [
+    4,
+    6
+  ],
+  "st.b dn": [
+    4,
+    6
+  ],
+  "sf.b dn": [
+    4,
+    6
+  ],
+  "sls.b dn": [
+    4,
+    6
+  ],
+  "scc.b (an)": [
+    8,
+    8
+  ],
+  "scc.b (an)+": [
+    8,
+    8
+  ],
+  "scc.b -(an)": [
+    8,
+    8
+  ],
+  "scc.b d(an)": [
+    8,
+    8
+  ],
+  "scc.b d(an,ix)": [
+    8,
+    8
+  ],
+  "scc.b d(pc)": [
+    8,
+    8
+  ],
+  "scc.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "scc.b xxx.w": [
+    8,
+    8
+  ],
+  "scc.b xxx.l": [
+    8,
+    8
+  ],
+  "scs.b (an)": [
+    8,
+    8
+  ],
+  "scs.b (an)+": [
+    8,
+    8
+  ],
+  "scs.b -(an)": [
+    8,
+    8
+  ],
+  "scs.b d(an)": [
+    8,
+    8
+  ],
+  "scs.b d(an,ix)": [
+    8,
+    8
+  ],
+  "scs.b d(pc)": [
+    8,
+    8
+  ],
+  "scs.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "scs.b xxx.w": [
+    8,
+    8
+  ],
+  "scs.b xxx.l": [
+    8,
+    8
+  ],
+  "seq.b (an)": [
+    8,
+    8
+  ],
+  "seq.b (an)+": [
+    8,
+    8
+  ],
+  "seq.b -(an)": [
+    8,
+    8
+  ],
+  "seq.b d(an)": [
+    8,
+    8
+  ],
+  "seq.b d(an,ix)": [
+    8,
+    8
+  ],
+  "seq.b d(pc)": [
+    8,
+    8
+  ],
+  "seq.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "seq.b xxx.w": [
+    8,
+    8
+  ],
+  "seq.b xxx.l": [
+    8,
+    8
+  ],
+  "sge.b (an)": [
+    8,
+    8
+  ],
+  "sge.b (an)+": [
+    8,
+    8
+  ],
+  "sge.b -(an)": [
+    8,
+    8
+  ],
+  "sge.b d(an)": [
+    8,
+    8
+  ],
+  "sge.b d(an,ix)": [
+    8,
+    8
+  ],
+  "sge.b d(pc)": [
+    8,
+    8
+  ],
+  "sge.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "sge.b xxx.w": [
+    8,
+    8
+  ],
+  "sge.b xxx.l": [
+    8,
+    8
+  ],
+  "sgt.b (an)": [
+    8,
+    8
+  ],
+  "sgt.b (an)+": [
+    8,
+    8
+  ],
+  "sgt.b -(an)": [
+    8,
+    8
+  ],
+  "sgt.b d(an)": [
+    8,
+    8
+  ],
+  "sgt.b d(an,ix)": [
+    8,
+    8
+  ],
+  "sgt.b d(pc)": [
+    8,
+    8
+  ],
+  "sgt.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "sgt.b xxx.w": [
+    8,
+    8
+  ],
+  "sgt.b xxx.l": [
+    8,
+    8
+  ],
+  "shi.b (an)": [
+    8,
+    8
+  ],
+  "shi.b (an)+": [
+    8,
+    8
+  ],
+  "shi.b -(an)": [
+    8,
+    8
+  ],
+  "shi.b d(an)": [
+    8,
+    8
+  ],
+  "shi.b d(an,ix)": [
+    8,
+    8
+  ],
+  "shi.b d(pc)": [
+    8,
+    8
+  ],
+  "shi.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "shi.b xxx.w": [
+    8,
+    8
+  ],
+  "shi.b xxx.l": [
+    8,
+    8
+  ],
+  "sle.b (an)": [
+    8,
+    8
+  ],
+  "sle.b (an)+": [
+    8,
+    8
+  ],
+  "sle.b -(an)": [
+    8,
+    8
+  ],
+  "sle.b d(an)": [
+    8,
+    8
+  ],
+  "sle.b d(an,ix)": [
+    8,
+    8
+  ],
+  "sle.b d(pc)": [
+    8,
+    8
+  ],
+  "sle.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "sle.b xxx.w": [
+    8,
+    8
+  ],
+  "sle.b xxx.l": [
+    8,
+    8
+  ],
+  "slt.b (an)": [
+    8,
+    8
+  ],
+  "slt.b (an)+": [
+    8,
+    8
+  ],
+  "slt.b -(an)": [
+    8,
+    8
+  ],
+  "slt.b d(an)": [
+    8,
+    8
+  ],
+  "slt.b d(an,ix)": [
+    8,
+    8
+  ],
+  "slt.b d(pc)": [
+    8,
+    8
+  ],
+  "slt.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "slt.b xxx.w": [
+    8,
+    8
+  ],
+  "slt.b xxx.l": [
+    8,
+    8
+  ],
+  "smi.b (an)": [
+    8,
+    8
+  ],
+  "smi.b (an)+": [
+    8,
+    8
+  ],
+  "smi.b -(an)": [
+    8,
+    8
+  ],
+  "smi.b d(an)": [
+    8,
+    8
+  ],
+  "smi.b d(an,ix)": [
+    8,
+    8
+  ],
+  "smi.b d(pc)": [
+    8,
+    8
+  ],
+  "smi.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "smi.b xxx.w": [
+    8,
+    8
+  ],
+  "smi.b xxx.l": [
+    8,
+    8
+  ],
+  "sne.b (an)": [
+    8,
+    8
+  ],
+  "sne.b (an)+": [
+    8,
+    8
+  ],
+  "sne.b -(an)": [
+    8,
+    8
+  ],
+  "sne.b d(an)": [
+    8,
+    8
+  ],
+  "sne.b d(an,ix)": [
+    8,
+    8
+  ],
+  "sne.b d(pc)": [
+    8,
+    8
+  ],
+  "sne.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "sne.b xxx.w": [
+    8,
+    8
+  ],
+  "sne.b xxx.l": [
+    8,
+    8
+  ],
+  "spl.b (an)": [
+    8,
+    8
+  ],
+  "spl.b (an)+": [
+    8,
+    8
+  ],
+  "spl.b -(an)": [
+    8,
+    8
+  ],
+  "spl.b d(an)": [
+    8,
+    8
+  ],
+  "spl.b d(an,ix)": [
+    8,
+    8
+  ],
+  "spl.b d(pc)": [
+    8,
+    8
+  ],
+  "spl.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "spl.b xxx.w": [
+    8,
+    8
+  ],
+  "spl.b xxx.l": [
+    8,
+    8
+  ],
+  "svc.b (an)": [
+    8,
+    8
+  ],
+  "svc.b (an)+": [
+    8,
+    8
+  ],
+  "svc.b -(an)": [
+    8,
+    8
+  ],
+  "svc.b d(an)": [
+    8,
+    8
+  ],
+  "svc.b d(an,ix)": [
+    8,
+    8
+  ],
+  "svc.b d(pc)": [
+    8,
+    8
+  ],
+  "svc.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "svc.b xxx.w": [
+    8,
+    8
+  ],
+  "svc.b xxx.l": [
+    8,
+    8
+  ],
+  "svs.b (an)": [
+    8,
+    8
+  ],
+  "svs.b (an)+": [
+    8,
+    8
+  ],
+  "svs.b -(an)": [
+    8,
+    8
+  ],
+  "svs.b d(an)": [
+    8,
+    8
+  ],
+  "svs.b d(an,ix)": [
+    8,
+    8
+  ],
+  "svs.b d(pc)": [
+    8,
+    8
+  ],
+  "svs.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "svs.b xxx.w": [
+    8,
+    8
+  ],
+  "svs.b xxx.l": [
+    8,
+    8
+  ],
+  "st.b (an)": [
+    8,
+    8
+  ],
+  "st.b (an)+": [
+    8,
+    8
+  ],
+  "st.b -(an)": [
+    8,
+    8
+  ],
+  "st.b d(an)": [
+    8,
+    8
+  ],
+  "st.b d(an,ix)": [
+    8,
+    8
+  ],
+  "st.b d(pc)": [
+    8,
+    8
+  ],
+  "st.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "st.b xxx.w": [
+    8,
+    8
+  ],
+  "st.b xxx.l": [
+    8,
+    8
+  ],
+  "sf.b (an)": [
+    8,
+    8
+  ],
+  "sf.b (an)+": [
+    8,
+    8
+  ],
+  "sf.b -(an)": [
+    8,
+    8
+  ],
+  "sf.b d(an)": [
+    8,
+    8
+  ],
+  "sf.b d(an,ix)": [
+    8,
+    8
+  ],
+  "sf.b d(pc)": [
+    8,
+    8
+  ],
+  "sf.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "sf.b xxx.w": [
+    8,
+    8
+  ],
+  "sf.b xxx.l": [
+    8,
+    8
+  ],
+  "sls.b (an)": [
+    8,
+    8
+  ],
+  "sls.b (an)+": [
+    8,
+    8
+  ],
+  "sls.b -(an)": [
+    8,
+    8
+  ],
+  "sls.b d(an)": [
+    8,
+    8
+  ],
+  "sls.b d(an,ix)": [
+    8,
+    8
+  ],
+  "sls.b d(pc)": [
+    8,
+    8
+  ],
+  "sls.b d(pc,ix)": [
+    8,
+    8
+  ],
+  "sls.b xxx.w": [
+    8,
+    8
+  ],
+  "sls.b xxx.l": [
+    8,
+    8
+  ],
+  "tas.b dn": [
+    4
+  ],
+  "tas.b (an)": [
+    10
+  ],
+  "tas.b (an)+": [
+    10
+  ],
+  "tas.b -(an)": [
+    10
+  ],
+  "tas.b d(an)": [
+    10
+  ],
+  "tas.b d(an,ix)": [
+    10
+  ],
+  "tas.b d(pc)": [
+    10
+  ],
+  "tas.b d(pc,ix)": [
+    10
+  ],
+  "tas.b xxx.w": [
+    10
+  ],
+  "tas.b xxx.l": [
+    10
+  ],
+  "tst.b dn": [
+    4
+  ],
+  "tst.w dn": [
+    4
+  ],
+  "tst.l dn": [
+    4
+  ],
+  "tst.b (an)": [
+    4
+  ],
+  "tst.b (an)+": [
+    4
+  ],
+  "tst.b -(an)": [
+    4
+  ],
+  "tst.b d(an)": [
+    4
+  ],
+  "tst.b d(an,ix)": [
+    4
+  ],
+  "tst.b d(pc)": [
+    4
+  ],
+  "tst.b d(pc,ix)": [
+    4
+  ],
+  "tst.b xxx.w": [
+    4
+  ],
+  "tst.b xxx.l": [
+    4
+  ],
+  "tst.w (an)": [
+    4
+  ],
+  "tst.w (an)+": [
+    4
+  ],
+  "tst.w -(an)": [
+    4
+  ],
+  "tst.w d(an)": [
+    4
+  ],
+  "tst.w d(an,ix)": [
+    4
+  ],
+  "tst.w d(pc)": [
+    4
+  ],
+  "tst.w d(pc,ix)": [
+    4
+  ],
+  "tst.w xxx.w": [
+    4
+  ],
+  "tst.w xxx.l": [
+    4
+  ],
+  "tst.l (an)": [
+    4
+  ],
+  "tst.l (an)+": [
+    4
+  ],
+  "tst.l -(an)": [
+    4
+  ],
+  "tst.l d(an)": [
+    4
+  ],
+  "tst.l d(an,ix)": [
+    4
+  ],
+  "tst.l d(pc)": [
+    4
+  ],
+  "tst.l d(pc,ix)": [
+    4
+  ],
+  "tst.l xxx.w": [
+    4
+  ],
+  "tst.l xxx.l": [
+    4
+  ],
+  "lsl.b #xxx,dn": [
+    12
+  ],
+  "lsl.w #xxx,dn": [
+    12
+  ],
+  "lsr.b #xxx,dn": [
+    12
+  ],
+  "lsr.w #xxx,dn": [
+    12
+  ],
+  "asl.b #xxx,dn": [
+    12
+  ],
+  "asl.w #xxx,dn": [
+    12
+  ],
+  "asr.b #xxx,dn": [
+    12
+  ],
+  "asr.w #xxx,dn": [
+    12
+  ],
+  "rol.b #xxx,dn": [
+    12
+  ],
+  "rol.w #xxx,dn": [
+    12
+  ],
+  "ror.b #xxx,dn": [
+    12
+  ],
+  "ror.w #xxx,dn": [
+    12
+  ],
+  "roxl.b #xxx,dn": [
+    12
+  ],
+  "roxl.w #xxx,dn": [
+    12
+  ],
+  "roxr.b #xxx,dn": [
+    12
+  ],
+  "roxr.w #xxx,dn": [
+    12
+  ],
+  "lsl.b #xxx,(an)": [
+    16
+  ],
+  "lsl.b #xxx,(an)+": [
+    16
+  ],
+  "lsl.b #xxx,-(an)": [
+    16
+  ],
+  "lsl.b #xxx,d(an)": [
+    16
+  ],
+  "lsl.b #xxx,d(an,ix)": [
+    16
+  ],
+  "lsl.b #xxx,d(pc)": [
+    16
+  ],
+  "lsl.b #xxx,d(pc,ix)": [
+    16
+  ],
+  "lsl.b #xxx,xxx.w": [
+    16
+  ],
+  "lsl.b #xxx,xxx.l": [
+    16
+  ],
+  "lsl.w #xxx,(an)": [
+    16
+  ],
+  "lsl.w #xxx,(an)+": [
+    16
+  ],
+  "lsl.w #xxx,-(an)": [
+    16
+  ],
+  "lsl.w #xxx,d(an)": [
+    16
+  ],
+  "lsl.w #xxx,d(an,ix)": [
+    16
+  ],
+  "lsl.w #xxx,d(pc)": [
+    16
+  ],
+  "lsl.w #xxx,d(pc,ix)": [
+    16
+  ],
+  "lsl.w #xxx,xxx.w": [
+    16
+  ],
+  "lsl.w #xxx,xxx.l": [
+    16
+  ],
+  "lsr.b #xxx,(an)": [
+    16
+  ],
+  "lsr.b #xxx,(an)+": [
+    16
+  ],
+  "lsr.b #xxx,-(an)": [
+    16
+  ],
+  "lsr.b #xxx,d(an)": [
+    16
+  ],
+  "lsr.b #xxx,d(an,ix)": [
+    16
+  ],
+  "lsr.b #xxx,d(pc)": [
+    16
+  ],
+  "lsr.b #xxx,d(pc,ix)": [
+    16
+  ],
+  "lsr.b #xxx,xxx.w": [
+    16
+  ],
+  "lsr.b #xxx,xxx.l": [
+    16
+  ],
+  "lsr.w #xxx,(an)": [
+    16
+  ],
+  "lsr.w #xxx,(an)+": [
+    16
+  ],
+  "lsr.w #xxx,-(an)": [
+    16
+  ],
+  "lsr.w #xxx,d(an)": [
+    16
+  ],
+  "lsr.w #xxx,d(an,ix)": [
+    16
+  ],
+  "lsr.w #xxx,d(pc)": [
+    16
+  ],
+  "lsr.w #xxx,d(pc,ix)": [
+    16
+  ],
+  "lsr.w #xxx,xxx.w": [
+    16
+  ],
+  "lsr.w #xxx,xxx.l": [
+    16
+  ],
+  "asl.b #xxx,(an)": [
+    16
+  ],
+  "asl.b #xxx,(an)+": [
+    16
+  ],
+  "asl.b #xxx,-(an)": [
+    16
+  ],
+  "asl.b #xxx,d(an)": [
+    16
+  ],
+  "asl.b #xxx,d(an,ix)": [
+    16
+  ],
+  "asl.b #xxx,d(pc)": [
+    16
+  ],
+  "asl.b #xxx,d(pc,ix)": [
+    16
+  ],
+  "asl.b #xxx,xxx.w": [
+    16
+  ],
+  "asl.b #xxx,xxx.l": [
+    16
+  ],
+  "asl.w #xxx,(an)": [
+    16
+  ],
+  "asl.w #xxx,(an)+": [
+    16
+  ],
+  "asl.w #xxx,-(an)": [
+    16
+  ],
+  "asl.w #xxx,d(an)": [
+    16
+  ],
+  "asl.w #xxx,d(an,ix)": [
+    16
+  ],
+  "asl.w #xxx,d(pc)": [
+    16
+  ],
+  "asl.w #xxx,d(pc,ix)": [
+    16
+  ],
+  "asl.w #xxx,xxx.w": [
+    16
+  ],
+  "asl.w #xxx,xxx.l": [
+    16
+  ],
+  "asr.b #xxx,(an)": [
+    16
+  ],
+  "asr.b #xxx,(an)+": [
+    16
+  ],
+  "asr.b #xxx,-(an)": [
+    16
+  ],
+  "asr.b #xxx,d(an)": [
+    16
+  ],
+  "asr.b #xxx,d(an,ix)": [
+    16
+  ],
+  "asr.b #xxx,d(pc)": [
+    16
+  ],
+  "asr.b #xxx,d(pc,ix)": [
+    16
+  ],
+  "asr.b #xxx,xxx.w": [
+    16
+  ],
+  "asr.b #xxx,xxx.l": [
+    16
+  ],
+  "asr.w #xxx,(an)": [
+    16
+  ],
+  "asr.w #xxx,(an)+": [
+    16
+  ],
+  "asr.w #xxx,-(an)": [
+    16
+  ],
+  "asr.w #xxx,d(an)": [
+    16
+  ],
+  "asr.w #xxx,d(an,ix)": [
+    16
+  ],
+  "asr.w #xxx,d(pc)": [
+    16
+  ],
+  "asr.w #xxx,d(pc,ix)": [
+    16
+  ],
+  "asr.w #xxx,xxx.w": [
+    16
+  ],
+  "asr.w #xxx,xxx.l": [
+    16
+  ],
+  "rol.b #xxx,(an)": [
+    16
+  ],
+  "rol.b #xxx,(an)+": [
+    16
+  ],
+  "rol.b #xxx,-(an)": [
+    16
+  ],
+  "rol.b #xxx,d(an)": [
+    16
+  ],
+  "rol.b #xxx,d(an,ix)": [
+    16
+  ],
+  "rol.b #xxx,d(pc)": [
+    16
+  ],
+  "rol.b #xxx,d(pc,ix)": [
+    16
+  ],
+  "rol.b #xxx,xxx.w": [
+    16
+  ],
+  "rol.b #xxx,xxx.l": [
+    16
+  ],
+  "rol.w #xxx,(an)": [
+    16
+  ],
+  "rol.w #xxx,(an)+": [
+    16
+  ],
+  "rol.w #xxx,-(an)": [
+    16
+  ],
+  "rol.w #xxx,d(an)": [
+    16
+  ],
+  "rol.w #xxx,d(an,ix)": [
+    16
+  ],
+  "rol.w #xxx,d(pc)": [
+    16
+  ],
+  "rol.w #xxx,d(pc,ix)": [
+    16
+  ],
+  "rol.w #xxx,xxx.w": [
+    16
+  ],
+  "rol.w #xxx,xxx.l": [
+    16
+  ],
+  "ror.b #xxx,(an)": [
+    16
+  ],
+  "ror.b #xxx,(an)+": [
+    16
+  ],
+  "ror.b #xxx,-(an)": [
+    16
+  ],
+  "ror.b #xxx,d(an)": [
+    16
+  ],
+  "ror.b #xxx,d(an,ix)": [
+    16
+  ],
+  "ror.b #xxx,d(pc)": [
+    16
+  ],
+  "ror.b #xxx,d(pc,ix)": [
+    16
+  ],
+  "ror.b #xxx,xxx.w": [
+    16
+  ],
+  "ror.b #xxx,xxx.l": [
+    16
+  ],
+  "ror.w #xxx,(an)": [
+    16
+  ],
+  "ror.w #xxx,(an)+": [
+    16
+  ],
+  "ror.w #xxx,-(an)": [
+    16
+  ],
+  "ror.w #xxx,d(an)": [
+    16
+  ],
+  "ror.w #xxx,d(an,ix)": [
+    16
+  ],
+  "ror.w #xxx,d(pc)": [
+    16
+  ],
+  "ror.w #xxx,d(pc,ix)": [
+    16
+  ],
+  "ror.w #xxx,xxx.w": [
+    16
+  ],
+  "ror.w #xxx,xxx.l": [
+    16
+  ],
+  "roxl.b #xxx,(an)": [
+    16
+  ],
+  "roxl.b #xxx,(an)+": [
+    16
+  ],
+  "roxl.b #xxx,-(an)": [
+    16
+  ],
+  "roxl.b #xxx,d(an)": [
+    16
+  ],
+  "roxl.b #xxx,d(an,ix)": [
+    16
+  ],
+  "roxl.b #xxx,d(pc)": [
+    16
+  ],
+  "roxl.b #xxx,d(pc,ix)": [
+    16
+  ],
+  "roxl.b #xxx,xxx.w": [
+    16
+  ],
+  "roxl.b #xxx,xxx.l": [
+    16
+  ],
+  "roxl.w #xxx,(an)": [
+    16
+  ],
+  "roxl.w #xxx,(an)+": [
+    16
+  ],
+  "roxl.w #xxx,-(an)": [
+    16
+  ],
+  "roxl.w #xxx,d(an)": [
+    16
+  ],
+  "roxl.w #xxx,d(an,ix)": [
+    16
+  ],
+  "roxl.w #xxx,d(pc)": [
+    16
+  ],
+  "roxl.w #xxx,d(pc,ix)": [
+    16
+  ],
+  "roxl.w #xxx,xxx.w": [
+    16
+  ],
+  "roxl.w #xxx,xxx.l": [
+    16
+  ],
+  "roxr.b #xxx,(an)": [
+    16
+  ],
+  "roxr.b #xxx,(an)+": [
+    16
+  ],
+  "roxr.b #xxx,-(an)": [
+    16
+  ],
+  "roxr.b #xxx,d(an)": [
+    16
+  ],
+  "roxr.b #xxx,d(an,ix)": [
+    16
+  ],
+  "roxr.b #xxx,d(pc)": [
+    16
+  ],
+  "roxr.b #xxx,d(pc,ix)": [
+    16
+  ],
+  "roxr.b #xxx,xxx.w": [
+    16
+  ],
+  "roxr.b #xxx,xxx.l": [
+    16
+  ],
+  "roxr.w #xxx,(an)": [
+    16
+  ],
+  "roxr.w #xxx,(an)+": [
+    16
+  ],
+  "roxr.w #xxx,-(an)": [
+    16
+  ],
+  "roxr.w #xxx,d(an)": [
+    16
+  ],
+  "roxr.w #xxx,d(an,ix)": [
+    16
+  ],
+  "roxr.w #xxx,d(pc)": [
+    16
+  ],
+  "roxr.w #xxx,d(pc,ix)": [
+    16
+  ],
+  "roxr.w #xxx,xxx.w": [
+    16
+  ],
+  "roxr.w #xxx,xxx.l": [
+    16
+  ],
+  "lsl.b dn,dn": [
+    12
+  ],
+  "lsl.w dn,dn": [
+    12
+  ],
+  "lsr.b dn,dn": [
+    12
+  ],
+  "lsr.w dn,dn": [
+    12
+  ],
+  "asl.b dn,dn": [
+    12
+  ],
+  "asl.w dn,dn": [
+    12
+  ],
+  "asr.b dn,dn": [
+    12
+  ],
+  "asr.w dn,dn": [
+    12
+  ],
+  "rol.b dn,dn": [
+    12
+  ],
+  "rol.w dn,dn": [
+    12
+  ],
+  "ror.b dn,dn": [
+    12
+  ],
+  "ror.w dn,dn": [
+    12
+  ],
+  "roxl.b dn,dn": [
+    12
+  ],
+  "roxl.w dn,dn": [
+    12
+  ],
+  "roxr.b dn,dn": [
+    12
+  ],
+  "roxr.w dn,dn": [
+    12
+  ],
+  "lsl.b dn,(an)": [
+    16
+  ],
+  "lsl.b dn,(an)+": [
+    16
+  ],
+  "lsl.b dn,-(an)": [
+    16
+  ],
+  "lsl.b dn,d(an)": [
+    16
+  ],
+  "lsl.b dn,d(an,ix)": [
+    16
+  ],
+  "lsl.b dn,d(pc)": [
+    16
+  ],
+  "lsl.b dn,d(pc,ix)": [
+    16
+  ],
+  "lsl.b dn,xxx.w": [
+    16
+  ],
+  "lsl.b dn,xxx.l": [
+    16
+  ],
+  "lsl.w dn,(an)": [
+    16
+  ],
+  "lsl.w dn,(an)+": [
+    16
+  ],
+  "lsl.w dn,-(an)": [
+    16
+  ],
+  "lsl.w dn,d(an)": [
+    16
+  ],
+  "lsl.w dn,d(an,ix)": [
+    16
+  ],
+  "lsl.w dn,d(pc)": [
+    16
+  ],
+  "lsl.w dn,d(pc,ix)": [
+    16
+  ],
+  "lsl.w dn,xxx.w": [
+    16
+  ],
+  "lsl.w dn,xxx.l": [
+    16
+  ],
+  "lsr.b dn,(an)": [
+    16
+  ],
+  "lsr.b dn,(an)+": [
+    16
+  ],
+  "lsr.b dn,-(an)": [
+    16
+  ],
+  "lsr.b dn,d(an)": [
+    16
+  ],
+  "lsr.b dn,d(an,ix)": [
+    16
+  ],
+  "lsr.b dn,d(pc)": [
+    16
+  ],
+  "lsr.b dn,d(pc,ix)": [
+    16
+  ],
+  "lsr.b dn,xxx.w": [
+    16
+  ],
+  "lsr.b dn,xxx.l": [
+    16
+  ],
+  "lsr.w dn,(an)": [
+    16
+  ],
+  "lsr.w dn,(an)+": [
+    16
+  ],
+  "lsr.w dn,-(an)": [
+    16
+  ],
+  "lsr.w dn,d(an)": [
+    16
+  ],
+  "lsr.w dn,d(an,ix)": [
+    16
+  ],
+  "lsr.w dn,d(pc)": [
+    16
+  ],
+  "lsr.w dn,d(pc,ix)": [
+    16
+  ],
+  "lsr.w dn,xxx.w": [
+    16
+  ],
+  "lsr.w dn,xxx.l": [
+    16
+  ],
+  "asl.b dn,(an)": [
+    16
+  ],
+  "asl.b dn,(an)+": [
+    16
+  ],
+  "asl.b dn,-(an)": [
+    16
+  ],
+  "asl.b dn,d(an)": [
+    16
+  ],
+  "asl.b dn,d(an,ix)": [
+    16
+  ],
+  "asl.b dn,d(pc)": [
+    16
+  ],
+  "asl.b dn,d(pc,ix)": [
+    16
+  ],
+  "asl.b dn,xxx.w": [
+    16
+  ],
+  "asl.b dn,xxx.l": [
+    16
+  ],
+  "asl.w dn,(an)": [
+    16
+  ],
+  "asl.w dn,(an)+": [
+    16
+  ],
+  "asl.w dn,-(an)": [
+    16
+  ],
+  "asl.w dn,d(an)": [
+    16
+  ],
+  "asl.w dn,d(an,ix)": [
+    16
+  ],
+  "asl.w dn,d(pc)": [
+    16
+  ],
+  "asl.w dn,d(pc,ix)": [
+    16
+  ],
+  "asl.w dn,xxx.w": [
+    16
+  ],
+  "asl.w dn,xxx.l": [
+    16
+  ],
+  "asr.b dn,(an)": [
+    16
+  ],
+  "asr.b dn,(an)+": [
+    16
+  ],
+  "asr.b dn,-(an)": [
+    16
+  ],
+  "asr.b dn,d(an)": [
+    16
+  ],
+  "asr.b dn,d(an,ix)": [
+    16
+  ],
+  "asr.b dn,d(pc)": [
+    16
+  ],
+  "asr.b dn,d(pc,ix)": [
+    16
+  ],
+  "asr.b dn,xxx.w": [
+    16
+  ],
+  "asr.b dn,xxx.l": [
+    16
+  ],
+  "asr.w dn,(an)": [
+    16
+  ],
+  "asr.w dn,(an)+": [
+    16
+  ],
+  "asr.w dn,-(an)": [
+    16
+  ],
+  "asr.w dn,d(an)": [
+    16
+  ],
+  "asr.w dn,d(an,ix)": [
+    16
+  ],
+  "asr.w dn,d(pc)": [
+    16
+  ],
+  "asr.w dn,d(pc,ix)": [
+    16
+  ],
+  "asr.w dn,xxx.w": [
+    16
+  ],
+  "asr.w dn,xxx.l": [
+    16
+  ],
+  "rol.b dn,(an)": [
+    16
+  ],
+  "rol.b dn,(an)+": [
+    16
+  ],
+  "rol.b dn,-(an)": [
+    16
+  ],
+  "rol.b dn,d(an)": [
+    16
+  ],
+  "rol.b dn,d(an,ix)": [
+    16
+  ],
+  "rol.b dn,d(pc)": [
+    16
+  ],
+  "rol.b dn,d(pc,ix)": [
+    16
+  ],
+  "rol.b dn,xxx.w": [
+    16
+  ],
+  "rol.b dn,xxx.l": [
+    16
+  ],
+  "rol.w dn,(an)": [
+    16
+  ],
+  "rol.w dn,(an)+": [
+    16
+  ],
+  "rol.w dn,-(an)": [
+    16
+  ],
+  "rol.w dn,d(an)": [
+    16
+  ],
+  "rol.w dn,d(an,ix)": [
+    16
+  ],
+  "rol.w dn,d(pc)": [
+    16
+  ],
+  "rol.w dn,d(pc,ix)": [
+    16
+  ],
+  "rol.w dn,xxx.w": [
+    16
+  ],
+  "rol.w dn,xxx.l": [
+    16
+  ],
+  "ror.b dn,(an)": [
+    16
+  ],
+  "ror.b dn,(an)+": [
+    16
+  ],
+  "ror.b dn,-(an)": [
+    16
+  ],
+  "ror.b dn,d(an)": [
+    16
+  ],
+  "ror.b dn,d(an,ix)": [
+    16
+  ],
+  "ror.b dn,d(pc)": [
+    16
+  ],
+  "ror.b dn,d(pc,ix)": [
+    16
+  ],
+  "ror.b dn,xxx.w": [
+    16
+  ],
+  "ror.b dn,xxx.l": [
+    16
+  ],
+  "ror.w dn,(an)": [
+    16
+  ],
+  "ror.w dn,(an)+": [
+    16
+  ],
+  "ror.w dn,-(an)": [
+    16
+  ],
+  "ror.w dn,d(an)": [
+    16
+  ],
+  "ror.w dn,d(an,ix)": [
+    16
+  ],
+  "ror.w dn,d(pc)": [
+    16
+  ],
+  "ror.w dn,d(pc,ix)": [
+    16
+  ],
+  "ror.w dn,xxx.w": [
+    16
+  ],
+  "ror.w dn,xxx.l": [
+    16
+  ],
+  "roxl.b dn,(an)": [
+    16
+  ],
+  "roxl.b dn,(an)+": [
+    16
+  ],
+  "roxl.b dn,-(an)": [
+    16
+  ],
+  "roxl.b dn,d(an)": [
+    16
+  ],
+  "roxl.b dn,d(an,ix)": [
+    16
+  ],
+  "roxl.b dn,d(pc)": [
+    16
+  ],
+  "roxl.b dn,d(pc,ix)": [
+    16
+  ],
+  "roxl.b dn,xxx.w": [
+    16
+  ],
+  "roxl.b dn,xxx.l": [
+    16
+  ],
+  "roxl.w dn,(an)": [
+    16
+  ],
+  "roxl.w dn,(an)+": [
+    16
+  ],
+  "roxl.w dn,-(an)": [
+    16
+  ],
+  "roxl.w dn,d(an)": [
+    16
+  ],
+  "roxl.w dn,d(an,ix)": [
+    16
+  ],
+  "roxl.w dn,d(pc)": [
+    16
+  ],
+  "roxl.w dn,d(pc,ix)": [
+    16
+  ],
+  "roxl.w dn,xxx.w": [
+    16
+  ],
+  "roxl.w dn,xxx.l": [
+    16
+  ],
+  "roxr.b dn,(an)": [
+    16
+  ],
+  "roxr.b dn,(an)+": [
+    16
+  ],
+  "roxr.b dn,-(an)": [
+    16
+  ],
+  "roxr.b dn,d(an)": [
+    16
+  ],
+  "roxr.b dn,d(an,ix)": [
+    16
+  ],
+  "roxr.b dn,d(pc)": [
+    16
+  ],
+  "roxr.b dn,d(pc,ix)": [
+    16
+  ],
+  "roxr.b dn,xxx.w": [
+    16
+  ],
+  "roxr.b dn,xxx.l": [
+    16
+  ],
+  "roxr.w dn,(an)": [
+    16
+  ],
+  "roxr.w dn,(an)+": [
+    16
+  ],
+  "roxr.w dn,-(an)": [
+    16
+  ],
+  "roxr.w dn,d(an)": [
+    16
+  ],
+  "roxr.w dn,d(an,ix)": [
+    16
+  ],
+  "roxr.w dn,d(pc)": [
+    16
+  ],
+  "roxr.w dn,d(pc,ix)": [
+    16
+  ],
+  "roxr.w dn,xxx.w": [
+    16
+  ],
+  "roxr.w dn,xxx.l": [
+    16
+  ],
+  "lsl.b dn": [
+    8
+  ],
+  "lsl.w dn": [
+    8
+  ],
+  "lsr.b dn": [
+    8
+  ],
+  "lsr.w dn": [
+    8
+  ],
+  "asl.b dn": [
+    8
+  ],
+  "asl.w dn": [
+    8
+  ],
+  "asr.b dn": [
+    8
+  ],
+  "asr.w dn": [
+    8
+  ],
+  "rol.b dn": [
+    8
+  ],
+  "rol.w dn": [
+    8
+  ],
+  "ror.b dn": [
+    8
+  ],
+  "ror.w dn": [
+    8
+  ],
+  "roxl.b dn": [
+    8
+  ],
+  "roxl.w dn": [
+    8
+  ],
+  "roxr.b dn": [
+    8
+  ],
+  "roxr.w dn": [
+    8
+  ],
+  "lsl.b (an)": [
+    8
+  ],
+  "lsl.b (an)+": [
+    8
+  ],
+  "lsl.b -(an)": [
+    8
+  ],
+  "lsl.b d(an)": [
+    8
+  ],
+  "lsl.b d(an,ix)": [
+    8
+  ],
+  "lsl.b d(pc)": [
+    8
+  ],
+  "lsl.b d(pc,ix)": [
+    8
+  ],
+  "lsl.b xxx.w": [
+    8
+  ],
+  "lsl.b xxx.l": [
+    8
+  ],
+  "lsl.w (an)": [
+    8
+  ],
+  "lsl.w (an)+": [
+    8
+  ],
+  "lsl.w -(an)": [
+    8
+  ],
+  "lsl.w d(an)": [
+    8
+  ],
+  "lsl.w d(an,ix)": [
+    8
+  ],
+  "lsl.w d(pc)": [
+    8
+  ],
+  "lsl.w d(pc,ix)": [
+    8
+  ],
+  "lsl.w xxx.w": [
+    8
+  ],
+  "lsl.w xxx.l": [
+    8
+  ],
+  "lsr.b (an)": [
+    8
+  ],
+  "lsr.b (an)+": [
+    8
+  ],
+  "lsr.b -(an)": [
+    8
+  ],
+  "lsr.b d(an)": [
+    8
+  ],
+  "lsr.b d(an,ix)": [
+    8
+  ],
+  "lsr.b d(pc)": [
+    8
+  ],
+  "lsr.b d(pc,ix)": [
+    8
+  ],
+  "lsr.b xxx.w": [
+    8
+  ],
+  "lsr.b xxx.l": [
+    8
+  ],
+  "lsr.w (an)": [
+    8
+  ],
+  "lsr.w (an)+": [
+    8
+  ],
+  "lsr.w -(an)": [
+    8
+  ],
+  "lsr.w d(an)": [
+    8
+  ],
+  "lsr.w d(an,ix)": [
+    8
+  ],
+  "lsr.w d(pc)": [
+    8
+  ],
+  "lsr.w d(pc,ix)": [
+    8
+  ],
+  "lsr.w xxx.w": [
+    8
+  ],
+  "lsr.w xxx.l": [
+    8
+  ],
+  "asl.b (an)": [
+    8
+  ],
+  "asl.b (an)+": [
+    8
+  ],
+  "asl.b -(an)": [
+    8
+  ],
+  "asl.b d(an)": [
+    8
+  ],
+  "asl.b d(an,ix)": [
+    8
+  ],
+  "asl.b d(pc)": [
+    8
+  ],
+  "asl.b d(pc,ix)": [
+    8
+  ],
+  "asl.b xxx.w": [
+    8
+  ],
+  "asl.b xxx.l": [
+    8
+  ],
+  "asl.w (an)": [
+    8
+  ],
+  "asl.w (an)+": [
+    8
+  ],
+  "asl.w -(an)": [
+    8
+  ],
+  "asl.w d(an)": [
+    8
+  ],
+  "asl.w d(an,ix)": [
+    8
+  ],
+  "asl.w d(pc)": [
+    8
+  ],
+  "asl.w d(pc,ix)": [
+    8
+  ],
+  "asl.w xxx.w": [
+    8
+  ],
+  "asl.w xxx.l": [
+    8
+  ],
+  "asr.b (an)": [
+    8
+  ],
+  "asr.b (an)+": [
+    8
+  ],
+  "asr.b -(an)": [
+    8
+  ],
+  "asr.b d(an)": [
+    8
+  ],
+  "asr.b d(an,ix)": [
+    8
+  ],
+  "asr.b d(pc)": [
+    8
+  ],
+  "asr.b d(pc,ix)": [
+    8
+  ],
+  "asr.b xxx.w": [
+    8
+  ],
+  "asr.b xxx.l": [
+    8
+  ],
+  "asr.w (an)": [
+    8
+  ],
+  "asr.w (an)+": [
+    8
+  ],
+  "asr.w -(an)": [
+    8
+  ],
+  "asr.w d(an)": [
+    8
+  ],
+  "asr.w d(an,ix)": [
+    8
+  ],
+  "asr.w d(pc)": [
+    8
+  ],
+  "asr.w d(pc,ix)": [
+    8
+  ],
+  "asr.w xxx.w": [
+    8
+  ],
+  "asr.w xxx.l": [
+    8
+  ],
+  "rol.b (an)": [
+    8
+  ],
+  "rol.b (an)+": [
+    8
+  ],
+  "rol.b -(an)": [
+    8
+  ],
+  "rol.b d(an)": [
+    8
+  ],
+  "rol.b d(an,ix)": [
+    8
+  ],
+  "rol.b d(pc)": [
+    8
+  ],
+  "rol.b d(pc,ix)": [
+    8
+  ],
+  "rol.b xxx.w": [
+    8
+  ],
+  "rol.b xxx.l": [
+    8
+  ],
+  "rol.w (an)": [
+    8
+  ],
+  "rol.w (an)+": [
+    8
+  ],
+  "rol.w -(an)": [
+    8
+  ],
+  "rol.w d(an)": [
+    8
+  ],
+  "rol.w d(an,ix)": [
+    8
+  ],
+  "rol.w d(pc)": [
+    8
+  ],
+  "rol.w d(pc,ix)": [
+    8
+  ],
+  "rol.w xxx.w": [
+    8
+  ],
+  "rol.w xxx.l": [
+    8
+  ],
+  "ror.b (an)": [
+    8
+  ],
+  "ror.b (an)+": [
+    8
+  ],
+  "ror.b -(an)": [
+    8
+  ],
+  "ror.b d(an)": [
+    8
+  ],
+  "ror.b d(an,ix)": [
+    8
+  ],
+  "ror.b d(pc)": [
+    8
+  ],
+  "ror.b d(pc,ix)": [
+    8
+  ],
+  "ror.b xxx.w": [
+    8
+  ],
+  "ror.b xxx.l": [
+    8
+  ],
+  "ror.w (an)": [
+    8
+  ],
+  "ror.w (an)+": [
+    8
+  ],
+  "ror.w -(an)": [
+    8
+  ],
+  "ror.w d(an)": [
+    8
+  ],
+  "ror.w d(an,ix)": [
+    8
+  ],
+  "ror.w d(pc)": [
+    8
+  ],
+  "ror.w d(pc,ix)": [
+    8
+  ],
+  "ror.w xxx.w": [
+    8
+  ],
+  "ror.w xxx.l": [
+    8
+  ],
+  "roxl.b (an)": [
+    8
+  ],
+  "roxl.b (an)+": [
+    8
+  ],
+  "roxl.b -(an)": [
+    8
+  ],
+  "roxl.b d(an)": [
+    8
+  ],
+  "roxl.b d(an,ix)": [
+    8
+  ],
+  "roxl.b d(pc)": [
+    8
+  ],
+  "roxl.b d(pc,ix)": [
+    8
+  ],
+  "roxl.b xxx.w": [
+    8
+  ],
+  "roxl.b xxx.l": [
+    8
+  ],
+  "roxl.w (an)": [
+    12
+  ],
+  "roxl.w (an)+": [
+    8
+  ],
+  "roxl.w -(an)": [
+    8
+  ],
+  "roxl.w d(an)": [
+    16
+  ],
+  "roxl.w d(an,ix)": [
+    8
+  ],
+  "roxl.w d(pc)": [
+    8
+  ],
+  "roxl.w d(pc,ix)": [
+    8
+  ],
+  "roxl.w xxx.w": [
+    8
+  ],
+  "roxl.w xxx.l": [
+    8
+  ],
+  "roxr.b (an)": [
+    8
+  ],
+  "roxr.b (an)+": [
+    8
+  ],
+  "roxr.b -(an)": [
+    8
+  ],
+  "roxr.b d(an)": [
+    8
+  ],
+  "roxr.b d(an,ix)": [
+    8
+  ],
+  "roxr.b d(pc)": [
+    8
+  ],
+  "roxr.b d(pc,ix)": [
+    8
+  ],
+  "roxr.b xxx.w": [
+    8
+  ],
+  "roxr.b xxx.l": [
+    8
+  ],
+  "roxr.w (an)": [
+    12
+  ],
+  "roxr.w (an)+": [
+    8
+  ],
+  "roxr.w -(an)": [
+    8
+  ],
+  "roxr.w d(an)": [
+    16
+  ],
+  "roxr.w d(an,ix)": [
+    8
+  ],
+  "roxr.w d(pc)": [
+    8
+  ],
+  "roxr.w d(pc,ix)": [
+    8
+  ],
+  "roxr.w xxx.w": [
+    8
+  ],
+  "roxr.w xxx.l": [
+    8
+  ],
+  "lsl.l #xxx,dn": [
+    16
+  ],
+  "lsr.l #xxx,dn": [
+    16
+  ],
+  "asl.l #xxx,dn": [
+    16
+  ],
+  "asr.l #xxx,dn": [
+    16
+  ],
+  "rol.l #xxx,dn": [
+    16
+  ],
+  "ror.l #xxx,dn": [
+    16
+  ],
+  "roxl.l #xxx,dn": [
+    16
+  ],
+  "roxr.l #xxx,dn": [
+    16
+  ],
+  "lsl.l dn": [
+    10
+  ],
+  "lsr.l dn": [
+    10
+  ],
+  "asl.l dn": [
+    10
+  ],
+  "asr.l dn": [
+    10
+  ],
+  "rol.l dn": [
+    10
+  ],
+  "ror.l dn": [
+    10
+  ],
+  "roxl.l dn": [
+    10
+  ],
+  "roxr.l dn": [
+    10
+  ],
+  "lsl.l dn,dn": [
+    16
+  ],
+  "lsr.l dn,dn": [
+    16
+  ],
+  "asl.l dn,dn": [
+    16
+  ],
+  "asr.l dn,dn": [
+    16
+  ],
+  "rol.l dn,dn": [
+    16
+  ],
+  "ror.l dn,dn": [
+    16
+  ],
+  "roxl.l dn,dn": [
+    16
+  ],
+  "roxr.l dn,dn": [
+    16
+  ],
+  "bchg.b dn,(an)": [
+    8
+  ],
+  "bchg.b dn,(an)+": [
+    8
+  ],
+  "bchg.b dn,-(an)": [
+    8
+  ],
+  "bchg.b dn,d(an)": [
+    8
+  ],
+  "bchg.b dn,d(an,ix)": [
+    8
+  ],
+  "bchg.b dn,d(pc)": [
+    8
+  ],
+  "bchg.b dn,d(pc,ix)": [
+    8
+  ],
+  "bchg.b dn,xxx.w": [
+    8
+  ],
+  "bchg.b dn,xxx.l": [
+    8
+  ],
+  "bset.b dn,(an)": [
+    8
+  ],
+  "bset.b dn,(an)+": [
+    8
+  ],
+  "bset.b dn,-(an)": [
+    8
+  ],
+  "bset.b dn,d(an)": [
+    8
+  ],
+  "bset.b dn,d(an,ix)": [
+    8
+  ],
+  "bset.b dn,d(pc)": [
+    8
+  ],
+  "bset.b dn,d(pc,ix)": [
+    8
+  ],
+  "bset.b dn,xxx.w": [
+    8
+  ],
+  "bset.b dn,xxx.l": [
+    8
+  ],
+  "bclr.b dn,(an)": [
+    8
+  ],
+  "bclr.b dn,(an)+": [
+    8
+  ],
+  "bclr.b dn,-(an)": [
+    8
+  ],
+  "bclr.b dn,d(an)": [
+    8
+  ],
+  "bclr.b dn,d(an,ix)": [
+    8
+  ],
+  "bclr.b dn,d(pc)": [
+    8
+  ],
+  "bclr.b dn,d(pc,ix)": [
+    8
+  ],
+  "bclr.b dn,xxx.w": [
+    8
+  ],
+  "bclr.b dn,xxx.l": [
+    8
+  ],
+  "bchg.b #xxx,(an)": [
+    12
+  ],
+  "bchg.b #xxx,(an)+": [
+    12
+  ],
+  "bchg.b #xxx,-(an)": [
+    12
+  ],
+  "bchg.b #xxx,d(an)": [
+    12
+  ],
+  "bchg.b #xxx,d(an,ix)": [
+    12
+  ],
+  "bchg.b #xxx,d(pc)": [
+    12
+  ],
+  "bchg.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "bchg.b #xxx,xxx.w": [
+    12
+  ],
+  "bchg.b #xxx,xxx.l": [
+    12
+  ],
+  "bset.b #xxx,(an)": [
+    12
+  ],
+  "bset.b #xxx,(an)+": [
+    12
+  ],
+  "bset.b #xxx,-(an)": [
+    12
+  ],
+  "bset.b #xxx,d(an)": [
+    12
+  ],
+  "bset.b #xxx,d(an,ix)": [
+    12
+  ],
+  "bset.b #xxx,d(pc)": [
+    12
+  ],
+  "bset.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "bset.b #xxx,xxx.w": [
+    12
+  ],
+  "bset.b #xxx,xxx.l": [
+    12
+  ],
+  "bclr.b #xxx,(an)": [
+    12
+  ],
+  "bclr.b #xxx,(an)+": [
+    12
+  ],
+  "bclr.b #xxx,-(an)": [
+    12
+  ],
+  "bclr.b #xxx,d(an)": [
+    12
+  ],
+  "bclr.b #xxx,d(an,ix)": [
+    12
+  ],
+  "bclr.b #xxx,d(pc)": [
+    12
+  ],
+  "bclr.b #xxx,d(pc,ix)": [
+    12
+  ],
+  "bclr.b #xxx,xxx.w": [
+    12
+  ],
+  "bclr.b #xxx,xxx.l": [
+    12
+  ],
+  "bchg.l dn,dn": [
+    8
+  ],
+  "bset.l dn,dn": [
+    8
+  ],
+  "bchg.l #xxx,dn": [
+    12
+  ],
+  "bset.l #xxx,dn": [
+    12
+  ],
+  "bclr.l dn,dn": [
+    10
+  ],
+  "bclr.l #xxx,dn": [
+    14
+  ],
+  "btst.b dn,(an)": [
+    4
+  ],
+  "btst.b dn,(an)+": [
+    4
+  ],
+  "btst.b dn,-(an)": [
+    4
+  ],
+  "btst.b dn,d(an)": [
+    4
+  ],
+  "btst.b dn,d(an,ix)": [
+    4
+  ],
+  "btst.b dn,d(pc)": [
+    4
+  ],
+  "btst.b dn,d(pc,ix)": [
+    4
+  ],
+  "btst.b dn,xxx.w": [
+    4
+  ],
+  "btst.b dn,xxx.l": [
+    4
+  ],
+  "btst.b #xxx,(an)": [
+    8
+  ],
+  "btst.b #xxx,(an)+": [
+    8
+  ],
+  "btst.b #xxx,-(an)": [
+    8
+  ],
+  "btst.b #xxx,d(an)": [
+    8
+  ],
+  "btst.b #xxx,d(an,ix)": [
+    8
+  ],
+  "btst.b #xxx,d(pc)": [
+    8
+  ],
+  "btst.b #xxx,d(pc,ix)": [
+    8
+  ],
+  "btst.b #xxx,xxx.w": [
+    8
+  ],
+  "btst.b #xxx,xxx.l": [
+    8
+  ],
+  "btst.b dn,#xxx": [
+    10
+  ],
+  "btst.l dn,dn": [
+    6
+  ],
+  "btst.l #xxx,dn": [
+    10
+  ],
+  "bcc.b xxx.l": [
+    10,
+    8
+  ],
+  "bcs.b xxx.l": [
+    10,
+    8
+  ],
+  "beq.b xxx.l": [
+    10,
+    8
+  ],
+  "bge.b xxx.l": [
+    10,
+    8
+  ],
+  "bgt.b xxx.l": [
+    10,
+    8
+  ],
+  "bhi.b xxx.l": [
+    10,
+    8
+  ],
+  "ble.b xxx.l": [
+    10,
+    8
+  ],
+  "blt.b xxx.l": [
+    10,
+    8
+  ],
+  "bmi.b xxx.l": [
+    10,
+    8
+  ],
+  "bne.b xxx.l": [
+    10,
+    8
+  ],
+  "bpl.b xxx.l": [
+    10,
+    8
+  ],
+  "bvc.b xxx.l": [
+    10,
+    8
+  ],
+  "bvs.b xxx.l": [
+    10,
+    8
+  ],
+  "bls.b xxx.l": [
+    10,
+    8
+  ],
+  "bcc.w xxx.l": [
+    10,
+    12
+  ],
+  "bcs.w xxx.l": [
+    10,
+    12
+  ],
+  "beq.w xxx.l": [
+    10,
+    12
+  ],
+  "bge.w xxx.l": [
+    10,
+    12
+  ],
+  "bgt.w xxx.l": [
+    10,
+    12
+  ],
+  "bhi.w xxx.l": [
+    10,
+    12
+  ],
+  "ble.w xxx.l": [
+    10,
+    12
+  ],
+  "blt.w xxx.l": [
+    10,
+    12
+  ],
+  "bmi.w xxx.l": [
+    10,
+    12
+  ],
+  "bne.w xxx.l": [
+    10,
+    12
+  ],
+  "bpl.w xxx.l": [
+    10,
+    12
+  ],
+  "bvc.w xxx.l": [
+    10,
+    12
+  ],
+  "bvs.w xxx.l": [
+    10,
+    12
+  ],
+  "bls.w xxx.l": [
+    10,
+    12
+  ],
+  "bra.b xxx.l": [
+    10
+  ],
+  "bra.w xxx.l": [
+    10
+  ],
+  "bsr.b xxx.l": [
+    18
+  ],
+  "bsr.w xxx.l": [
+    18
+  ],
+  "dbcc.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbcs.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbeq.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbf.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbra.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbge.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbgt.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbhi.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dble.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dblt.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbmi.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbne.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbpl.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbt.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbvc.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbvs.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "dbls.w dn,xxx.l": [
+    10,
+    12,
+    14
+  ],
+  "jmp (an)": [
+    8
+  ],
+  "jmp d(an)": [
+    10
+  ],
+  "jmp d(an,ix)": [
+    14
+  ],
+  "jmp xxx.w": [
+    10
+  ],
+  "jmp xxx.l": [
+    12
+  ],
+  "jmp d(pc)": [
+    10
+  ],
+  "jmp d(pc,ix)": [
+    14
+  ],
+  "jsr (an)": [
+    16
+  ],
+  "jsr d(an)": [
+    18
+  ],
+  "jsr d(an,ix)": [
+    22
+  ],
+  "jsr xxx.w": [
+    18
+  ],
+  "jsr xxx.l": [
+    20
+  ],
+  "jsr d(pc)": [
+    18
+  ],
+  "jsr d(pc,ix)": [
+    22
+  ],
+  "lea.l (an),an": [
+    4
+  ],
+  "lea.l d(an),an": [
+    8
+  ],
+  "lea.l d(an,ix),an": [
+    12
+  ],
+  "lea.l xxx.w,an": [
+    8
+  ],
+  "lea.l xxx.l,an": [
+    12
+  ],
+  "lea.l d(pc),an": [
+    8
+  ],
+  "lea.l d(pc,ix),an": [
+    12
+  ],
+  "pea.l (an)": [
+    12
+  ],
+  "pea.l d(an)": [
+    16
+  ],
+  "pea.l d(an,ix)": [
+    20
+  ],
+  "pea.l xxx.w": [
+    16
+  ],
+  "pea.l xxx.l": [
+    20
+  ],
+  "pea.l d(pc)": [
+    16
+  ],
+  "pea.l d(pc,ix)": [
+    20
+  ],
+  "movem.w (an),reglist": [
+    48
+  ],
+  "movem.w (an),dn": [
+    48
+  ],
+  "movem.w (an),an": [
+    48
+  ],
+  "movem.w (an)+,reglist": [
+    48
+  ],
+  "movem.w (an)+,dn": [
+    48
+  ],
+  "movem.w (an)+,an": [
+    48
+  ],
+  "movem.w d(an),reglist": [
+    64
+  ],
+  "movem.w d(an),dn": [
+    64
+  ],
+  "movem.w d(an),an": [
+    64
+  ],
+  "movem.w d(an,ix),reglist": [
+    72
+  ],
+  "movem.w d(an,ix),dn": [
+    72
+  ],
+  "movem.w d(an,ix),an": [
+    72
+  ],
+  "movem.w xxx.w,reglist": [
+    64
+  ],
+  "movem.w xxx.w,dn": [
+    64
+  ],
+  "movem.w xxx.w,an": [
+    64
+  ],
+  "movem.w xxx.l,reglist": [
+    80
+  ],
+  "movem.w xxx.l,dn": [
+    80
+  ],
+  "movem.w xxx.l,an": [
+    80
+  ],
+  "movem.w d(pc),reglist": [
+    64
+  ],
+  "movem.w d(pc),dn": [
+    64
+  ],
+  "movem.w d(pc),an": [
+    64
+  ],
+  "movem.w d(pc,ix),reglist": [
+    72
+  ],
+  "movem.w d(pc,ix),dn": [
+    72
+  ],
+  "movem.w d(pc,ix),an": [
+    72
+  ],
+  "movem.l (an),reglist": [
+    96
+  ],
+  "movem.l (an),dn": [
+    96
+  ],
+  "movem.l (an),an": [
+    96
+  ],
+  "movem.l (an)+,reglist": [
+    96
+  ],
+  "movem.l (an)+,dn": [
+    96
+  ],
+  "movem.l (an)+,an": [
+    96
+  ],
+  "movem.l d(an),reglist": [
+    128
+  ],
+  "movem.l d(an),dn": [
+    128
+  ],
+  "movem.l d(an),an": [
+    128
+  ],
+  "movem.l d(an,ix),reglist": [
+    144
+  ],
+  "movem.l d(an,ix),dn": [
+    144
+  ],
+  "movem.l d(an,ix),an": [
+    144
+  ],
+  "movem.l xxx.w,reglist": [
+    128
+  ],
+  "movem.l xxx.w,dn": [
+    128
+  ],
+  "movem.l xxx.w,an": [
+    128
+  ],
+  "movem.l xxx.l,reglist": [
+    160
+  ],
+  "movem.l xxx.l,dn": [
+    160
+  ],
+  "movem.l xxx.l,an": [
+    160
+  ],
+  "movem.l d(pc),reglist": [
+    128
+  ],
+  "movem.l d(pc),dn": [
+    128
+  ],
+  "movem.l d(pc),an": [
+    128
+  ],
+  "movem.l d(pc,ix),reglist": [
+    144
+  ],
+  "movem.l d(pc,ix),dn": [
+    144
+  ],
+  "movem.l d(pc,ix),an": [
+    144
+  ],
+  "movem.w reglist,(an)": [
+    32
+  ],
+  "movem.w dn,(an)": [
+    32
+  ],
+  "movem.w an,(an)": [
+    32
+  ],
+  "movem.w reglist,-(an)": [
+    32
+  ],
+  "movem.w dn,-(an)": [
+    32
+  ],
+  "movem.w an,-(an)": [
+    32
+  ],
+  "movem.w reglist,d(an)": [
+    48
+  ],
+  "movem.w dn,d(an)": [
+    48
+  ],
+  "movem.w an,d(an)": [
+    48
+  ],
+  "movem.w reglist,d(an,ix)": [
+    56
+  ],
+  "movem.w dn,d(an,ix)": [
+    56
+  ],
+  "movem.w an,d(an,ix)": [
+    56
+  ],
+  "movem.w reglist,xxx.w": [
+    48
+  ],
+  "movem.w dn,xxx.w": [
+    48
+  ],
+  "movem.w an,xxx.w": [
+    48
+  ],
+  "movem.w reglist,xxx.l": [
+    64
+  ],
+  "movem.w dn,xxx.l": [
+    64
+  ],
+  "movem.w an,xxx.l": [
+    64
+  ],
+  "movem.l reglist,(an)": [
+    64
+  ],
+  "movem.l dn,(an)": [
+    64
+  ],
+  "movem.l an,(an)": [
+    64
+  ],
+  "movem.l reglist,-(an)": [
+    64
+  ],
+  "movem.l dn,-(an)": [
+    64
+  ],
+  "movem.l an,-(an)": [
+    64
+  ],
+  "movem.l reglist,d(an)": [
+    96
+  ],
+  "movem.l dn,d(an)": [
+    96
+  ],
+  "movem.l an,d(an)": [
+    96
+  ],
+  "movem.l reglist,d(an,ix)": [
+    112
+  ],
+  "movem.l dn,d(an,ix)": [
+    112
+  ],
+  "movem.l an,d(an,ix)": [
+    112
+  ],
+  "movem.l reglist,xxx.w": [
+    96
+  ],
+  "movem.l dn,xxx.w": [
+    96
+  ],
+  "movem.l an,xxx.w": [
+    96
+  ],
+  "movem.l reglist,xxx.l": [
+    128
+  ],
+  "movem.l dn,xxx.l": [
+    128
+  ],
+  "movem.l an,xxx.l": [
+    128
+  ],
+  "addx.b dn,dn": [
+    4
+  ],
+  "addx.w dn,dn": [
+    4
+  ],
+  "subx.b dn,dn": [
+    4
+  ],
+  "subx.w dn,dn": [
+    4
+  ],
+  "addx.b -(an),-(an)": [
+    18
+  ],
+  "addx.w -(an),-(an)": [
+    18
+  ],
+  "subx.b -(an),-(an)": [
+    18
+  ],
+  "subx.w -(an),-(an)": [
+    18
+  ],
+  "addx.l dn,dn": [
+    8
+  ],
+  "subx.l dn,dn": [
+    8
+  ],
+  "addx.l -(an),-(an)": [
+    30
+  ],
+  "subx.l -(an),-(an)": [
+    30
+  ],
+  "cmpm.b (an)+,(an)+": [
+    12
+  ],
+  "cmpm.w (an)+,(an)+": [
+    12
+  ],
+  "cmpm.l (an)+,(an)+": [
+    20
+  ],
+  "abcd.b dn,dn": [
+    6
+  ],
+  "sbcd.b dn,dn": [
+    6
+  ],
+  "abcd.b -(an),-(an)": [
+    18
+  ],
+  "sbcd.b -(an),-(an)": [
+    18
+  ],
+  "chk.w dn,dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.w an,dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.w (an),dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.w (an)+,dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.w -(an),dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.w d(an),dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.w d(an,ix),dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.w d(pc),dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.w d(pc,ix),dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.w xxx.w,dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.w xxx.l,dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.w #xxx,dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.l dn,dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.l an,dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.l (an),dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.l (an)+,dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.l -(an),dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.l d(an),dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.l d(an,ix),dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.l d(pc),dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.l d(pc,ix),dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.l xxx.w,dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.l xxx.l,dn": [
+    10,
+    38,
+    40
+  ],
+  "chk.l #xxx,dn": [
+    10,
+    38,
+    40
+  ],
+  "exg.l dn,dn": [
+    6
+  ],
+  "exg.l dn,an": [
+    6
+  ],
+  "exg.l an,dn": [
+    6
+  ],
+  "exg.l an,an": [
+    6
+  ],
+  "ext.w dn": [
+    4
+  ],
+  "ext.l dn": [
+    4
+  ],
+  "link.w an,#xxx": [
+    16
+  ],
+  "link.l an,#xxx": [
+    16
+  ],
+  "nop": [
+    4
+  ],
+  "reset": [
+    132
+  ],
+  "rte": [
+    20
+  ],
+  "rtr": [
+    20
+  ],
+  "rts": [
+    16
+  ],
+  "stop #xxx": [
+    4
+  ],
+  "swap.w dn": [
+    4
+  ],
+  "trap #xxx": [
+    34
+  ],
+  "trapv": [
+    4,
+    34
+  ],
+  "unlk an": [
+    12
+  ],
+  "illegal": [
+    34
+  ],
+  "and.b #xxx,ccr": [
+    20
+  ],
+  "and.w #xxx,ccr": [
+    20
+  ],
+  "andi.b #xxx,ccr": [
+    20
+  ],
+  "andi.w #xxx,ccr": [
+    20
+  ],
+  "eor.b #xxx,ccr": [
+    20
+  ],
+  "eor.w #xxx,ccr": [
+    20
+  ],
+  "eori.b #xxx,ccr": [
+    20
+  ],
+  "eori.w #xxx,ccr": [
+    20
+  ],
+  "or.b #xxx,ccr": [
+    20
+  ],
+  "or.w #xxx,ccr": [
+    20
+  ],
+  "ori.b #xxx,ccr": [
+    20
+  ],
+  "ori.w #xxx,ccr": [
+    20
+  ],
+  "and.b #xxx,sr": [
+    20
+  ],
+  "and.w #xxx,sr": [
+    20
+  ],
+  "andi.b #xxx,sr": [
+    20
+  ],
+  "andi.w #xxx,sr": [
+    20
+  ],
+  "eor.b #xxx,sr": [
+    20
+  ],
+  "eor.w #xxx,sr": [
+    20
+  ],
+  "eori.b #xxx,sr": [
+    20
+  ],
+  "eori.w #xxx,sr": [
+    20
+  ],
+  "or.b #xxx,sr": [
+    20
+  ],
+  "or.w #xxx,sr": [
+    20
+  ],
+  "ori.b #xxx,sr": [
+    20
+  ],
+  "ori.w #xxx,sr": [
+    20
+  ],
+  "move.w sr,dn": [
+    6
+  ],
+  "move.w sr,an": [
+    6
+  ],
+  "move.w sr,(an)": [
+    6
+  ],
+  "move.w sr,(an)+": [
+    6
+  ],
+  "move.w sr,-(an)": [
+    6
+  ],
+  "move.w sr,d(an)": [
+    6
+  ],
+  "move.w sr,d(an,ix)": [
+    6
+  ],
+  "move.w sr,d(pc)": [
+    6
+  ],
+  "move.w sr,d(pc,ix)": [
+    6
+  ],
+  "move.w sr,xxx.w": [
+    6
+  ],
+  "move.w sr,xxx.l": [
+    6
+  ],
+  "move.w sr,#xxx": [
+    6
+  ],
+  "move.w dn,ccr": [
+    12
+  ],
+  "move.w an,ccr": [
+    12
+  ],
+  "move.w (an),ccr": [
+    12
+  ],
+  "move.w (an)+,ccr": [
+    12
+  ],
+  "move.w -(an),ccr": [
+    12
+  ],
+  "move.w d(an),ccr": [
+    12
+  ],
+  "move.w d(an,ix),ccr": [
+    12
+  ],
+  "move.w d(pc),ccr": [
+    12
+  ],
+  "move.w d(pc,ix),ccr": [
+    12
+  ],
+  "move.w xxx.w,ccr": [
+    12
+  ],
+  "move.w xxx.l,ccr": [
+    12
+  ],
+  "move.w #xxx,ccr": [
+    12
+  ],
+  "move.w dn,sr": [
+    12
+  ],
+  "move.w an,sr": [
+    12
+  ],
+  "move.w (an),sr": [
+    12
+  ],
+  "move.w (an)+,sr": [
+    12
+  ],
+  "move.w -(an),sr": [
+    12
+  ],
+  "move.w d(an),sr": [
+    12
+  ],
+  "move.w d(an,ix),sr": [
+    12
+  ],
+  "move.w d(pc),sr": [
+    12
+  ],
+  "move.w d(pc,ix),sr": [
+    12
+  ],
+  "move.w xxx.w,sr": [
+    12
+  ],
+  "move.w xxx.l,sr": [
+    12
+  ],
+  "move.w #xxx,sr": [
+    12
+  ],
+  "move.l an,usp": [
+    4
+  ],
+  "move.l usp,an": [
+    4
+  ],
+  "movep.w dn,d(an)": [
+    16
+  ],
+  "movep.w d(an),dn": [
+    16
+  ],
+  "movep.l dn,d(an)": [
+    24
+  ],
+  "movep.l d(an),dn": [
+    24
+  ]
+}
