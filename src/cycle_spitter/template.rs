@@ -101,11 +101,9 @@ pub fn parse_template(template_content: &str, number_re: &Regex) -> Result<Vec<T
         }
 
         let cycles = if let Some(cap) = number_re.captures(trimmed) {
-            cap.get(1)
-                .map(|m| m.as_str().parse::<usize>().unwrap_or(0))
-                .unwrap_or(0)
+            cap.get(1).map(|m| m.as_str().parse::<usize>().unwrap_or(0)).unwrap_or(0)
         } else {
-            if trimmed.starts_with(";") && trimmed.contains(" set ") && trimmed.contains(" equ ") {
+            if trimmed.trim().starts_with(";") && trimmed.contains(" set ") && trimmed.contains(" equ ") {
                 lookup_cycles(trimmed)
             } else {
                 continue;

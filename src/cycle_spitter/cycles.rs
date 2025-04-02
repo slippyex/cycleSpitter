@@ -90,8 +90,6 @@ use serde_json;
 
 use regex::Regex;
 
-
-
 static REG_DISPLACEMENT: Lazy<Regex> = Lazy::new(|| {
     Regex::new(r"([^\s,()]+)\((a[0-7]|sp)\)").unwrap()
 });
@@ -134,7 +132,6 @@ pub fn lookup_cycles(line: &str) -> usize {
     }
 }
 
-
 pub fn normalize_line(line: &str) -> String {
     let trimmed = line.trim();
     let mut parts = trimmed.splitn(2, char::is_whitespace);
@@ -145,9 +142,10 @@ pub fn normalize_line(line: &str) -> String {
         format!("{}.l", first_token)
     } else {
         let result = REG_BCC.replace_all(first_token, |caps: &regex::Captures| {
+            // Get the trailing character if it exists (could be whitespace or punctuation)
             let trailing = caps.get(3).map_or("", |m| m.as_str());
             if caps.get(2).is_some() {
-                format!("{}{}{}", &caps[1], ".b", trailing)
+                format!("{}{}{}", &caps[1].to_string(), ".b", trailing)
             } else {
                 format!("{}{}{}", &caps[1], ".w", trailing)
             }
@@ -166,8 +164,11 @@ pub fn normalize_line(line: &str) -> String {
         }
     }).into_owned();
     operands = REG_IMMEDIATE.replace_all(&operands, "#xxx").into_owned();
+    // c. Replace data registers.
     operands = REG_DATA.replace_all(&operands, "dn").into_owned();
+    // d. Replace address registers.
     operands = REG_ADDR.replace_all(&operands, "an").into_owned();
+    // e. Replace any remaining absolute addresses.
     operands = REG_ABS_ADDRESS.replace_all(&operands, |caps: &regex::Captures| {
         let before = caps.name("before").unwrap().as_str();
         let token = caps.name("token").unwrap().as_str();
@@ -186,8 +187,10 @@ pub fn normalize_line(line: &str) -> String {
             }
         }
     }).into_owned();
+    // f. Collapse multiple spaces.
     operands = REG_SPACES.replace_all(&operands, " ").into_owned();
     let operands = operands.trim();
+
     if operands.is_empty() {
         first_token
     } else {

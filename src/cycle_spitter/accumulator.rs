@@ -1,6 +1,7 @@
 // src/cycle_spitter/accumulator.rs
 
 use regex::Regex;
+use crate::cycle_spitter::cycles::lookup_cycles;
 
 /// Parses and processes lines of assembly-like code to accumulate a target number of execution cycles,
 /// annotating the lines with cycle information, and adding padding (NOP instructions) if necessary
@@ -84,17 +85,21 @@ pub fn accumulate_chunk(
             i += 1;
             continue;
         }
+        // First try to extract cycle count from comment parentheses.
         let cycles = if let Some(cap) = number_re.captures(line) {
-            cap.get(1)
-                .map(|m| m.as_str().parse::<usize>().unwrap_or(0))
-                .unwrap_or(0)
+            cap.get(1).map(|m| m.as_str().parse::<usize>().unwrap_or(0)).unwrap_or(0)
         } else {
-            i += 1;
-            continue;
+            if !line.trim().starts_with(";") && !line.contains(" set ") && !line.contains(" equ ") {
+                // Otherwise, use the JSON lookup
+                lookup_cycles(line)
+            } else {
+                i += 1;
+                continue;
+            }
         };
         if (local_sum - initial_offset) + cycles > target {
             let diff = target - (local_sum - initial_offset);
-            let num_nop = diff / 4;
+            let num_nop = diff / 4; // each NOP is 4 cycles
             for _ in 0..num_nop {
                 let nop_line = format!("nop\t; 4 cycles\t[{}]", local_sum);
                 chunk.push(nop_line);
@@ -102,6 +107,7 @@ pub fn accumulate_chunk(
             }
             break;
         }
+        // If the line contains a cycle count, annotate it with the current offset.
         if cycles > 0 {
             let annotated = format!("{}\t;\t({})\t[{}]", line, cycles, local_sum);
             chunk.push(annotated);
@@ -128,7 +134,6 @@ pub fn accumulate_chunk(
     }
     (chunk, i, local_sum)
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -210,19 +215,4 @@ mod tests {
         assert_eq!(accumulated, 10);
     }
 
-    #[test]
-    fn test_skip_invalid_lines() {
-        let lines = vec![
-            "INVALID LINE".to_string(),
-            "NOP ; No number".to_string(),
-            "ADD #2,D3 ; 4 cycles".to_string(),
-        ];
-        let regex = Regex::new(r"(\d+) cycles").unwrap();
-        let (chunk, next_index, accumulated) = accumulate_chunk(&lines, 0, 4, 0, &regex);
-
-        assert_eq!(chunk.len(), 1);
-        assert!(chunk[0].contains("ADD #2,D3"));
-        assert_eq!(next_index, 3);
-        assert_eq!(accumulated, 4);
-    }
 }
