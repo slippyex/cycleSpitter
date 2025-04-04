@@ -1,7 +1,7 @@
 // src/cycle_spitter/accumulator.rs
 
-use crate::cycle_spitter::cycle_helpers::extract_cycle_count;
-use crate::cycle_spitter::format_helpers::format_accumulated_instruction;
+use crate::cycle_spitter::helpers::extract_cycle_count;
+use crate::cycle_spitter::helpers::format_accumulated_instruction;
 
 /// Parses and processes lines of assembly-like code to accumulate a target number of execution cycles,
 /// annotating the lines with cycle information, and adding padding (NOP instructions) if necessary

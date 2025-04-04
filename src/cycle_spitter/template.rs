@@ -2,8 +2,8 @@
 
 use regex::Regex;
 use std::error::Error;
-use crate::cycle_spitter::cycle_helpers::extract_cycle_count;
-use crate::cycle_spitter::format_helpers::format_template_instruction;
+use crate::cycle_spitter::helpers::extract_cycle_count;
+use crate::cycle_spitter::helpers::format_template_instruction;
 
 /// Represents a section of a parsed template.
 /// Each section contains:
