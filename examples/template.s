@@ -2,17 +2,17 @@
 ; new scanline
 ; -------------------------------------------------------------
 ; left border
-		move.b	d7,$ffff8260.w			; (12)
-		move.w	d7,$ffff8260.w			; (12)
+		move.b	d7,$ffff8260.w
+		move.w	d7,$ffff8260.w
 		dcb.w	88,$4e71
 ; -------------------------------------------------------------
 ; right border
-		move.w	d7,$ffff820a.w			; (12)
-		move.b	d7,$ffff820a.w			; (12)
+		move.w	d7,$ffff820a.w
+		move.b	d7,$ffff820a.w
 		dcb.w	11,$4e71
 ; -------------------------------------------------------------
 ; stabilizer
-		move.b	d7,$ffff8260.w			; (12)
-		move.w	d7,$ffff8260.w			; (12)
+		move.b	d7,$ffff8260.w
+		move.w	d7,$ffff8260.w
 		dcb.w	11,$4e71
 ; =============================================================

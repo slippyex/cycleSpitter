@@ -1,10 +1,8 @@
 // src/main.rs
 mod cycle_spitter;
 
-use regex::Regex;
 use std::env;
 use std::fs;
-
 use crate::cycle_spitter::accumulator::accumulate_chunk;
 use crate::cycle_spitter::block::process_block;
 use crate::cycle_spitter::template::parse_template;
@@ -19,11 +17,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let template_file = if args.len() > 3 { &args[3] } else { "template.s" };
 
     // Compile regex used in multiple modules.
-    let number_re = Regex::new(r"\(\s*(\d+)\s*\)")?;
+//    let number_re = Regex::new(r"\(\s*(\d+)\s*\)")?;
+
 
     // Parse the template.
     let template_content = fs::read_to_string(template_file)?;
-    let template_sections = parse_template(&template_content, &number_re)?;
+    let template_sections = parse_template(&template_content)?;
 
     // Read and process the input file.
     let content = fs::read_to_string(filename)?;
@@ -58,7 +57,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     current_index,
                     section.nop_cycles,
                     scanline_offset,
-                    &number_re,
                 );
                 scanline_offset = new_offset;
                 scanline_cycles += section.nop_cycles;

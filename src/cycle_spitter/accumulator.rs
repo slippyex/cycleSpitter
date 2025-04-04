@@ -1,7 +1,7 @@
 // src/cycle_spitter/accumulator.rs
 
-use regex::Regex;
-use crate::cycle_spitter::cycles::lookup_cycles;
+use crate::cycle_spitter::cycles::{lookup_cycles, CycleCount};
+use crate::cycle_spitter::regexes::REG_NUMBER_RE;
 
 /// Parses and processes lines of assembly-like code to accumulate a target number of execution cycles,
 /// annotating the lines with cycle information, and adding padding (NOP instructions) if necessary
@@ -73,7 +73,6 @@ pub fn accumulate_chunk(
     start_index: usize,
     target: usize,
     initial_offset: usize,
-    number_re: &Regex,
 ) -> (Vec<String>, usize, usize) {
     let mut local_sum = initial_offset;
     let mut chunk = Vec::new();
@@ -86,8 +85,11 @@ pub fn accumulate_chunk(
             continue;
         }
         // First try to extract cycle count from comment parentheses.
-        let cycles = if let Some(cap) = number_re.captures(line) {
-            cap.get(1).map(|m| m.as_str().parse::<usize>().unwrap_or(0)).unwrap_or(0)
+        let cycles = if let Some(cap) = REG_NUMBER_RE.captures(line) {
+            CycleCount {
+                cycles: cap.get(1).map(|m| m.as_str().parse::<usize>().unwrap_or(0)).unwrap_or(0),
+                lookup: String::from("n/a")
+            }
         } else {
             if !line.trim().starts_with(";") && !line.contains(" set ") && !line.contains(" equ ") {
                 // Otherwise, use the JSON lookup
@@ -97,7 +99,7 @@ pub fn accumulate_chunk(
                 continue;
             }
         };
-        if (local_sum - initial_offset) + cycles > target {
+        if (local_sum - initial_offset) + cycles.cycles > target {
             let diff = target - (local_sum - initial_offset);
             let num_nop = diff / 4; // each NOP is 4 cycles
             for _ in 0..num_nop {
@@ -108,10 +110,10 @@ pub fn accumulate_chunk(
             break;
         }
         // If the line contains a cycle count, annotate it with the current offset.
-        if cycles > 0 {
-            let annotated = format!("{}\t;\t({})\t[{}]", line, cycles, local_sum);
+        if cycles.cycles > 0 {
+            let annotated = format!("{}\t;\t({})\t{}\t[{}]", line, cycles.cycles, cycles.lookup, local_sum);
             chunk.push(annotated);
-            local_sum += cycles;
+            local_sum += cycles.cycles;
         } else {
             chunk.push(line.clone());
         }
@@ -142,15 +144,14 @@ mod tests {
     #[test]
     fn test_basic_accumulation() {
         let lines = vec![
-            "MOVE.W A1,A2 ; 2 cycles".to_string(),
-            "ADD #2,D3 ; 4 cycles".to_string(),
+            "MOVE.W A1,A2 ; (2) cycles".to_string(),
+            "ADD #2,D3 ; (4) cycles".to_string(),
         ];
-        let regex = Regex::new(r"(\d+) cycles").unwrap();
-        let (chunk, next_index, accumulated) = accumulate_chunk(&lines, 0, 6, 0, &regex);
+        let (chunk, next_index, accumulated) = accumulate_chunk(&lines, 0, 6, 0);
 
         assert_eq!(chunk.len(), 2);
-        assert!(chunk[0].contains("; 2 cycles"));
-        assert!(chunk[1].contains("; 4 cycles"));
+        assert!(chunk[0].contains("; (2) cycles"));
+        assert!(chunk[1].contains("; (4) cycles"));
         assert_eq!(next_index, 2);
         assert_eq!(accumulated, 6);
     }
@@ -160,15 +161,14 @@ mod tests {
         let lines = vec![
             "; This is a comment".to_string(),
             "     ".to_string(),
-            "ADD #2,D3 ; 4 cycles".to_string(),
+            "ADD #2,D3 ; (4) cycles".to_string(),
         ];
-        let regex = Regex::new(r"(\d+) cycles").unwrap();
-        let (chunk, next_index, accumulated) = accumulate_chunk(&lines, 0, 4, 0, &regex);
+        let (chunk, next_index, accumulated) = accumulate_chunk(&lines, 0, 4, 0);
 
         assert_eq!(chunk.len(), 3);
         assert_eq!(chunk[0], "; This is a comment");
         assert!(chunk[1].trim().is_empty());
-        assert!(chunk[2].contains("; 4 cycles"));
+        assert!(chunk[2].contains("; (4) cycles"));
         assert_eq!(next_index, 3);
         assert_eq!(accumulated, 4);
     }
@@ -176,11 +176,10 @@ mod tests {
     #[test]
     fn test_padding_with_nops() {
         let lines = vec![
-            "MOVE.W A1,A2 ; 2 cycles".to_string(),
-            "ADD #2,D3 ; 4 cycles".to_string(),
+            "MOVE.W A1,A2 ; (2) cycles".to_string(),
+            "ADD #2,D3 ; (4) cycles".to_string(),
         ];
-        let regex = Regex::new(r"(\d+) cycles").unwrap();
-        let (chunk, next_index, accumulated) = accumulate_chunk(&lines, 0, 14, 0, &regex);
+        let (chunk, next_index, accumulated) = accumulate_chunk(&lines, 0, 14, 0);
 
         assert!(chunk.iter().any(|line| line.contains("nop\t; 4 cycles")));
         assert_eq!(next_index, 2);
@@ -190,11 +189,10 @@ mod tests {
     #[test]
     fn test_overflow_handling() {
         let lines = vec![
-            "MOVE.W A1,A2 ; 2 cycles".to_string(),
-            "ADD #2,D3 ; 6 cycles".to_string(),
+            "MOVE.W A1,A2 ; (2) cycles".to_string(),
+            "ADD #2,D3 ; (6) cycles".to_string(),
         ];
-        let regex = Regex::new(r"(\d+) cycles").unwrap();
-        let (chunk, next_index, accumulated) = accumulate_chunk(&lines, 0, 6, 0, &regex);
+        let (chunk, next_index, accumulated) = accumulate_chunk(&lines, 0, 6, 0);
 
         assert!(chunk.iter().any(|line| line.contains("MOVE.W A1,A2")));
         assert!(!chunk.iter().any(|line| line.contains("ADD #2,D3")));
@@ -205,10 +203,9 @@ mod tests {
     #[test]
     fn test_mismatch_warning() {
         let lines = vec![
-            "MOVE.W A1,A2 ; 2 cycles".to_string(),
+            "MOVE.W A1,A2 ; (2) cycles".to_string(),
         ];
-        let regex = Regex::new(r"(\d+) cycles").unwrap();
-        let (chunk, next_index, accumulated) = accumulate_chunk(&lines, 0, 10, 0, &regex);
+        let (chunk, next_index, accumulated) = accumulate_chunk(&lines, 0, 10, 0);
 
         assert!(chunk.iter().any(|line| line.contains("nop\t; 4 cycles")));
         assert_eq!(next_index, 1);

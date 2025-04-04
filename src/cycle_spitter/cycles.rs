@@ -122,35 +122,58 @@ static CYCLES_MAP: Lazy<HashMap<String, Vec<usize>>> = Lazy::new(|| {
     serde_json::from_str(json_str).expect("Error parsing cycles JSON")
 });
 
-pub fn lookup_cycles(line: &str) -> usize {
+pub struct CycleCount {
+    pub(crate) cycles: usize,
+    pub(crate) lookup: String
+}
+
+pub fn lookup_cycles(line: &str) -> CycleCount {
     let normalized = normalize_line(line);
-    if let Some(cycles) = CYCLES_MAP.get(normalized.as_str()) {
-        cycles[0]
+
+    let result = if let Some(cycles) = CYCLES_MAP.get(normalized.as_str()) {
+        CycleCount {
+            cycles: cycles[0],
+            lookup: normalized
+        }
     } else {
         eprintln!("Warning: No cycle count found for instruction: {}", line);
-        0
-    }
+        CycleCount {
+            cycles: 0,
+            lookup: normalized
+        }
+    };
+    result
 }
 
 pub fn normalize_line(line: &str) -> String {
-    let trimmed = line.trim();
+    let line_without_comment = match line.find(';') {
+        Some(idx) => &line[..idx],
+        None => line,
+    };
+
+    let trimmed = line_without_comment.trim().to_lowercase();
     let mut parts = trimmed.splitn(2, char::is_whitespace);
     let first_token = parts.next().unwrap();
     let operand_part = parts.next().unwrap_or("");
 
-    let first_token = if REG_INSTRUCTION.is_match(first_token) {
-        format!("{}.l", first_token)
-    } else {
-        let result = REG_BCC.replace_all(first_token, |caps: &regex::Captures| {
-            // Get the trailing character if it exists (could be whitespace or punctuation)
+    let first_token = {
+        if REG_INSTRUCTION.is_match(first_token) {
+            // For instructions like "lea" or "moveq", always force a ".l" suffix.
+            format!("{}.l", first_token)
+        } else if let Some(caps) = REG_BCC.captures(first_token) {
+            // Handle branch conditions.
             let trailing = caps.get(3).map_or("", |m| m.as_str());
             if caps.get(2).is_some() {
-                format!("{}{}{}", &caps[1].to_string(), ".b", trailing)
+                format!("{}{}{}", &caps[1], ".b", trailing)
             } else {
                 format!("{}{}{}", &caps[1], ".w", trailing)
             }
-        });
-        result.to_string()
+        } else if !first_token.contains('.') {
+            // If no suffix is found, default to ".w"
+            format!("{}.w", first_token)
+        } else {
+            first_token.to_string()
+        }
     };
 
     let mut operands = operand_part.to_string();
@@ -189,7 +212,25 @@ pub fn normalize_line(line: &str) -> String {
     }).into_owned();
     // f. Collapse multiple spaces.
     operands = REG_SPACES.replace_all(&operands, " ").into_owned();
-    let operands = operands.trim();
+    let mut operands = operands.trim().to_owned();
+    operands = if operands.contains('$') {
+        // Use a non-capturing group for the '$'
+        let re = Regex::new(r"\$(\w+)(\.w)?([,;\n\t])?").unwrap();
+        let result = re.replace_all(&operands, |caps: &regex::Captures| {
+            // Capture any punctuation (if present).
+            let punctuation = caps.get(3).map_or("", |m| m.as_str());
+            // If group 2 (".w") is present, use "xxx.w", else use "xxx.l".
+            if caps.get(2).is_some() {
+                format!("xxx.w{}", punctuation)
+            } else {
+                format!("xxx.l{}", punctuation)
+            }
+        });
+        result.into_owned()
+    } else {
+        operands.to_string()
+    };
+
 
     if operands.is_empty() {
         first_token
@@ -207,7 +248,7 @@ mod tests {
     fn test_lookup_cycles_valid_instruction() {
         let line = "moveq #16,d0";
         let cycles = lookup_cycles(line);
-        assert!(cycles > 0, "Valid instruction should return a positive cycle count.");
+        assert!(cycles.cycles > 0, "Valid instruction should return a positive cycle count.");
     }
 
     /// Test that `lookup_cycles` returns 0 for unknown instructions.
@@ -215,7 +256,7 @@ mod tests {
     fn test_lookup_cycles_unknown_instruction() {
         let line = "unknown_op #42,d1";
         let cycles = lookup_cycles(line);
-        assert_eq!(cycles, 0, "Unknown instructions should return 0 cycles.");
+        assert_eq!(cycles.cycles, 0, "Unknown instructions should return 0 cycles.");
     }
 
     /// Test that `lookup_cycles` handles instructions with normalized cases.
@@ -224,20 +265,63 @@ mod tests {
         let line = " moveq #12,d2  "; // Misformatted but equivalent to "moveq #12,d2"
         let normalized_line = normalize_line(line);
         assert_eq!(normalized_line, "moveq.l #xxx,dn");
+
+        let line = " add #12,d2  "; // Misformatted but equivalent to "add.w #12,d2"
+        let normalized_line = normalize_line(line);
+        assert_eq!(normalized_line, "add.w #xxx,dn");
+
+        let line = " moveq #12,D2";
+        let normalized_line = normalize_line(line);
+        assert_eq!(normalized_line, "moveq.l #xxx,dn");
+
+        let line = " MOVE.W A1,A2";
+        let normalized_line = normalize_line(line);
+        assert_eq!(normalized_line, "move.w an,an");
+
     }
 
     /// Test normalization of valid lines.
     #[test]
     fn test_normalize_line_valid_cases() {
         assert_eq!(
-            normalize_line("moveq #16,d0"),
-            "moveq.l #xxx,dn",
-            "Expected `moveq` to be normalized correctly."
+            normalize_line("move.l d0,a1"),
+            "move.l dn,an",
+            "Expected `move.l` instruction with displacement to normalize correctly."
         );
         assert_eq!(
-            normalize_line("lea 100(a0),a1"),
-            "lea.l d(an),an",
-            "Expected `lea` instruction with displacement to normalize correctly."
+            normalize_line("lea $ffff8240.w,a0"),
+            "lea.l xxx.w,an",
+            "Expected `lea` instruction with absolute.w to normalize correctly."
+        );
+        assert_eq!(
+            normalize_line("lea $ffff8240,a0"),
+            "lea.l xxx.l,an",
+            "Expected `lea` instruction with absolute.l to normalize correctly."
+        );
+        assert_eq!(
+            normalize_line("move.w $ffff8240.w,d0"),
+            "move.w xxx.w,dn",
+            "Expected `move.w` instruction with absolute.w to normalize correctly."
+        );
+        assert_eq!(
+            normalize_line("move.w d0,$ffff8240.w"),
+            "move.w dn,xxx.w",
+            "Expected `move.w` instruction with absolute.w to normalize correctly."
+        );
+        assert_eq!(
+            normalize_line("move.w $ffff8240,d0"),
+            "move.w xxx.l,dn",
+            "Expected `move.w` instruction with absolute to normalize correctly."
+        );
+        assert_eq!(
+            normalize_line("move.w d0,$ffff8240"),
+            "move.w dn,xxx.l",
+            "Expected `move.w` instruction with absolute to normalize correctly."
+        );
+        assert_eq!(
+            normalize_line("move.b	d7,$ffff8260.w			;"),
+            "move.b dn,xxx.w",
+            "Expected `move.w` instruction with absolute to normalize correctly."
         );
         assert_eq!(
             normalize_line("bne.s label.w"),
@@ -270,8 +354,8 @@ mod tests {
     /// Test normalization of displacement addressing.
     #[test]
     fn test_normalize_displacement_addressing() {
-        let line = "moveq.l 100(sp),a1";
-        let expected = "moveq.l d(an),an"; // since sp internally resolves into a7 = an
+        let line = "lea 100(sp),a1";
+        let expected = "lea.l d(an),an"; // since sp internally resolves into a7 = an
         assert_eq!(
             normalize_line(line),
             expected,
