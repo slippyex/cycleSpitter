@@ -4,6 +4,7 @@ use regex::Regex;
 use std::error::Error;
 use crate::cycle_spitter::helpers::extract_cycle_count;
 use crate::cycle_spitter::helpers::format_template_instruction;
+use once_cell::sync::Lazy;
 
 /// Represents a section of a parsed template.
 /// Each section contains:
@@ -17,6 +18,18 @@ pub struct TemplateSection {
     pub nop_cycles: usize,
     pub label: String,
 }
+
+static NOP_RE: Lazy<Regex> = Lazy::new(|| {
+    Regex::new(r"dcb\.w\s*(\d+),\s*\$4e71").unwrap()
+});
+
+static COMMENT_RE: Lazy<Regex> = Lazy::new(|| {
+    Regex::new(r";\s*(.*)").unwrap()
+});
+
+static PAREN_NUM_RE: Lazy<Regex> = Lazy::new(|| {
+    Regex::new(r"\(\s*\d+\s*\)").unwrap()
+});
 
 /// Parses the given template content into a vector of `TemplateSection` objects.
 ///
@@ -70,13 +83,11 @@ pub struct TemplateSection {
 /// - If the `Regex` cannot be compiled or fails to capture required groups.
 /// - If parsing a numeric value (e.g., cycle count) from captured groups fails.
 pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Box<dyn Error>> {
-    let mut sections = Vec::new();
-    let nop_re = Regex::new(r"dcb\.w\s*(\d+),\s*\$4e71")?;
-    let comment_re = Regex::new(r";\s*(.*)")?;
-    let paren_num_re = Regex::new(r"\(\s*\d+\s*\)")?;
-
-    let mut current_code = Vec::new();
-    let mut current_label = String::new();
+    // Pre-allocate vectors based on estimated size
+    let line_count = template_content.lines().count();
+    let mut sections = Vec::with_capacity(line_count / 4); // Rough estimate: one section per 4 lines
+    let mut current_code = Vec::with_capacity(4); // Most sections have a few instructions
+    let mut current_label = String::with_capacity(32); // Reasonable size for labels
 
     for line in template_content.lines() {
         let trimmed = line.trim();
@@ -84,7 +95,19 @@ pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Bo
             continue;
         }
 
-        if let Some(caps) = nop_re.captures(trimmed) {
+        // Handle set lines first, before any cycle extraction
+        if trimmed.contains(" set ") {
+            if current_label.is_empty() {
+                current_label = COMMENT_RE.captures(trimmed)
+                    .and_then(|c| c.get(1))
+                    .map(|m| m.as_str().to_string())
+                    .unwrap_or_else(|| format!("Section {}", sections.len() + 1));
+            }
+            current_code.push((trimmed.to_string(), 0));
+            continue;
+        }
+
+        if let Some(caps) = NOP_RE.captures(trimmed) {
             let count = caps.get(1).unwrap().as_str().parse::<usize>()?;
             let cycles = count * 4;
 
@@ -94,8 +117,8 @@ pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Bo
                     nop_cycles: cycles,
                     label: current_label,
                 });
-                current_code = Vec::new();
-                current_label = String::new();
+                current_code = Vec::with_capacity(4);
+                current_label = String::with_capacity(32);
             }
             continue;
         }
@@ -105,20 +128,23 @@ pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Bo
             l.trim().starts_with(";") ||
                 l.contains("dcb.w") ||
                 l.contains(" equ ") ||
-                l.contains(" set ") ||
-                paren_num_re.is_match(l)
+                PAREN_NUM_RE.is_match(l)
         };
 
         if let Some(cycle_count) = extract_cycle_count(trimmed, skip_predicate) {
             if current_label.is_empty() {
-                current_label = comment_re.captures(trimmed)
+                current_label = COMMENT_RE.captures(trimmed)
                     .and_then(|c| c.get(1))
                     .map(|m| m.as_str().to_string())
                     .unwrap_or_else(|| format!("Section {}", sections.len() + 1));
             }
 
-            let commented_output = format_template_instruction(trimmed, &cycle_count.lookup, cycle_count.cycles);
-            current_code.push((commented_output, cycle_count.cycles));
+            let commented_output = format_template_instruction(
+                trimmed,
+                &cycle_count.lookup,
+                &cycle_count.cycles
+            );
+            current_code.push((commented_output, cycle_count.cycles[0]));
         } else {
             continue;
         }

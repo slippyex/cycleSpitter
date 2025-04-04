@@ -38,7 +38,7 @@
 //!
 //! let line = " moveq #16,d0";
 //! let cycles = lookup_cycles(line);
-//! println!("Instruction: {}, Cycles: {}", line, cycles);
+//! println!("Instruction: {}, Cycles: {}", line, cycles.cycles.join(", "));
 //! ```
 
 // Detailed Descriptions of Individual Components
@@ -66,11 +66,11 @@
 //! - **Parameters**:
 //!   - `line`: A `&str` containing the full assembly instruction line.
 //! - **Returns**:
-//!   - A `usize` representing the number of cycles required for the given instruction.
+//!   - A `CycleCount` struct containing a `Vec<usize>` representing the cycle counts for the given instruction and a `String` representing the normalized instruction.
 //! - **Behavior**:
 //!   - Normalizes the input instruction using `normalize_line`.
 //!   - Performs a lookup in the `CYCLES_MAP`.
-//!   - If a match is not found, issues a warning on `stderr` and returns `0`.
+//!   - If a match is not found, issues a warning on `stderr` and returns a `CycleCount` with a single zero cycle count.
 //!
 //! ### `normalize_line` Function
 //! Standardizes an instruction line into a format suitable for efficient database lookup.
@@ -178,7 +178,7 @@ static CYCLES_MAP: Lazy<HashMap<String, Vec<usize>>> = Lazy::new(|| {
 });
 
 pub struct CycleCount {
-    pub cycles: usize,
+    pub cycles: Vec<usize>,  // Vector of cycle counts (e.g. for branch taken/not-taken)
     pub lookup: String
 }
 
@@ -187,13 +187,13 @@ pub fn lookup_cycles(line: &str) -> CycleCount {
 
     let result = if let Some(cycles) = CYCLES_MAP.get(normalized.as_str()) {
         CycleCount {
-            cycles: cycles[0],
+            cycles: cycles.clone(),  // Keep all cycle values
             lookup: normalized
         }
     } else {
         eprintln!("Warning: No cycle count found for instruction: {}", line);
         CycleCount {
-            cycles: 0,
+            cycles: vec![0],  // Default to single zero for unknown instructions
             lookup: normalized
         }
     };
@@ -308,7 +308,7 @@ mod tests {
     fn test_lookup_cycles_valid_instruction() {
         let line = "moveq #16,d0";
         let cycles = lookup_cycles(line);
-        assert!(cycles.cycles > 0, "Valid instruction should return a positive cycle count.");
+        assert!(!cycles.cycles.is_empty(), "Valid instruction should return a non-empty cycle count.");
     }
 
     /// Test that `lookup_cycles` returns 0 for unknown instructions.
@@ -316,7 +316,7 @@ mod tests {
     fn test_lookup_cycles_unknown_instruction() {
         let line = "unknown_op #42,d1";
         let cycles = lookup_cycles(line);
-        assert_eq!(cycles.cycles, 0, "Unknown instructions should return 0 cycles.");
+        assert_eq!(cycles.cycles, vec![0], "Unknown instructions should return a single zero cycle count.");
     }
 
     /// Test that `lookup_cycles` handles instructions with normalized cases.

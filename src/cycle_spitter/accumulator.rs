@@ -75,8 +75,12 @@ pub fn accumulate_chunk(
     initial_offset: usize,
 ) -> (Vec<String>, usize, usize) {
     let mut local_sum = initial_offset;
-    let mut chunk = Vec::new();
+    // Pre-allocate chunk vector based on estimated size
+    // Assuming average instruction takes 4 cycles, allocate target/4 + some padding for comments
+    let estimated_size = (target / 4) + 10;
+    let mut chunk = Vec::with_capacity(estimated_size);
     let mut i = start_index;
+
     while i < lines.len() && (local_sum - initial_offset) < target {
         let line = &lines[i];
         if line.trim().is_empty() || line.trim().starts_with(";") {
@@ -85,12 +89,22 @@ pub fn accumulate_chunk(
             continue;
         }
 
+        // Handle set lines first, before any cycle extraction
+        if line.contains(" set ") {
+            chunk.push(line.clone());
+            i += 1;
+            continue;
+        }
+
         // Define a predicate for accumulator-specific lines.
-        let skip_predicate = |l: &str| l.trim().starts_with(";") || l.contains(" equ ") || l.contains(" set ");
+        let skip_predicate = |l: &str| l.trim().starts_with(";") || l.contains(" equ ");
         let cycle_option = extract_cycle_count(line, skip_predicate);
 
         if let Some(cycles) = cycle_option {
-            if (local_sum - initial_offset) + cycles.cycles > target {
+            // For branches with multiple cycle counts, use the not-taken (first) value for basic accounting
+            let base_cycles = cycles.cycles[0];
+            
+            if (local_sum - initial_offset) + base_cycles > target {
                 let diff = target - (local_sum - initial_offset);
                 let num_nop = diff / 4; // each NOP is 4 cycles
                 for _ in 0..num_nop {
@@ -100,24 +114,28 @@ pub fn accumulate_chunk(
                 }
                 break;
             }
-            let annotated = format_accumulated_instruction(line, &cycles.lookup, cycles.cycles, local_sum);
+            let annotated = format_accumulated_instruction(line, &cycles.lookup, &cycles.cycles, local_sum);
             chunk.push(annotated);
-            local_sum += cycles.cycles;
+            local_sum += base_cycles;
         } else {
             i += 1;
             continue;
         }
         i += 1;
     }
+
     if (local_sum - initial_offset) < target {
         let diff = target - (local_sum - initial_offset);
         let num_nop = diff / 4;
+        // Pre-extend the vector for the remaining NOPs
+        chunk.reserve(num_nop);
         for _ in 0..num_nop {
             let nop_line = format!("nop\t; 4 cycles\t[{}]", local_sum);
             chunk.push(nop_line);
             local_sum += 4;
         }
     }
+
     if (local_sum - initial_offset) != target {
         eprintln!(
             "Warning: Accumulated cycles {} do not equal target {} starting at index {}.",

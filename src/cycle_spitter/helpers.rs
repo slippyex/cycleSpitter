@@ -20,10 +20,10 @@ where
 {
     if let Some(cap) = REG_NUMBER_RE.captures(line) {
         Some(CycleCount {
-            cycles: cap
+            cycles: vec![cap
                 .get(1)
                 .map(|m| m.as_str().parse::<usize>().unwrap_or(0))
-                .unwrap_or(0),
+                .unwrap_or(0)],
             lookup: String::from("n/a"),
         })
     } else if should_skip(line) {
@@ -35,15 +35,56 @@ where
 
 /// Formats an instruction line for the template module.
 /// If the line already contains a semicolon, it uses one style; otherwise, it inserts a tab and semicolon.
-pub fn format_template_instruction(line: &str, lookup: &str, cycles: usize) -> String {
-    if line.contains(";") {
-        format!("{} {} [{}]", line, lookup, cycles)
+pub fn format_template_instruction(line: &str, lookup: &str, cycles: &[usize]) -> String {
+    // Pre-calculate capacity to avoid reallocations
+    let cycles_str = if cycles.len() > 1 {
+        format!("{}/{}", cycles[0], cycles[1]) // Format as "not-taken/taken" for branches
     } else {
-        format!("{}\t; {} [{}]", line, lookup, cycles)
+        cycles[0].to_string()
+    };
+
+    let mut result = String::with_capacity(
+        line.len() + lookup.len() + cycles_str.len() + 10 // +10 for formatting chars
+    );
+
+    if line.contains(";") {
+        result.push_str(line);
+        result.push(' ');
+        result.push_str(lookup);
+        result.push_str(" [");
+        result.push_str(&cycles_str);
+        result.push(']');
+    } else {
+        result.push_str(line);
+        result.push_str("\t; ");
+        result.push_str(lookup);
+        result.push_str(" [");
+        result.push_str(&cycles_str);
+        result.push(']');
     }
+    result
 }
 
 /// Formats an instruction line for the accumulator module, including a given offset.
-pub fn format_accumulated_instruction(line: &str, lookup: &str, cycles: usize, offset: usize) -> String {
-    format!("{}\t;\t({})\t{}\t[{}]", line, cycles, lookup, offset)
+pub fn format_accumulated_instruction(line: &str, lookup: &str, cycles: &[usize], offset: usize) -> String {
+    // Pre-calculate capacity to avoid reallocations
+    let cycles_str = if cycles.len() > 1 {
+        format!("{}/{}", cycles[0], cycles[1]) // Format as "not-taken/taken" for branches
+    } else {
+        cycles[0].to_string()
+    };
+
+    let mut result = String::with_capacity(
+        line.len() + lookup.len() + cycles_str.len() + offset.to_string().len() + 10
+    );
+
+    result.push_str(line);
+    result.push_str("\t;\t(");
+    result.push_str(&cycles_str);
+    result.push_str(")\t");
+    result.push_str(lookup);
+    result.push_str("\t[");
+    result.push_str(&offset.to_string());
+    result.push(']');
+    result
 }
