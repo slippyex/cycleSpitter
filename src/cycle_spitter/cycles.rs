@@ -91,29 +91,68 @@ use serde_json;
 use regex::Regex;
 
 static REG_DISPLACEMENT: Lazy<Regex> = Lazy::new(|| {
+    // Matches an operand in the format: `<displacement>(<address_register>)`
+    // Example matches: `12(a0)`, `-4(sp)`
+    // - `[^\s,()]+`: Matches a series of characters that are not whitespace, commas, or parentheses
+    // - `\(a[0-7]|sp\)`: Matches an address register (`a0`-`a7`) or the stack pointer (`sp`) inside parentheses
     Regex::new(r"([^\s,()]+)\((a[0-7]|sp)\)").unwrap()
 });
+
 static REG_INSTRUCTION: Lazy<Regex> = Lazy::new(|| {
+    // Matches specific instructions: `lea` or `moveq` at the start of a line
+    // Example matches: `lea`, `moveq`
+    // - `^`: Asserts that the match occurs at the beginning of the string
+    // - `(lea|moveq)`: Matches either `lea` or `moveq`
     Regex::new(r"^(lea|moveq)$").unwrap()
 });
+
 static REG_IMMEDIATE: Lazy<Regex> = Lazy::new(|| {
+    // Matches immediate values prefixed with `#`
+    // Example matches: `#123`, `#-45`
+    // - `#[^,\s]+`: Matches a `#` followed by a series of characters that are not commas or whitespace
     Regex::new(r"(#[^,\s]+)").unwrap()
 });
+
 static REG_DATA: Lazy<Regex> = Lazy::new(|| {
+    // Matches data registers `d0` through `d7`
+    // Example matches: `d0`, `d7`
+    // - `\b`: Asserts a word boundary to ensure precise matching
+    // - `d[0-7]`: Matches `d` followed by a single digit from 0 to 7
     Regex::new(r"\bd[0-7]\b").unwrap()
 });
+
 static REG_ADDR: Lazy<Regex> = Lazy::new(|| {
+    // Matches address registers `a0` through `a7` or the stack pointer `sp`
+    // Example matches: `a0`, `a7`, `sp`
+    // - `\b`: Asserts a word boundary to ensure precise matching
+    // - `(a[0-7]|sp)`: Matches `a` followed by a digit from 0 to 7, or `sp`
     Regex::new(r"\b(a[0-7]|sp)\b").unwrap()
 });
+
 static REG_ABS_ADDRESS: Lazy<Regex> = Lazy::new(|| {
+    // Matches absolute addresses, optionally followed by a `.l` or `.w` suffix
+    // Example matches: `label`, `label.l`, `label.w`
+    // - `(?P<before>^|[ \t,(\[])`: Matches the start of the string or a space, tab, comma, parenthesis, or square bracket
+    // - `(?P<token>[a-zA-Z_][a-zA-Z0-9_]*)`: Matches an identifier (starts with a letter/underscore, followed by letters, digits, or underscores)
+    // - `(?P<suffix>\.[lw])?`: Optionally matches a `.l` or `.w` suffix
     Regex::new(
         r"(?P<before>^|[ \t,(\[])(?P<token>[a-zA-Z_][a-zA-Z0-9_]*)(?P<suffix>\.[lw])?\b"
     ).unwrap()
 });
+
 static REG_SPACES: Lazy<Regex> = Lazy::new(|| {
+    // Matches one or more spaces or tabs
+    // Example matches: ` `, `\t`, `    `
+    // - `[ \t]+`: Matches one or more occurrences of a space or tab character
     Regex::new(r"[ \t]+").unwrap()
 });
+
 static REG_BCC: Lazy<Regex> = Lazy::new(|| {
+    // Matches branch instructions beginning with `b` (e.g., `bra`, `beq`) and optionally ending with `.s`
+    // Example matches: `bne`, `bra.s`
+    // - `^`: Asserts that the match occurs at the beginning of the string
+    // - `(b[A-Za-z]{2})`: Matches `b` followed by any two letters
+    // - `(\.s)?`: Optionally matches a `.s` suffix
     Regex::new(r"^(b[A-Za-z]{2})(\.s)?").unwrap()
 });
 
@@ -123,8 +162,8 @@ static CYCLES_MAP: Lazy<HashMap<String, Vec<usize>>> = Lazy::new(|| {
 });
 
 pub struct CycleCount {
-    pub(crate) cycles: usize,
-    pub(crate) lookup: String
+    pub cycles: usize,
+    pub lookup: String
 }
 
 pub fn lookup_cycles(line: &str) -> CycleCount {
@@ -151,7 +190,14 @@ pub fn normalize_line(line: &str) -> String {
         None => line,
     };
 
-    let trimmed = line_without_comment.trim().to_lowercase();
+    // Remove leading label like `my_label:` if present
+    let line_without_label = Regex::new(r"^\s*[a-zA-Z_][a-zA-Z0-9_]*:\s*")
+        .unwrap()
+        .replace(line_without_comment, "")
+        .to_string();
+
+    let trimmed = line_without_label.trim().to_lowercase();
+
     let mut parts = trimmed.splitn(2, char::is_whitespace);
     let first_token = parts.next().unwrap();
     let operand_part = parts.next().unwrap_or("");
@@ -402,6 +448,18 @@ mod tests {
         let line = "moveq #16";
         let result = normalize_line(line);
         assert!(!result.is_empty(), "Malformed input should result in a non-empty result.");
+    }
+
+    /// Test an instruction with a label
+    #[test]
+    fn test_normalize_with_label_input() {
+        let line = "my_label:\tmoveq #16,d1";
+        let expected = "moveq.l #xxx,dn";
+        assert_eq!(
+            normalize_line(line),
+            expected,
+            "Absolute addressing should be normalized to `xxx.l`."
+        );
     }
 
     /// Test that whitespace is handled correctly.

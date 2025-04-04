@@ -1,6 +1,58 @@
 // src/main.rs
 mod cycle_spitter;
-
+/// Main program for the "cycleSpitter" generation tool.
+///
+/// This program reads a source 68000 assembly file, processes its content to split it
+/// into scanlines of a defined cycle length, and outputs the generated result
+/// with annotations and structure based on a provided template file.
+///
+/// Key functionalities:
+/// 1. **Input Parsing and Validation**:
+///    - Reads the input assembly file, output scanlines label, and template file.
+///    - Defaults to using "sample.s", "SCANLINES_CONSUMED", and "template.s" if
+///      no input arguments are provided.
+/// 2. **Template Parsing**:
+///    - Processes the predefined template file to organize the layout of injected
+///      code for each scanline, handling sections and nop cycles.
+/// 3. **Assembly File Processing**:
+///    - Reads the input assembly file line by line, trims it, and preprocesses it
+///      into a flat structure for easier processing (via `process_block`).
+///    - Breaks the input into chunks that fit into scanlines of `SCANLINE_CYCLES`
+///      cycles, inserting padding and annotations when necessary.
+/// 4. **Output Generation**:
+///    - Assembles the final output lines based on the parsed template and scanline
+///      processing.
+///    - Adds metadata, including the total number of scanlines, template used, and
+///      the specific padding details for scanline alignment.
+///    - Outputs the processed and annotated result in an assembly-compatible format.
+///
+/// ### Constants:
+/// - `SCANLINE_CYCLES`: Defines the number of cycles a single scanline should consist of (512 by default).
+///
+/// ### Command-line Arguments:
+/// - `[1]`: Path to the input source file (default: "sample.s").
+/// - `[2]`: The label for the total scanlines summary (default: "SCANLINES_CONSUMED").
+/// - `[3]`: Path to the template file for code layout (default: "template.s").
+///
+/// ### Example Usage:
+/// ```sh
+/// $ ./cycle_spitter input.s SCANLINES_OUTPUT template.s
+/// ```
+///
+/// ### Output Notes:
+/// - Outputs generated assembly with annotations for padding and cycle calculations.
+/// - Total cycles per scanline and issues like overflow are highlighted for debugging.
+///
+/// ### Error Handling:
+/// - Gracefully handles file I/O errors and invalid or missing templates.
+/// - Warns if a scanline exceeds the defined cycle limit.
+///
+/// The program is modularized into different components:
+/// - `accumulate_chunk`: Handles grouping of assembly lines into cycle-aligned chunks.
+/// - `process_block`: Flattens and preprocesses the input structure.
+/// - `parse_template`: Reads and interprets the injection template sections.
+///
+/// Author: slippy / vectronix (c) 2025
 use std::env;
 use std::fs;
 use crate::cycle_spitter::accumulator::accumulate_chunk;
@@ -15,10 +67,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let filename = if args.len() > 1 { &args[1] } else { "sample.s" };
     let scanlines_label = if args.len() > 2 { &args[2] } else { "SCANLINES_CONSUMED" };
     let template_file = if args.len() > 3 { &args[3] } else { "template.s" };
-
-    // Compile regex used in multiple modules.
-//    let number_re = Regex::new(r"\(\s*(\d+)\s*\)")?;
-
 
     // Parse the template.
     let template_content = fs::read_to_string(template_file)?;
