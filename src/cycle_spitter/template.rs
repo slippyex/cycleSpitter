@@ -2,8 +2,8 @@
 
 use regex::Regex;
 use std::error::Error;
-use crate::cycle_spitter::cycles::{lookup_cycles, CycleCount};
-use crate::cycle_spitter::regexes::REG_NUMBER_RE;
+use crate::cycle_spitter::cycle_helpers::extract_cycle_count;
+use crate::cycle_spitter::format_helpers::format_template_instruction;
 
 /// Represents a section of a parsed template.
 /// Each section contains:
@@ -22,7 +22,6 @@ pub struct TemplateSection {
 ///
 /// # Arguments
 /// - `template_content`: A string slice containing the content of the template to parse.
-/// - `number_re`: A precompiled `Regex` pattern to extract cycle counts directly from individual lines.
 ///
 /// # Returns
 /// A `Result` containing:
@@ -60,8 +59,7 @@ pub struct TemplateSection {
 ///     move.w #$1234, D0 ; Move instruction
 ///     dcb.w 3, $4e71
 /// "#;
-/// let re = Regex::new(r"move\.w\s*#\$([0-9a-fA-F]+)")?;
-/// let sections = parse_template(content, &re)?;
+/// let sections = parse_template(content)?;
 /// for section in sections {
 ///     println!("{:?}", section);
 /// }
@@ -75,7 +73,6 @@ pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Bo
     let mut sections = Vec::new();
     let nop_re = Regex::new(r"dcb\.w\s*(\d+),\s*\$4e71")?;
     let comment_re = Regex::new(r";\s*(.*)")?;
-    // This regex finds a numeric value within parentheses (e.g. "(123)")
     let paren_num_re = Regex::new(r"\(\s*\d+\s*\)")?;
 
     let mut current_code = Vec::new();
@@ -103,45 +100,28 @@ pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Bo
             continue;
         }
 
-        // Try to get cycles from number_re first
-        let cycles = if let Some(cap) = REG_NUMBER_RE.captures(trimmed) {
-            CycleCount {
-                cycles: cap.get(1).map(|m| m.as_str().parse::<usize>().unwrap_or(0)).unwrap_or(0),
-                lookup: String::from("n/a")
-            }
-        } else {
-            // Exclude lines that:
-            // - Start with a comment
-            // - Contain "dcb.w"
-            // - Contain " equ " or " set "
-            if trimmed.starts_with(";") || trimmed.contains("dcb.w") ||
-                (trimmed.contains(" equ ") || trimmed.contains(" set ")) {
-                continue;
-            }
-            // If the line has a numeric value in parentheses, skip lookup_cycles
-            if paren_num_re.is_match(trimmed) {
-                continue;
-            }
-            // Otherwise, use lookup_cycles to determine cycles
-            lookup_cycles(trimmed)
+        // Define a predicate for template-specific lines.
+        let skip_predicate = |l: &str| {
+            l.trim().starts_with(";") ||
+                l.contains("dcb.w") ||
+                l.contains(" equ ") ||
+                l.contains(" set ") ||
+                paren_num_re.is_match(l)
         };
 
-        // Set the label if not already set using inline comment (if available)
-        if current_label.is_empty() {
-            current_label = comment_re.captures(trimmed)
-                .and_then(|c| c.get(1))
-                .map(|m| m.as_str().to_string())
-                .unwrap_or_else(|| format!("Section {}", sections.len() + 1));
+        if let Some(cycle_count) = extract_cycle_count(trimmed, skip_predicate) {
+            if current_label.is_empty() {
+                current_label = comment_re.captures(trimmed)
+                    .and_then(|c| c.get(1))
+                    .map(|m| m.as_str().to_string())
+                    .unwrap_or_else(|| format!("Section {}", sections.len() + 1));
+            }
+
+            let commented_output = format_template_instruction(trimmed, &cycle_count.lookup, cycle_count.cycles);
+            current_code.push((commented_output, cycle_count.cycles));
+        } else {
+            continue;
         }
-
-        let output = trimmed.to_string();
-        let commented_output = if output.contains(";") {
-            format!("{} {} [{}]", trimmed.to_string(), cycles.lookup, cycles.cycles)
-        } else {
-            format!("{}\t; {} [{}]", trimmed.to_string(), cycles.lookup, cycles.cycles)
-        };
-
-        current_code.push((commented_output, cycles.cycles));
     }
 
     if !current_code.is_empty() {

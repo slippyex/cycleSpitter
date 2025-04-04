@@ -156,6 +156,22 @@ static REG_BCC: Lazy<Regex> = Lazy::new(|| {
     Regex::new(r"^(b[A-Za-z]{2})(\.s)?").unwrap()
 });
 
+static REG_LABEL_CHECK: Lazy<Regex> = Lazy::new(|| {
+    // This regex checks for a valid label in assembly-like syntax.
+    // A valid label starts with optional whitespace, followed by an alphabetic character or '_',
+    // which can then be followed by alphanumeric characters or '_'. Finally, it must end with a colon ':'.
+    // Example matches: "label:", "  my_label:", "test123:"
+    Regex::new(r"^\s|\.*[a-zA-Z_][a-zA-Z0-9_]*:\s*").unwrap()
+});
+
+static REG_DOLLAR_CHECK: Lazy<Regex> = Lazy::new(|| {
+    // This regex checks for variables or symbols prefixed with a dollar sign '$'.
+    // The dollar sign is followed by one or more word characters (\w), optionally followed by '.w'.
+    // It may optionally end with one of the characters ',', ';', '\n', or '\t'.
+    // Example matches: "$var,", "$symbol;", "$abc.w", "$test\n"
+    Regex::new(r"\$(\w+)(\.w)?([,;\n\t])?").unwrap()
+});
+
 static CYCLES_MAP: Lazy<HashMap<String, Vec<usize>>> = Lazy::new(|| {
     let json_str = include_str!("db/cycles.json");
     serde_json::from_str(json_str).expect("Error parsing cycles JSON")
@@ -191,8 +207,7 @@ pub fn normalize_line(line: &str) -> String {
     };
 
     // Remove leading label like `my_label:` if present
-    let line_without_label = Regex::new(r"^\s*[a-zA-Z_][a-zA-Z0-9_]*:\s*")
-        .unwrap()
+    let line_without_label = REG_LABEL_CHECK
         .replace(line_without_comment, "")
         .to_string();
 
@@ -261,8 +276,7 @@ pub fn normalize_line(line: &str) -> String {
     let mut operands = operands.trim().to_owned();
     operands = if operands.contains('$') {
         // Use a non-capturing group for the '$'
-        let re = Regex::new(r"\$(\w+)(\.w)?([,;\n\t])?").unwrap();
-        let result = re.replace_all(&operands, |caps: &regex::Captures| {
+        let result = REG_DOLLAR_CHECK.replace_all(&operands, |caps: &regex::Captures| {
             // Capture any punctuation (if present).
             let punctuation = caps.get(3).map_or("", |m| m.as_str());
             // If group 2 (".w") is present, use "xxx.w", else use "xxx.l".
@@ -453,6 +467,14 @@ mod tests {
     /// Test an instruction with a label
     #[test]
     fn test_normalize_with_label_input() {
+        let line = ".my_label:\tmoveq #16,d1";
+        let expected = "moveq.l #xxx,dn";
+        assert_eq!(
+            normalize_line(line),
+            expected,
+            "Absolute addressing should be normalized to `xxx.l`."
+        );
+
         let line = "my_label:\tmoveq #16,d1";
         let expected = "moveq.l #xxx,dn";
         assert_eq!(

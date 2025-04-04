@@ -1,7 +1,7 @@
 // src/cycle_spitter/accumulator.rs
 
-use crate::cycle_spitter::cycles::{lookup_cycles, CycleCount};
-use crate::cycle_spitter::regexes::REG_NUMBER_RE;
+use crate::cycle_spitter::cycle_helpers::extract_cycle_count;
+use crate::cycle_spitter::format_helpers::format_accumulated_instruction;
 
 /// Parses and processes lines of assembly-like code to accumulate a target number of execution cycles,
 /// annotating the lines with cycle information, and adding padding (NOP instructions) if necessary
@@ -84,38 +84,28 @@ pub fn accumulate_chunk(
             i += 1;
             continue;
         }
-        // First try to extract cycle count from comment parentheses.
-        let cycles = if let Some(cap) = REG_NUMBER_RE.captures(line) {
-            CycleCount {
-                cycles: cap.get(1).map(|m| m.as_str().parse::<usize>().unwrap_or(0)).unwrap_or(0),
-                lookup: String::from("n/a")
+
+        // Define a predicate for accumulator-specific lines.
+        let skip_predicate = |l: &str| l.trim().starts_with(";") || l.contains(" equ ") || l.contains(" set ");
+        let cycle_option = extract_cycle_count(line, skip_predicate);
+
+        if let Some(cycles) = cycle_option {
+            if (local_sum - initial_offset) + cycles.cycles > target {
+                let diff = target - (local_sum - initial_offset);
+                let num_nop = diff / 4; // each NOP is 4 cycles
+                for _ in 0..num_nop {
+                    let nop_line = format!("nop\t; 4 cycles\t[{}]", local_sum);
+                    chunk.push(nop_line);
+                    local_sum += 4;
+                }
+                break;
             }
-        } else {
-            if !line.trim().starts_with(";") && !line.contains(" set ") && !line.contains(" equ ") {
-                // Otherwise, use the JSON lookup
-                lookup_cycles(line)
-            } else {
-                i += 1;
-                continue;
-            }
-        };
-        if (local_sum - initial_offset) + cycles.cycles > target {
-            let diff = target - (local_sum - initial_offset);
-            let num_nop = diff / 4; // each NOP is 4 cycles
-            for _ in 0..num_nop {
-                let nop_line = format!("nop\t; 4 cycles\t[{}]", local_sum);
-                chunk.push(nop_line);
-                local_sum += 4;
-            }
-            break;
-        }
-        // If the line contains a cycle count, annotate it with the current offset.
-        if cycles.cycles > 0 {
-            let annotated = format!("{}\t;\t({})\t{}\t[{}]", line, cycles.cycles, cycles.lookup, local_sum);
+            let annotated = format_accumulated_instruction(line, &cycles.lookup, cycles.cycles, local_sum);
             chunk.push(annotated);
             local_sum += cycles.cycles;
         } else {
-            chunk.push(line.clone());
+            i += 1;
+            continue;
         }
         i += 1;
     }
