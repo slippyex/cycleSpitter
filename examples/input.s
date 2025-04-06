@@ -1,6 +1,8 @@
                 lea     charBuffer,a0
                 lea     buffer8,a1
                 addq.w  #1,delayCounter
+.loop:          tst.w d0
+                movem.l d0-d7,-(sp)
 ;---------------------------------------------------------
 ; SCROLLOOP: Loop that performs the scrolling effect on the bitmap.
 ;---------------------------------------------------------

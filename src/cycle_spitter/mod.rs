@@ -2,8 +2,8 @@
 pub mod accumulator;
 pub mod block;
 pub mod template;
+pub mod regexes;
 
 mod cycles;
-mod regexes;
 mod helpers;
 

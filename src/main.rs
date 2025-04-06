@@ -55,8 +55,10 @@ mod cycle_spitter;
 /// Author: slippy / vectronix (c) 2025
 use std::env;
 use std::fs;
+
 use crate::cycle_spitter::accumulator::accumulate_chunk;
 use crate::cycle_spitter::block::process_block;
+use crate::cycle_spitter::regexes::REG_LABEL_RE;
 use crate::cycle_spitter::template::parse_template;
 
 const SCANLINE_CYCLES: usize = 512;
@@ -139,6 +141,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     for line in final_output {
         if line.trim().starts_with(";") || line.contains(" equ ") || line.contains(" set ") {
             println!("{}", line);
+        } else if let Some(caps) = REG_LABEL_RE.captures(&line) {
+            println!("{}\t{}", &caps[1], caps[2].to_string().clone().trim());
         } else {
             println!("\t{}", line);
         }
