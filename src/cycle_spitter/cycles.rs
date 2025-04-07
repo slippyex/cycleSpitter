@@ -177,82 +177,100 @@ static CYCLES_MAP: Lazy<HashMap<String, Vec<usize>>> = Lazy::new(|| {
     serde_json::from_str(json_str).expect("Error parsing cycles JSON")
 });
 
-pub struct CycleCount {
-    pub cycles: Vec<usize>,  // Vector of cycle counts (e.g. for branch taken/not-taken)
-    pub lookup: String
-}
 
-pub fn lookup_cycles(line: &str) -> CycleCount {
-    let normalized = normalize_line(line);
+// 1. New regex for register lists (placed with the other static regex definitions)
+static REG_REGLIST: Lazy<Regex> = Lazy::new(|| {
+    // This regex matches a series of registers (d0 to d7 or a0 to a7)
+    // connected by either '-' (for ranges) or '/' (for lists).
+    Regex::new(r"(?P<reglist>[da][0-7](?:-[da][0-7])?(?:[/-][da][0-7](?:-[da][0-7])?)+)").unwrap()
+});
 
-    let result = if let Some(cycles) = CYCLES_MAP.get(normalized.as_str()) {
-        CycleCount {
-            cycles: cycles.clone(),  // Keep all cycle values
-            lookup: normalized
+// 2. Helper function to count registers in a register list string.
+fn count_registers(reg_list: &str) -> usize {
+    let mut count = 0;
+    // Split the list on '/' (which is used as a delimiter in your examples)
+    for part in reg_list.split('/') {
+        if part.contains('-') {
+            // If it is a range like "d0-d7" or "a2-a4", split further.
+            let range_parts: Vec<&str> = part.split('-').collect();
+            if range_parts.len() == 2 {
+                // Extract the numeric part (assumes the register is of the form [da][0-7])
+                let start_digit = range_parts[0].chars().last().unwrap().to_digit(10).unwrap();
+                let end_digit = range_parts[1].chars().last().unwrap().to_digit(10).unwrap();
+                count += (end_digit - start_digit + 1) as usize;
+            } else {
+                // Fallback: count as one if the range is malformed.
+                count += 1;
+            }
+        } else {
+            // A single register.
+            count += 1;
         }
-    } else {
-        eprintln!("Warning: No cycle count found for instruction: {}", line);
-        CycleCount {
-            cycles: vec![0],  // Default to single zero for unknown instructions
-            lookup: normalized
-        }
-    };
-    result
+    }
+    count
 }
-
-pub fn normalize_line(line: &str) -> String {
+// 3. Extend the normalization function. We can create a new function that returns both the normalized string and reglist count.
+pub fn normalize_line_ext(line: &str) -> (String, usize) {
     let line_without_comment = match line.find(';') {
         Some(idx) => &line[..idx],
         None => line,
     };
 
-    // Remove leading label like `my_label:` if present
+    // Remove any leading label
     let line_without_label = REG_LABEL_CHECK
         .replace(line_without_comment, "")
         .to_string();
 
     let trimmed = line_without_label.trim().to_lowercase();
-
     let mut parts = trimmed.splitn(2, char::is_whitespace);
     let first_token = parts.next().unwrap();
     let operand_part = parts.next().unwrap_or("");
 
-    let first_token = {
-        if REG_INSTRUCTION.is_match(first_token) {
-            // For instructions like "lea" or "moveq", always force a ".l" suffix.
-            format!("{}.l", first_token)
-        } else if let Some(caps) = REG_BCC.captures(first_token) {
-            // Handle branch conditions.
-            let trailing = caps.get(3).map_or("", |m| m.as_str());
-            if caps.get(2).is_some() {
-                format!("{}{}{}", &caps[1], ".b", trailing)
-            } else {
-                format!("{}{}{}", &caps[1], ".w", trailing)
-            }
-        } else if !first_token.contains('.') {
-            // If no suffix is found, default to ".w"
-            format!("{}.w", first_token)
+    // Process the instruction token (e.g. adding suffixes)
+    let first_token = if REG_INSTRUCTION.is_match(first_token) {
+        format!("{}.l", first_token)
+    } else if let Some(caps) = REG_BCC.captures(first_token) {
+        let trailing = caps.get(3).map_or("", |m| m.as_str());
+        if caps.get(2).is_some() {
+            format!("{}{}{}", &caps[1], ".b", trailing)
         } else {
-            first_token.to_string()
+            format!("{}{}{}", &caps[1], ".w", trailing)
         }
+    } else if !first_token.contains('.') {
+        format!("{}.w", first_token)
+    } else {
+        first_token.to_string()
     };
 
+    // Start processing the operands.
     let mut operands = operand_part.to_string();
-    operands = REG_DISPLACEMENT.replace_all(&operands, |captures: &regex::Captures| {
-        if &captures[1] == "-" {
-            // If the first capture is "-", keep it unchanged
-            format!("-({})", &captures[2])
+
+    // 3a. Replace displacement addressing operands.
+    operands = REG_DISPLACEMENT.replace_all(&operands, |caps: &regex::Captures| {
+        if &caps[1] == "-" {
+            format!("-({})", &caps[2])
         } else {
-            // Otherwise, replace with "d($2)"
-            format!("d({})", &captures[2])
+            format!("d({})", &caps[2])
         }
     }).into_owned();
+
+    // 3b. Replace immediate values.
     operands = REG_IMMEDIATE.replace_all(&operands, "#xxx").into_owned();
-    // c. Replace data registers.
+
+    // 3c. Handle multiple register lists.
+    let mut reg_count = 0;
+
+    operands = REG_REGLIST.replace_all(&operands, |caps: &regex::Captures| {
+        let reg_list_str = caps.name("reglist").unwrap().as_str();
+        reg_count += count_registers(reg_list_str);
+        "%%REGLIST%%".to_string()
+    }).into_owned();
+
+    // 3d. Replace data and address registers in remaining parts.
     operands = REG_DATA.replace_all(&operands, "dn").into_owned();
-    // d. Replace address registers.
     operands = REG_ADDR.replace_all(&operands, "an").into_owned();
-    // e. Replace any remaining absolute addresses.
+
+    // 3e. Replace any remaining absolute addresses.
     operands = REG_ABS_ADDRESS.replace_all(&operands, |caps: &regex::Captures| {
         let before = caps.name("before").unwrap().as_str();
         let token = caps.name("token").unwrap().as_str();
@@ -271,32 +289,61 @@ pub fn normalize_line(line: &str) -> String {
             }
         }
     }).into_owned();
-    // f. Collapse multiple spaces.
+
+    // 3f. Collapse multiple spaces.
     operands = REG_SPACES.replace_all(&operands, " ").into_owned();
-    let mut operands = operands.trim().to_owned();
+    operands = operands.trim().to_owned();
+
+    // 3g. Handle '$'-prefixed variables.
     operands = if operands.contains('$') {
-        // Use a non-capturing group for the '$'
-        let result = REG_DOLLAR_CHECK.replace_all(&operands, |caps: &regex::Captures| {
-            // Capture any punctuation (if present).
+        REG_DOLLAR_CHECK.replace_all(&operands, |caps: &regex::Captures| {
             let punctuation = caps.get(3).map_or("", |m| m.as_str());
-            // If group 2 (".w") is present, use "xxx.w", else use "xxx.l".
             if caps.get(2).is_some() {
                 format!("xxx.w{}", punctuation)
             } else {
                 format!("xxx.l{}", punctuation)
             }
-        });
-        result.into_owned()
+        }).into_owned()
     } else {
         operands.to_string()
     };
 
+    // i. Restore the register list placeholder.
+    operands = operands.replace("%%REGLIST%%", "reglist");
 
-    if operands.is_empty() {
+    let normalized = if operands.is_empty() {
         first_token
     } else {
         format!("{} {}", first_token, operands)
-    }
+    };
+    (normalized, reg_count)
+}
+
+// 4. Update the CycleCount struct to include register count.
+pub struct CycleCount {
+    pub cycles: Vec<usize>,
+    pub lookup: String,
+    pub reg_count: usize,
+}
+
+// 5. Update lookup_cycles to use the extended normalization.
+pub fn lookup_cycles(line: &str) -> CycleCount {
+    let (normalized, reg_count) = normalize_line_ext(line);
+    let result = if let Some(cycles) = CYCLES_MAP.get(normalized.as_str()) {
+        CycleCount {
+            cycles: cycles.clone(),
+            lookup: normalized,
+            reg_count,
+        }
+    } else {
+        eprintln!("Warning: No cycle count found for instruction: {}", line);
+        CycleCount {
+            cycles: vec![0],
+            lookup: normalized,
+            reg_count,
+        }
+    };
+    result
 }
 
 #[cfg(test)]
@@ -323,20 +370,20 @@ mod tests {
     #[test]
     fn test_lookup_cycles_normalized_instruction() {
         let line = " moveq #12,d2  "; // Misformatted but equivalent to "moveq #12,d2"
-        let normalized_line = normalize_line(line);
-        assert_eq!(normalized_line, "moveq.l #xxx,dn");
+        let normalized_line = normalize_line_ext(line);
+        assert_eq!(normalized_line.0, "moveq.l #xxx,dn");
 
         let line = " add #12,d2  "; // Misformatted but equivalent to "add.w #12,d2"
-        let normalized_line = normalize_line(line);
-        assert_eq!(normalized_line, "add.w #xxx,dn");
+        let normalized_line = normalize_line_ext(line);
+        assert_eq!(normalized_line.0, "add.w #xxx,dn");
 
         let line = " moveq #12,D2";
-        let normalized_line = normalize_line(line);
-        assert_eq!(normalized_line, "moveq.l #xxx,dn");
+        let normalized_line = normalize_line_ext(line);
+        assert_eq!(normalized_line.0, "moveq.l #xxx,dn");
 
         let line = " MOVE.W A1,A2";
-        let normalized_line = normalize_line(line);
-        assert_eq!(normalized_line, "move.w an,an");
+        let normalized_line = normalize_line_ext(line);
+        assert_eq!(normalized_line.0, "move.w an,an");
 
     }
 
@@ -344,47 +391,47 @@ mod tests {
     #[test]
     fn test_normalize_line_valid_cases() {
         assert_eq!(
-            normalize_line("move.l d0,a1"),
+            normalize_line_ext("move.l d0,a1").0,
             "move.l dn,an",
             "Expected `move.l` instruction with displacement to normalize correctly."
         );
         assert_eq!(
-            normalize_line("lea $ffff8240.w,a0"),
+            normalize_line_ext("lea $ffff8240.w,a0").0,
             "lea.l xxx.w,an",
             "Expected `lea` instruction with absolute.w to normalize correctly."
         );
         assert_eq!(
-            normalize_line("lea $ffff8240,a0"),
+            normalize_line_ext("lea $ffff8240,a0").0,
             "lea.l xxx.l,an",
             "Expected `lea` instruction with absolute.l to normalize correctly."
         );
         assert_eq!(
-            normalize_line("move.w $ffff8240.w,d0"),
+            normalize_line_ext("move.w $ffff8240.w,d0").0,
             "move.w xxx.w,dn",
             "Expected `move.w` instruction with absolute.w to normalize correctly."
         );
         assert_eq!(
-            normalize_line("move.w d0,$ffff8240.w"),
+            normalize_line_ext("move.w d0,$ffff8240.w").0,
             "move.w dn,xxx.w",
             "Expected `move.w` instruction with absolute.w to normalize correctly."
         );
         assert_eq!(
-            normalize_line("move.w $ffff8240,d0"),
+            normalize_line_ext("move.w $ffff8240,d0").0,
             "move.w xxx.l,dn",
             "Expected `move.w` instruction with absolute to normalize correctly."
         );
         assert_eq!(
-            normalize_line("move.w d0,$ffff8240"),
+            normalize_line_ext("move.w d0,$ffff8240").0,
             "move.w dn,xxx.l",
             "Expected `move.w` instruction with absolute to normalize correctly."
         );
         assert_eq!(
-            normalize_line("move.b	d7,$ffff8260.w			;"),
+            normalize_line_ext("move.b	d7,$ffff8260.w			;").0,
             "move.b dn,xxx.w",
             "Expected `move.w` instruction with absolute to normalize correctly."
         );
         assert_eq!(
-            normalize_line("bne.s label.w"),
+            normalize_line_ext("bne.s label.w").0,
             "bne.b xxx.w",
             "Expected branch instruction to normalize to `.b` suffix."
         );
@@ -395,7 +442,7 @@ mod tests {
     fn test_normalize_already_normalized_instructions() {
         let line = "moveq.l #xxx,dn";
         assert_eq!(
-            normalize_line(line),
+            normalize_line_ext(line).0,
             line,
             "Already normalized instruction should remain unchanged."
         );
@@ -405,7 +452,7 @@ mod tests {
     #[test]
     fn test_normalize_immediate_values() {
         assert_eq!(
-            normalize_line("addq.l #20,d1"),
+            normalize_line_ext("addq.l #20,d1").0,
             "addq.l #xxx,dn",
             "Immediate values should be replaced with #xxx."
         );
@@ -417,7 +464,7 @@ mod tests {
         let line = "lea 100(sp),a1";
         let expected = "lea.l d(an),an"; // since sp internally resolves into a7 = an
         assert_eq!(
-            normalize_line(line),
+            normalize_line_ext(line).0,
             expected,
             "Displacement addressing should be normalized properly."
         );
@@ -427,17 +474,17 @@ mod tests {
     #[test]
     fn test_normalize_registers() {
         let line = "movem.l d0-d7/a0-a6,-(sp)";
-        let expected = "movem.l dn-dn/an-an,-(an)";
+        let expected = "movem.l reglist,-(an)";
         assert_eq!(
-            normalize_line(line),
+            normalize_line_ext(line).0,
             expected,
             "Registers (data/address) should be replaced with placeholders."
         );
 
         let line = "movem.l (sp)+,d0-d7/a0-a6";
-        let expected = "movem.l (an)+,dn-dn/an-an";
+        let expected = "movem.l (an)+,reglist";
         assert_eq!(
-            normalize_line(line),
+            normalize_line_ext(line).0,
             expected,
             "Registers (data/address) should be replaced with placeholders."
         );
@@ -450,7 +497,7 @@ mod tests {
         let line = "movea.l my_label,a0";
         let expected = "movea.l xxx.l,an";
         assert_eq!(
-            normalize_line(line),
+            normalize_line_ext(line).0,
             expected,
             "Absolute addressing should be normalized to `xxx.l`."
         );
@@ -460,8 +507,8 @@ mod tests {
     #[test]
     fn test_normalize_malformed_input() {
         let line = "moveq #16";
-        let result = normalize_line(line);
-        assert!(!result.is_empty(), "Malformed input should result in a non-empty result.");
+        let result = normalize_line_ext(line);
+        assert!(!result.0.is_empty(), "Malformed input should result in a non-empty result.");
     }
 
     /// Test an instruction with a label
@@ -470,7 +517,7 @@ mod tests {
         let line = ".my_label:\tmoveq #16,d1";
         let expected = "moveq.l #xxx,dn";
         assert_eq!(
-            normalize_line(line),
+            normalize_line_ext(line).0,
             expected,
             "Absolute addressing should be normalized to `xxx.l`."
         );
@@ -478,7 +525,7 @@ mod tests {
         let line = "my_label:\tmoveq #16,d1";
         let expected = "moveq.l #xxx,dn";
         assert_eq!(
-            normalize_line(line),
+            normalize_line_ext(line).0,
             expected,
             "Absolute addressing should be normalized to `xxx.l`."
         );
@@ -490,7 +537,7 @@ mod tests {
         let line = "   add.l     d0,d1 ";
         let expected = "add.l dn,dn";
         assert_eq!(
-            normalize_line(line),
+            normalize_line_ext(line).0,
             expected,
             "Whitespace should be handled and normalized correctly."
         );
@@ -500,13 +547,13 @@ mod tests {
     #[test]
     fn test_branch_normalization_with_suffix() {
         assert_eq!(
-            normalize_line("bne label"),
+            normalize_line_ext("bne label").0,
             "bne.w xxx.l",
             "Branch instructions should be normalized with `.w` suffix for label."
         );
 
         assert_eq!(
-            normalize_line("bne.s dummy.w"),
+            normalize_line_ext("bne.s dummy.w").0,
             "bne.b xxx.w",
             "Branch instructions with `.s` suffix should normalize correctly."
         );
@@ -516,7 +563,7 @@ mod tests {
     #[test]
     fn test_normalize_unknown_tokens() {
         let line = "customop $FF,d1";
-        let normalized = normalize_line(line);
+        let normalized = normalize_line_ext(line).0;
         assert_ne!(
             normalized, "",
             "Unknown tokens should still produce a normalized line."

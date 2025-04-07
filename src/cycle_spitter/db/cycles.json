@@ -7152,7 +7152,8 @@
     20
   ],
   "movem.w (an),reglist": [
-    48
+    12,
+    4
   ],
   "movem.w (an),dn": [
     48
@@ -7161,7 +7162,8 @@
     48
   ],
   "movem.w (an)+,reglist": [
-    48
+    12,
+    4
   ],
   "movem.w (an)+,dn": [
     48
@@ -7170,7 +7172,8 @@
     48
   ],
   "movem.w d(an),reglist": [
-    64
+    16,
+    4
   ],
   "movem.w d(an),dn": [
     64
@@ -7179,7 +7182,8 @@
     64
   ],
   "movem.w d(an,ix),reglist": [
-    72
+    18,
+    4
   ],
   "movem.w d(an,ix),dn": [
     72
@@ -7188,7 +7192,8 @@
     72
   ],
   "movem.w xxx.w,reglist": [
-    64
+    16,
+    4
   ],
   "movem.w xxx.w,dn": [
     64
@@ -7197,7 +7202,8 @@
     64
   ],
   "movem.w xxx.l,reglist": [
-    80
+    20,
+    4
   ],
   "movem.w xxx.l,dn": [
     80
@@ -7206,7 +7212,8 @@
     80
   ],
   "movem.w d(pc),reglist": [
-    64
+    16,
+    4
   ],
   "movem.w d(pc),dn": [
     64
@@ -7215,7 +7222,8 @@
     64
   ],
   "movem.w d(pc,ix),reglist": [
-    72
+    18,
+    4
   ],
   "movem.w d(pc,ix),dn": [
     72
@@ -7224,7 +7232,8 @@
     72
   ],
   "movem.l (an),reglist": [
-    96
+    12,
+    8
   ],
   "movem.l (an),dn": [
     96
@@ -7233,7 +7242,8 @@
     96
   ],
   "movem.l (an)+,reglist": [
-    96
+    12,
+    8
   ],
   "movem.l (an)+,dn": [
     96
@@ -7242,7 +7252,8 @@
     96
   ],
   "movem.l d(an),reglist": [
-    128
+    16,
+    8
   ],
   "movem.l d(an),dn": [
     128
@@ -7251,7 +7262,8 @@
     128
   ],
   "movem.l d(an,ix),reglist": [
-    144
+    18,
+    8
   ],
   "movem.l d(an,ix),dn": [
     144
@@ -7260,7 +7272,8 @@
     144
   ],
   "movem.l xxx.w,reglist": [
-    128
+    16,
+    8
   ],
   "movem.l xxx.w,dn": [
     128
@@ -7269,7 +7282,8 @@
     128
   ],
   "movem.l xxx.l,reglist": [
-    160
+    20,
+    8
   ],
   "movem.l xxx.l,dn": [
     160
@@ -7278,7 +7292,8 @@
     160
   ],
   "movem.l d(pc),reglist": [
-    128
+    16,
+    8
   ],
   "movem.l d(pc),dn": [
     128
@@ -7287,7 +7302,8 @@
     128
   ],
   "movem.l d(pc,ix),reglist": [
-    144
+    18,
+    8
   ],
   "movem.l d(pc,ix),dn": [
     144
@@ -7296,7 +7312,8 @@
     144
   ],
   "movem.w reglist,(an)": [
-    32
+    8,
+    4
   ],
   "movem.w dn,(an)": [
     32
@@ -7305,7 +7322,8 @@
     32
   ],
   "movem.w reglist,-(an)": [
-    32
+    8,
+    4
   ],
   "movem.w dn,-(an)": [
     32
@@ -7314,7 +7332,8 @@
     32
   ],
   "movem.w reglist,d(an)": [
-    48
+    12,
+    4
   ],
   "movem.w dn,d(an)": [
     48
@@ -7323,7 +7342,8 @@
     48
   ],
   "movem.w reglist,d(an,ix)": [
-    56
+    14,
+    4
   ],
   "movem.w dn,d(an,ix)": [
     56
@@ -7332,7 +7352,8 @@
     56
   ],
   "movem.w reglist,xxx.w": [
-    48
+    12,
+    4
   ],
   "movem.w dn,xxx.w": [
     48
@@ -7341,7 +7362,8 @@
     48
   ],
   "movem.w reglist,xxx.l": [
-    64
+    16,
+    4
   ],
   "movem.w dn,xxx.l": [
     64
@@ -7350,7 +7372,8 @@
     64
   ],
   "movem.l reglist,(an)": [
-    64
+    8,
+    8
   ],
   "movem.l dn,(an)": [
     64
@@ -7359,7 +7382,8 @@
     64
   ],
   "movem.l reglist,-(an)": [
-    64
+    8,
+    8
   ],
   "movem.l dn,-(an)": [
     64
@@ -7368,7 +7392,8 @@
     64
   ],
   "movem.l reglist,d(an)": [
-    96
+    12,
+    8
   ],
   "movem.l dn,d(an)": [
     96
@@ -7377,7 +7402,8 @@
     96
   ],
   "movem.l reglist,d(an,ix)": [
-    112
+    14,
+    8
   ],
   "movem.l dn,d(an,ix)": [
     112
@@ -7386,7 +7412,8 @@
     112
   ],
   "movem.l reglist,xxx.w": [
-    96
+    12,
+    8
   ],
   "movem.l dn,xxx.w": [
     96
@@ -7395,7 +7422,8 @@
     96
   ],
   "movem.l reglist,xxx.l": [
-    128
+    16,
+    8
   ],
   "movem.l dn,xxx.l": [
     128

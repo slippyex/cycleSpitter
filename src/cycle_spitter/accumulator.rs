@@ -102,7 +102,12 @@ pub fn accumulate_chunk(
 
         if let Some(cycles) = cycle_option {
             // For branches with multiple cycle counts, use the not-taken (first) value for basic accounting
-            let base_cycles = cycles.cycles[0];
+
+            let base_cycles = if cycles.lookup.contains("reglist") {
+                cycles.cycles[0] + (cycles.cycles[1] * cycles.reg_count)
+            } else {
+                cycles.cycles[0]
+            };
             
             if (local_sum - initial_offset) + base_cycles > target {
                 let diff = target - (local_sum - initial_offset);
@@ -114,7 +119,7 @@ pub fn accumulate_chunk(
                 }
                 break;
             }
-            let annotated = format_accumulated_instruction(line, &cycles.lookup, &cycles.cycles, local_sum);
+            let annotated = format_accumulated_instruction(line, &cycles.lookup, &cycles.cycles, &cycles.reg_count, local_sum);
             chunk.push(annotated);
             local_sum += base_cycles;
         } else {

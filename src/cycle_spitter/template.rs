@@ -2,8 +2,7 @@
 
 use regex::Regex;
 use std::error::Error;
-use crate::cycle_spitter::helpers::extract_cycle_count;
-use crate::cycle_spitter::helpers::format_template_instruction;
+use crate::cycle_spitter::helpers::{extract_cycle_count, format_accumulated_instruction};
 use once_cell::sync::Lazy;
 
 /// Represents a section of a parsed template.
@@ -89,6 +88,7 @@ pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Bo
     let mut current_code = Vec::with_capacity(4); // Most sections have a few instructions
     let mut current_label = String::with_capacity(32); // Reasonable size for labels
 
+    let mut cycle_offset: usize = 0;
     for line in template_content.lines() {
         let trimmed = line.trim();
         if trimmed.is_empty() {
@@ -139,12 +139,20 @@ pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Bo
                     .unwrap_or_else(|| format!("Section {}", sections.len() + 1));
             }
 
-            let commented_output = format_template_instruction(
+            let commented_output = format_accumulated_instruction(
                 trimmed,
                 &cycle_count.lookup,
-                &cycle_count.cycles
+                &cycle_count.cycles,
+                &cycle_count.reg_count,
+                cycle_offset
             );
-            current_code.push((commented_output, cycle_count.cycles[0]));
+            let caclucated_cycles = if cycle_count.reg_count > 1 {
+                cycle_count.cycles[0] + (cycle_count.cycles[1] * cycle_count.reg_count)
+            } else {
+                cycle_count.cycles[0]
+            };
+            current_code.push((commented_output, caclucated_cycles));
+            cycle_offset += caclucated_cycles
         } else {
             continue;
         }
