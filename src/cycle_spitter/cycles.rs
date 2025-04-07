@@ -86,7 +86,6 @@
 
 use std::collections::HashMap;
 use once_cell::sync::Lazy;
-use serde_json;
 
 use regex::Regex;
 
@@ -277,16 +276,14 @@ pub fn normalize_line_ext(line: &str) -> (String, usize) {
         let suffix = caps.name("suffix").map(|m| m.as_str());
         if token == "an" || token == "dn" || token == "d" {
             caps.get(0).unwrap().as_str().to_string()
-        } else {
-            if let Some(suf) = suffix {
-                if suf == ".w" {
-                    format!("{}xxx.w", before)
-                } else {
-                    format!("{}xxx.l", before)
-                }
+        } else if let Some(suf) = suffix {
+            if suf == ".w" {
+                format!("{}xxx.w", before)
             } else {
                 format!("{}xxx.l", before)
             }
+        } else {
+            format!("{}xxx.l", before)
         }
     }).into_owned();
 
@@ -329,7 +326,8 @@ pub struct CycleCount {
 // 5. Update lookup_cycles to use the extended normalization.
 pub fn lookup_cycles(line: &str) -> CycleCount {
     let (normalized, reg_count) = normalize_line_ext(line);
-    let result = if let Some(cycles) = CYCLES_MAP.get(normalized.as_str()) {
+    
+    if let Some(cycles) = CYCLES_MAP.get(normalized.as_str()) {
         CycleCount {
             cycles: cycles.clone(),
             lookup: normalized,
@@ -342,8 +340,7 @@ pub fn lookup_cycles(line: &str) -> CycleCount {
             lookup: normalized,
             reg_count,
         }
-    };
-    result
+    }
 }
 
 #[cfg(test)]
