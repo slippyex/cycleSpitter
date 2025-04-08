@@ -4,13 +4,17 @@ A cycle-accurate scanline splitter tool for Atari ST fullscreen (sync) programmi
 
 ## Description
 
-`cycleSpitter` is a utility designed to help Atari ST demoscene programmers achieve perfect cycle-accurate timing for fullscreen effects. It analyzes 68000 assembly code with cycle annotations and automatically:
+`cycleSpitter` is a utility designed to help Atari ST demoscene programmers achieve 
+perfect cycle-accurate timing for fullscreen effects. It analyzes 68000 assembly code 
+with cycle annotations and automatically:
 
 1. Expands `REPT`/`ENDR` blocks
-2. Splits code into scanline-sized chunks (512 cycles each)
-3. Injects border removal and stabilizer code
-4. Pads with NOPs when necessary
-5. Generates cycle-accurate annotations
+2. Determines cycle usage per instruction and allows manual override 
+3. Splits code into scanline-sized chunks (512 cycles each)
+4. Injects border removal and stabilizer code
+5. Pads with NOPs when necessary
+6. Generates cycle-accurate annotations
+7. Handles dynamic cycle usages (i.e. movem instructions with multiple regs)
 
 ## Features
 
