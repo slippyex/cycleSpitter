@@ -191,7 +191,7 @@ mod tests {
         assert_eq!(sections[0].injection_code.len(), 1);
         assert_eq!(
             sections[0].injection_code[0].0,
-            "move.w #$1323,D0 ; Move Instruction move.w #xxx,dn [8]"
+            "move.w #$1323,D0 ; Move Instruction	;	(8)	move.w #xxx,dn"
         );
         assert_eq!(sections[0].label, "Move Instruction");
     }
@@ -219,7 +219,7 @@ mod tests {
         assert_eq!(sections[0].injection_code.len(), 1);
         assert_eq!(
             sections[0].injection_code[0].0,
-            "move.w #$5678,D1\t; move.w #xxx,dn [8]"
+            "move.w #$5678,D1	;	(8)	move.w #xxx,dn"
         );
         assert_eq!(sections[0].label, "Section 1");
 
@@ -231,7 +231,7 @@ mod tests {
         assert_eq!(sections[1].injection_code.len(), 1);
         assert_eq!(
             sections[1].injection_code[0].0,
-            "move.w #$9,D2 ; Label for section move.w #xxx,dn [8]"
+            "move.w #$9,D2 ; Label for section	;	(8)	move.w #xxx,dn	[8]"
         );
         assert_eq!(sections[1].label, "Label for section");
     }
@@ -252,7 +252,7 @@ mod tests {
         assert_eq!(sections[0].injection_code.len(), 1);
         assert_eq!(
             sections[0].injection_code[0].0,
-            "move.w #$123,D3 ; Some work move.w #xxx,dn [8]"
+            "move.w #$123,D3 ; Some work	;	(8)	move.w #xxx,dn"
         );
         assert_eq!(sections[0].label, "Some work");
     }
@@ -272,7 +272,7 @@ mod tests {
         assert_eq!(sections[0].injection_code.len(), 1);
         assert_eq!(
             sections[0].injection_code[0].0,
-            "move.w #$100,D4 ; Inline comment move.w #xxx,dn [8]"
+            "move.w #$100,D4 ; Inline comment	;	(8)	move.w #xxx,dn"
         );
         assert_eq!(sections[0].label, "Inline comment");
     }
