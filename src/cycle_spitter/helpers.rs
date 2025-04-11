@@ -71,7 +71,7 @@ pub fn format_accumulated_instruction(
     result.push_str("\t;\t(");
     result.push_str(&cycles_str);
     result.push_str(")\t");
-    result.push_str(&*cycle_count.get_lookup());
+    result.push_str(&cycle_count.get_lookup());
     if offset > 0 {
         result.push_str("\t[");
         result.push_str(&offset.to_string());
