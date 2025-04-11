@@ -1,3 +1,4 @@
+#[derive(Debug, Clone)]
 pub struct CycleCount {
     cycles: Vec<usize>,
     lookup: String,
@@ -14,7 +15,7 @@ impl CycleCount {
     }
 
     pub fn base(&self) -> usize {
-        self.cycles.get(0).cloned().unwrap_or(0)
+        self.cycles.first().cloned().unwrap_or(0)
     }
 
     pub fn cycles_per_reg(&self) -> usize {
@@ -33,7 +34,7 @@ impl CycleCount {
         self.cycles.clone()
     }
 
-    pub fn _extra_if_taken(&self) -> usize {
+    pub fn extra_if_taken(&self) -> usize {
         self.cycles.get(1).cloned().unwrap_or(0)
     }
 
@@ -41,7 +42,7 @@ impl CycleCount {
         if iterations <= 1 {
             self.base()
         } else {
-            (iterations - 1) * self._extra_if_taken() + self.base()
+            (iterations - 1) * self.extra_if_taken() + self.base()
         }
     }
 }

@@ -1,9 +1,9 @@
 // src/cycle_spitter/template.rs
 
-use regex::Regex;
-use std::error::Error;
 use crate::cycle_spitter::helpers::{extract_cycle_count, format_accumulated_instruction};
 use once_cell::sync::Lazy;
+use regex::Regex;
+use std::error::Error;
 
 /// Represents a section of a parsed template.
 /// Each section contains:
@@ -18,17 +18,11 @@ pub struct TemplateSection {
     pub label: String,
 }
 
-static NOP_RE: Lazy<Regex> = Lazy::new(|| {
-    Regex::new(r"dcb\.w\s*(\d+),\s*\$4e71").unwrap()
-});
+static NOP_RE: Lazy<Regex> = Lazy::new(|| Regex::new(r"dcb\.w\s*(\d+),\s*\$4e71").unwrap());
 
-static COMMENT_RE: Lazy<Regex> = Lazy::new(|| {
-    Regex::new(r";\s*(.*)").unwrap()
-});
+static COMMENT_RE: Lazy<Regex> = Lazy::new(|| Regex::new(r";\s*(.*)").unwrap());
 
-static PAREN_NUM_RE: Lazy<Regex> = Lazy::new(|| {
-    Regex::new(r"\(\s*\d+\s*\)").unwrap()
-});
+static PAREN_NUM_RE: Lazy<Regex> = Lazy::new(|| Regex::new(r"\(\s*\d+\s*\)").unwrap());
 
 /// Parses the given template content into a vector of `TemplateSection` objects.
 ///
@@ -120,21 +114,16 @@ pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Bo
 
         // Define a predicate for template-specific lines.
         let skip_predicate = |l: &str| {
-            l.trim().starts_with(";") ||
-                l.contains("dcb.w") ||
-                l.contains(" equ ") ||
-                PAREN_NUM_RE.is_match(l)
+            l.trim().starts_with(";")
+                || l.contains("dcb.w")
+                || l.contains(" equ ")
+                || PAREN_NUM_RE.is_match(l)
         };
 
         if let Some(cycle_count) = extract_cycle_count(trimmed, skip_predicate) {
             current_label = check_comment_line(current_label.clone(), trimmed, &sections);
-            let commented_output = format_accumulated_instruction(
-                trimmed,
-                &cycle_count.get_lookup(),
-                &cycle_count.get_cycles(),
-                &cycle_count.get_reg_count(),
-                cycle_offset
-            );
+            let commented_output =
+                format_accumulated_instruction(trimmed, &cycle_count, cycle_offset);
             let caclucated_cycles = if cycle_count.get_reg_count() > 1 {
                 cycle_count.base() + (cycle_count.cycles_per_reg() * cycle_count.get_reg_count())
             } else {
@@ -158,10 +147,14 @@ pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Bo
     Ok(sections)
 }
 
-
-fn check_comment_line(mut current_label: String, trimmed: &str, sections: &Vec<TemplateSection>) -> String {
+fn check_comment_line(
+    mut current_label: String,
+    trimmed: &str,
+    sections: &[TemplateSection],
+) -> String {
     if current_label.is_empty() {
-        current_label = COMMENT_RE.captures(trimmed)
+        current_label = COMMENT_RE
+            .captures(trimmed)
             .and_then(|c| c.get(1))
             .map(|m| m.as_str().to_string())
             .unwrap_or_else(|| format!("Section {}", sections.len() + 1));

@@ -1,6 +1,6 @@
 // src/cycle_spitter/helpers.rs
 
-use crate::cycle_spitter::cycles::{lookup_cycles};
+use crate::cycle_spitter::cycles::lookup_cycles;
 use crate::cycle_spitter::models::CycleCount;
 use crate::cycle_spitter::regexes::REG_NUMBER_RE;
 
@@ -21,7 +21,11 @@ where
 {
     if let Some(cap) = REG_NUMBER_RE.captures(line) {
         Some(CycleCount::new(
-            vec![cap.get(1).map(|m| m.as_str().parse::<usize>().unwrap_or(0)).unwrap_or(0)],
+            vec![
+                cap.get(1)
+                    .map(|m| m.as_str().parse::<usize>().unwrap_or(0))
+                    .unwrap_or(0),
+            ],
             String::from("n/a"),
             0,
         ))
@@ -33,25 +37,41 @@ where
 }
 
 /// Formats an instruction line for the accumulator module, including a given offset.
-pub fn format_accumulated_instruction(line: &str, lookup: &str, cycles: &[usize], reg_count: &usize, offset: usize) -> String {
+pub fn format_accumulated_instruction(
+    line: &str,
+    cycle_count: &CycleCount,
+    offset: usize,
+) -> String {
     // Pre-calculate capacity to avoid reallocations
-    let cycles_str = if cycles.len() > 1 && !lookup.contains("reglist") {
-        format!("{}/{}", cycles[0], cycles[1]) // Format as "not-taken/taken" for branches
-    } else if cycles.len() > 1 && lookup.contains("reglist") {
-        format!("{} -> [base ({}) + (reg count ({}) * reg ({}))]", cycles[0] + (reg_count * cycles[1]), cycles[0], reg_count, cycles[1])
+    let cycles_str = if cycle_count.get_cycles().len() > 1
+        && !cycle_count.get_lookup().contains("reglist")
+    {
+        format!("{}/{}", cycle_count.base(), cycle_count.extra_if_taken()) // Format as "not-taken/taken" for branches
+    } else if cycle_count.get_cycles().len() > 1 && cycle_count.get_lookup().contains("reglist") {
+        format!(
+            "{} -> [base ({}) + (reg count ({}) * reg ({}))]",
+            cycle_count.base() + (cycle_count.get_reg_count() * cycle_count.cycles_per_reg()),
+            cycle_count.base(),
+            cycle_count.get_reg_count(),
+            cycle_count.cycles_per_reg()
+        )
     } else {
-        cycles[0].to_string()
+        cycle_count.base().to_string()
     };
 
     let mut result = String::with_capacity(
-        line.len() + lookup.len() + cycles_str.len() + offset.to_string().len() + 10
+        line.len()
+            + cycle_count.get_lookup().len()
+            + cycles_str.len()
+            + offset.to_string().len()
+            + 10,
     );
 
     result.push_str(line);
     result.push_str("\t;\t(");
     result.push_str(&cycles_str);
     result.push_str(")\t");
-    result.push_str(lookup);
+    result.push_str(&*cycle_count.get_lookup());
     if offset > 0 {
         result.push_str("\t[");
         result.push_str(&offset.to_string());

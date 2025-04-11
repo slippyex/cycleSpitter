@@ -108,7 +108,7 @@ pub fn accumulate_chunk(
             } else {
                 cycles.base()
             };
-            
+
             if (local_sum - initial_offset) + base_cycles > target {
                 let diff = target - (local_sum - initial_offset);
                 let num_nop = diff / 4; // each NOP is 4 cycles
@@ -119,7 +119,7 @@ pub fn accumulate_chunk(
                 }
                 break;
             }
-            let annotated = format_accumulated_instruction(line, &cycles.get_lookup(), &cycles.get_cycles(), &cycles.get_reg_count(), local_sum);
+            let annotated = format_accumulated_instruction(line, &cycles, local_sum);
             chunk.push(annotated);
             local_sum += base_cycles;
         } else {
@@ -144,7 +144,9 @@ pub fn accumulate_chunk(
     if (local_sum - initial_offset) != target {
         eprintln!(
             "Warning: Accumulated cycles {} do not equal target {} starting at index {}.",
-            local_sum - initial_offset, target, start_index
+            local_sum - initial_offset,
+            target,
+            start_index
         );
     }
     (chunk, i, local_sum)
@@ -215,14 +217,11 @@ mod tests {
 
     #[test]
     fn test_mismatch_warning() {
-        let lines = vec![
-            "MOVE.W A1,A2 ; (2) cycles".to_string(),
-        ];
+        let lines = vec!["MOVE.W A1,A2 ; (2) cycles".to_string()];
         let (chunk, next_index, accumulated) = accumulate_chunk(&lines, 0, 10, 0);
 
         assert!(chunk.iter().any(|line| line.contains("nop\t; 4 cycles")));
         assert_eq!(next_index, 1);
         assert_eq!(accumulated, 10);
     }
-
 }

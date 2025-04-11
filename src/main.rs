@@ -56,6 +56,7 @@ mod cycle_spitter;
 use std::env;
 use std::fs;
 
+
 use crate::cycle_spitter::accumulator::accumulate_chunk;
 use crate::cycle_spitter::block::process_block;
 use crate::cycle_spitter::regexes::REG_LABEL_RE;
@@ -67,8 +68,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Parse command-line arguments.
     let args: Vec<String> = env::args().collect();
     let filename = if args.len() > 1 { &args[1] } else { "sample.s" };
-    let scanlines_label = if args.len() > 2 { &args[2] } else { "SCANLINES_CONSUMED" };
-    let template_file = if args.len() > 3 { &args[3] } else { "template.s" };
+    let scanlines_label = if args.len() > 2 {
+        &args[2]
+    } else {
+        "SCANLINES_CONSUMED"
+    };
+    let template_file = if args.len() > 3 {
+        &args[3]
+    } else {
+        "template.s"
+    };
 
     // Parse the template.
     let template_content = fs::read_to_string(template_file)?;
@@ -120,11 +129,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             let remaining = SCANLINE_CYCLES - scanline_cycles;
             let nop_count = remaining / 4;
             if nop_count > 0 {
-                final_output.push(format!("\tdcb.w\t{},$4e71\t; Pad to 512 cycles ({} cycles)", nop_count, remaining));
+                final_output.push(format!(
+                    "\tdcb.w\t{},$4e71\t; Pad to 512 cycles ({} cycles)",
+                    nop_count, remaining
+                ));
             }
             scanline_cycles = SCANLINE_CYCLES;
         } else if scanline_cycles > SCANLINE_CYCLES {
-            eprintln!("Warning: Scanline overflow by {} cycles!", scanline_cycles - SCANLINE_CYCLES);
+            eprintln!(
+                "Warning: Scanline overflow by {} cycles!",
+                scanline_cycles - SCANLINE_CYCLES
+            );
         }
 
         final_output.push(format!("; Total cycles for scanline: {}", scanline_cycles));
