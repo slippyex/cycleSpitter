@@ -74,7 +74,6 @@ struct Args {
 /// - Warns if a scanline exceeds the defined cycle limit.
 ///
 /// Author: slippy / vectronix (c) 2025
-
 use std::fs;
 
 use crate::cycle_spitter::accumulator::accumulate_chunk;
