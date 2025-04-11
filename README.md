@@ -40,18 +40,31 @@ with cycle annotations and automatically:
 
 Basic usage:
    ```sh
-    ./cycleSpitter [input_file.s] [SCANLINES_LABEL] > output_file.s    
+    ./cycleSpitter --input input_file.s --label SCANLINES_LABEL --template template.s --cycles 512 > output_file.s    
    ``` 
 ## Input Format
 
 Your assembly file should include cycle counts in parentheses in comments:
    ```asm
-    lea     _3dpnt0,a3                  ; (12)
-    lea     cubeScreenOffsets,a4        ; (12)
-    
-    ; preserve the initial screen offset in a5
-    movea.l screen_adr_fs,a5            ; (20)
-    lea 230*140(a5),a5                  ; (8)
+                lea     charBuffer,a0
+                lea     buffer8,a1
+                addq.w  #1,delayCounter
+.loop:          tst.w d0
+                movem.l d0-d7/a1-a3,-(sp)
+;---------------------------------------------------------
+; SCROLLOOP: Loop that performs the scrolling effect on the bitmap.
+;---------------------------------------------------------
+                rept 7
+                    lsl.w   (a0)+
+                    addq.l  #2,a0
+add                 set 224
+                    rept    28
+                        roxl.w  add(a1)
+add set add-8
+                    endr
+                    roxl.w  (a1)
+                    lea     SCREEN_WIDTH(a1),a1
+                endr
    ``` 
 
 ## Template File
@@ -62,18 +75,18 @@ The default template (template.s) contains:
 ; new scanline
 ; -------------------------------------------------------------
 ; left border
-		move.b	d7,$ffff8260.w			; (12)
-		move.w	d7,$ffff8260.w			; (12)
+		move.b	d7,$ffff8260.w			; 
+		move.w	d7,$ffff8260.w			; 
 		dcb.w	88,$4e71
 ; -------------------------------------------------------------
 ; right border
-		move.w	d7,$ffff820a.w			; (12)
-		move.b	d7,$ffff820a.w			; (12)
+		move.w	d7,$ffff820a.w			; 
+		move.b	d7,$ffff820a.w			; 
 		dcb.w	11,$4e71
 ; -------------------------------------------------------------
 ; stabilizer
-		move.b	d7,$ffff8260.w			; (12)
-		move.w	d7,$ffff8260.w			; (12)
+		move.b	d7,$ffff8260.w			; 
+		move.w	d7,$ffff8260.w			; 
 		dcb.w	11,$4e71
 ; =============================================================
    ``` 
@@ -83,20 +96,26 @@ The default template (template.s) contains:
 ; ------------------------------------------
 ; This file is generated using
 ; cycleSpitter (c) 2025 - slippy / vectronix
-; Total scanlines created: 45
-; Template used: template.s
+; Total scanlines created: 22
+; Template used: ./examples/template.s
 ; ------------------------------------------
-SCANLINES_CONSUMED equ 45
-
-    ; --- Left border section ---
-    move.b d7,$ffff8260.w ;3 Left border [0]
-    move.w d7,$ffff8260.w ;3             [12]
-    ; Calculated cycles: 24
-    
-    lea     _3dpnt0,a3                  ; (12) [24]
-    lea     cubeScreenOffsets,a4        ; (12) [36]
-    nop     ; 4 cycles     [48]
-    ; Calculated cycles: 48
+SCANLINES_LABEL equ 22
+        move.b  d7,$ffff8260.w  ;       (12)    move.b dn,xxx.w [0]
+        move.w  d7,$ffff8260.w  ;       (12)    move.w dn,xxx.w [12]
+; --- Section 1 section ---
+        lea     charBuffer,a0   ;       (12)    lea.l xxx.l,an  [24]
+        lea     buffer8,a1      ;       (12)    lea.l xxx.l,an  [36]
+        addq.w  #1,delayCounter ;       (20)    addq.w #xxx,xxx.l       [48]
+.loop:  tst.w d0        ;       (4)     tst.w dn        [68]
+        movem.l d0-d7/a1-a3,-(sp)       ;       (96 -> [base (8) + (reg count (11) * reg (8))]) movem.l reglist,-(an)   [72]
+;---------------------------------------------------------
+; SCROLLOOP: Loop that performs the scrolling effect on the bitmap.
+;---------------------------------------------------------
+        lsl.w   (a0)+   ;       (12)    lsl.w (an)+     [168]
+        addq.l  #2,a0   ;       (8)     addq.l #xxx,an  [180]
+...
+...
+...
    ``` 
 
 ## Requirements
