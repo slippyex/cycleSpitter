@@ -97,12 +97,7 @@ pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Bo
 
         // Handle set lines first, before any cycle extraction
         if trimmed.contains(" set ") {
-            if current_label.is_empty() {
-                current_label = COMMENT_RE.captures(trimmed)
-                    .and_then(|c| c.get(1))
-                    .map(|m| m.as_str().to_string())
-                    .unwrap_or_else(|| format!("Section {}", sections.len() + 1));
-            }
+            current_label = check_comment_line(current_label.clone(), trimmed, &sections);
             current_code.push((trimmed.to_string(), 0));
             continue;
         }
@@ -132,24 +127,18 @@ pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Bo
         };
 
         if let Some(cycle_count) = extract_cycle_count(trimmed, skip_predicate) {
-            if current_label.is_empty() {
-                current_label = COMMENT_RE.captures(trimmed)
-                    .and_then(|c| c.get(1))
-                    .map(|m| m.as_str().to_string())
-                    .unwrap_or_else(|| format!("Section {}", sections.len() + 1));
-            }
-
+            current_label = check_comment_line(current_label.clone(), trimmed, &sections);
             let commented_output = format_accumulated_instruction(
                 trimmed,
-                &cycle_count.lookup,
-                &cycle_count.cycles,
-                &cycle_count.reg_count,
+                &cycle_count.get_lookup(),
+                &cycle_count.get_cycles(),
+                &cycle_count.get_reg_count(),
                 cycle_offset
             );
-            let caclucated_cycles = if cycle_count.reg_count > 1 {
-                cycle_count.cycles[0] + (cycle_count.cycles[1] * cycle_count.reg_count)
+            let caclucated_cycles = if cycle_count.get_reg_count() > 1 {
+                cycle_count.base() + (cycle_count.cycles_per_reg() * cycle_count.get_reg_count())
             } else {
-                cycle_count.cycles[0]
+                cycle_count.base()
             };
             current_code.push((commented_output, caclucated_cycles));
             cycle_offset += caclucated_cycles
@@ -167,6 +156,17 @@ pub fn parse_template(template_content: &str) -> Result<Vec<TemplateSection>, Bo
     }
 
     Ok(sections)
+}
+
+
+fn check_comment_line(mut current_label: String, trimmed: &str, sections: &Vec<TemplateSection>) -> String {
+    if current_label.is_empty() {
+        current_label = COMMENT_RE.captures(trimmed)
+            .and_then(|c| c.get(1))
+            .map(|m| m.as_str().to_string())
+            .unwrap_or_else(|| format!("Section {}", sections.len() + 1));
+    }
+    current_label
 }
 
 #[cfg(test)]

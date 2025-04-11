@@ -88,6 +88,7 @@ use std::collections::HashMap;
 use once_cell::sync::Lazy;
 
 use regex::Regex;
+use crate::cycle_spitter::models::CycleCount;
 
 static REG_DISPLACEMENT: Lazy<Regex> = Lazy::new(|| {
     // Matches an operand in the format: `<displacement>(<address_register>)`
@@ -317,29 +318,26 @@ pub fn normalize_line_ext(line: &str) -> (String, usize) {
 }
 
 // 4. Update the CycleCount struct to include register count.
-pub struct CycleCount {
-    pub cycles: Vec<usize>,
-    pub lookup: String,
-    pub reg_count: usize,
-}
+
+
 
 // 5. Update lookup_cycles to use the extended normalization.
 pub fn lookup_cycles(line: &str) -> CycleCount {
     let (normalized, reg_count) = normalize_line_ext(line);
     
     if let Some(cycles) = CYCLES_MAP.get(normalized.as_str()) {
-        CycleCount {
-            cycles: cycles.clone(),
-            lookup: normalized,
+        CycleCount::new(
+            cycles.clone(),
+            normalized,
             reg_count,
-        }
+        )
     } else {
         eprintln!("Warning: No cycle count found for instruction: {}", line);
-        CycleCount {
-            cycles: vec![0],
-            lookup: normalized,
+        CycleCount::new(
+            vec![0],
+            normalized,
             reg_count,
-        }
+        )
     }
 }
 
@@ -352,7 +350,7 @@ mod tests {
     fn test_lookup_cycles_valid_instruction() {
         let line = "moveq #16,d0";
         let cycles = lookup_cycles(line);
-        assert!(!cycles.cycles.is_empty(), "Valid instruction should return a non-empty cycle count.");
+        assert!(!cycles.get_cycles().is_empty(), "Valid instruction should return a non-empty cycle count.");
     }
 
     /// Test that `lookup_cycles` returns 0 for unknown instructions.
@@ -360,7 +358,7 @@ mod tests {
     fn test_lookup_cycles_unknown_instruction() {
         let line = "unknown_op #42,d1";
         let cycles = lookup_cycles(line);
-        assert_eq!(cycles.cycles, vec![0], "Unknown instructions should return a single zero cycle count.");
+        assert_eq!(cycles.get_cycles(), vec![0], "Unknown instructions should return a single zero cycle count.");
     }
 
     /// Test that `lookup_cycles` handles instructions with normalized cases.

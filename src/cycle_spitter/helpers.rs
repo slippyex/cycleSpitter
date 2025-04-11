@@ -1,6 +1,7 @@
 // src/cycle_spitter/helpers.rs
 
-use crate::cycle_spitter::cycles::{lookup_cycles, CycleCount};
+use crate::cycle_spitter::cycles::{lookup_cycles};
+use crate::cycle_spitter::models::CycleCount;
 use crate::cycle_spitter::regexes::REG_NUMBER_RE;
 
 /// Extracts the cycle count from a line of code. It first attempts to match a numeric value
@@ -19,14 +20,11 @@ where
     F: Fn(&str) -> bool,
 {
     if let Some(cap) = REG_NUMBER_RE.captures(line) {
-        Some(CycleCount {
-            cycles: vec![cap
-                .get(1)
-                .map(|m| m.as_str().parse::<usize>().unwrap_or(0))
-                .unwrap_or(0)],
-            lookup: String::from("n/a"),
-            reg_count: 0,
-        })
+        Some(CycleCount::new(
+            vec![cap.get(1).map(|m| m.as_str().parse::<usize>().unwrap_or(0)).unwrap_or(0)],
+            String::from("n/a"),
+            0,
+        ))
     } else if should_skip(line) {
         None
     } else {
