@@ -44,10 +44,12 @@ Basic usage:
    ``` 
 ## Input Format
 
-Your assembly file should include cycle counts in parentheses in comments:
+Your assembly file can optionally contain cycles counts in parentheses in the comments - these will take precedences to a looked up cycle value:
+
    ```asm
                 lea     charBuffer,a0
-                lea     buffer8,a1
+                lea     buffer8,a1                 ; (4) -> instead of looking up the value for this lea, 
+                                                   ; it would take the 4 cycles (which, of course, is the wrong timing - just for demonstration)
                 addq.w  #1,delayCounter
 .loop:          tst.w d0
                 movem.l d0-d7/a1-a3,-(sp)
