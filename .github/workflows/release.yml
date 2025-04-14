@@ -38,7 +38,7 @@ jobs:
           # Replace 'your-binary-name' with your executable’s name.
           # The asterisk (*) will match the .exe on Windows automatically.
           name: binary-${{ matrix.os }}
-          path: target/release/your-binary-name*
+          path: target/release/cycleSpitter*
 
   # Package job collects artifacts, packages them into one zip, and creates/releases the asset.
   package:
